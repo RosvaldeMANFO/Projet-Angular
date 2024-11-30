@@ -27,4 +27,8 @@ export class HeaderComponent implements OnInit {
         console.error('Sign-out error:', error);
       });
   }
+
+  openProfile() {
+    this.router.navigate(['/profile']);
+  }
 }
