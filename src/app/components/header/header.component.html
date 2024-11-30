@@ -5,9 +5,22 @@
       <mat-icon>person</mat-icon>
     </button>
     <mat-menu #userMenu="matMenu">
-        <button mat-menu-item>
+      <ng-container *ngIf="user; else notLoggedIn">
+        <button mat-menu-item disabled>
+          Logged in as: {{ user.email }}
+        </button>
+        <button mat-menu-item (click)="signOutUser()">
           <mat-icon>logout</mat-icon> Logout
         </button>
+      </ng-container>
+      <ng-template #notLoggedIn>
+        <button mat-menu-item routerLink="/login">
+          <mat-icon>login</mat-icon> Log in
+        </button>
+        <button mat-menu-item routerLink="/signup">
+          <mat-icon>login</mat-icon> Sign up
+        </button>
+      </ng-template>
     </mat-menu>
   </div>  
 </mat-toolbar>
