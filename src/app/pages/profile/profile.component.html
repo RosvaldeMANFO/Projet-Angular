@@ -1,1 +1,62 @@
-<p>Profile works!</p>
+<div class="profile-container flex flex-col items-center p-6 bg-gray-100 min-h-screen">
+    <!-- Profile Card -->
+    <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-4xl">
+      <div class="flex items-center space-x-4 mb-4">
+        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+          {{ user.name.charAt(0) }}
+        </div>
+        <div>
+          <h1 class="text-xl font-bold">{{ user.name }}</h1>
+          <p class="text-gray-600">{{ user.bio }}</p>
+        </div>
+      </div>
+      <div class="text-sm text-gray-700">
+        <p>Email: <span class="font-medium">{{ user.email }}</span></p>
+        <p>Joined: <span class="font-medium">{{ user.joinedDate }}</span></p>
+      </div>
+    </div>
+  
+    <!-- Tasks Section -->
+    <div class="mt-8 w-full max-w-4xl">
+      <h2 class="text-lg font-bold mb-4">Tasks</h2>
+      <div class="bg-white shadow-md rounded-lg">
+        <ul>
+          <li
+            *ngFor="let task of tasks"
+            class="flex items-center justify-between p-4 border-b last:border-none hover:bg-gray-50"
+          >
+            <div>
+              <p class="font-medium">{{ task.title }}</p>
+              <p class="text-gray-500 text-sm">{{ task.description }}</p>
+            </div>
+            <div>
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
+                [class.bg-green-100]="task.completed"
+                [class.text-green-800]="task.completed"
+                [class.bg-gray-200]="!task.completed"
+                [class.text-gray-800]="!task.completed"
+              >
+                <span class="mr-2">
+                  <i class="material-icons" *ngIf="task.completed">check_circle</i>
+                  <i class="material-icons" *ngIf="!task.completed">radio_button_unchecked</i>
+                </span>
+                {{ task.completed ? 'Completed' : 'Pending' }}
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    <!-- View All Tasks Button -->
+    <div class="mt-6 w-full max-w-4xl text-center">
+      <a
+        routerLink="/home"
+        class="inline-block px-6 py-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+      >
+        View All Tasks
+      </a>
+    </div>
+  </div>
+  
