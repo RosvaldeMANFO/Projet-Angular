@@ -1,0 +1,58 @@
+<div mat-dialog-title>
+    <div class="flex w-full justify-between items-center">
+        <span class="font-bold">Edit task</span>
+        <button mat-dialog-close mat-icon-button>
+            <mat-icon class="text-gray-500">close</mat-icon>
+        </button>
+    </div>
+</div>
+
+<mat-dialog-content>
+    <form [formGroup]="form" class="flex flex-col gap-3 w-full">
+        <mat-form-field appearance="outline">
+            <input matInput formControlName="title" [placeholder]="'Task title'">
+        </mat-form-field>
+        <div class="w-full flex justify-between items-center mb-3">
+            <p class="flex items-center gap-2">
+                <span
+                    class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                    {{ (reportedBy?.name ?? currentUser.name).charAt(0) }}
+                </span>
+                {{reportedBy?.name ?? currentUser.name}}
+            </p>
+            <button mat-stroked-button color="primary" [matMenuTriggerFor]="status">
+                <mat-icon>keyboard_arrow_down</mat-icon>
+                {{ form.value.state }}
+            </button>
+            <mat-menu #status="matMenu">
+                <button mat-menu-item *ngFor="let state of TaskStatus | keyvalue" class="px-4 py-2 cursor-pointer"
+                    (click)="form.patchValue({ state: state.key })">
+                    {{ state.value }}
+                </button>
+            </mat-menu>
+        </div>
+        <mat-form-field appearance="outline">
+            <textarea matInput formControlName="description" [placeholder]="'Task description'" rows="5"></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="assigneeName">
+                <mat-option *ngFor="let user of users" [value]="user.name">
+                    {{ user.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-date-range-input [rangePicker]="picker" [comparisonStart]="form.value['startDate']"
+                [comparisonEnd]="form.value['endDate']">
+                <input matStartDate [placeholder]="'Start date'" formControlName="startDate">
+                <input matEndDate [placeholder]="'End date'" formControlName="endDate">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+    <button class="w-[75%]" mat-raised-button [disabled]="!form.valid" color="primary" [mat-dialog-close]="form.value">Save</button>
+</mat-dialog-actions>
