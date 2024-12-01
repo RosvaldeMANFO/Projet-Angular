@@ -1,27 +1,78 @@
-# ProjetAngular
+# 📝 To-Do Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+Une application pour la gestion des tâches, développée avec **Angular**.
 
-## Development server
+---
+## 👤 Collaborateurs
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+| Collaborateurs|
+|---------------|
+| **Ranyl FOUMBI**   | 
+| **Rosvalde MANFO** |
+| **Félicité YAMBOS** |
 
-## Code scaffolding
+## 🌟 Fonctionnalités
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Ajouter, modifier et supprimer des tâches.
+- Rechercher des tâches par titre ou description.
+- Statuts personnalisés avec des codes couleur :
+  - **TODO** (À faire)
+  - **DOING** (En cours)
+  - **DONE** (Terminée)
+  - **CANCELLED** (Annulée)
+- Authentification et profile utilisateur
+- Détail des tâches
+- Dashboard pour affichage des tâches et statistiques
+- Ajout de commentaires sur les tâches
+- Interface responsive pour le web.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## 📂 Structure du projet
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```plaintext
+root/
+├── web/      
+│   ├── src/
+│   │   ├── app/              # Composants Angular
+│   │   └── assets/           # Fichiers statiques
+│   │   └── environments/     # Fichiers d'environnement
+│   └── package.json          # Dépendances Angular
+└── README.md                 # Ce fichier
+```
+## 🚀 Installation et Lancement
 
-## Running end-to-end tests
+Cloner le projet :
+```bash
+git clone https://github.com/RanylFoumbi/Projet-web-2.git
+cd web
+```
+Installer les dépendances :
+```bash
+npm install
+```
+Lancer le projet :
+```bash
+ng serve
+```
+Le projet sera accessible à http://localhost:4200.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+## 🎨 Charte graphique
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Voici les styles utilisés pour les statuts dans l'application Angular :
+
+| Statut        | Bordure  | Fond     | Texte    |
+|---------------|----------|----------|----------|
+| **TODO**   | `#FDE047` | `#FEF9C3` | `#CA8A04` |
+| **DONE** | `#86EFAC` | `#DCFCE7` | `#16A34A` |
+| **DOING** | `#93C5FD` | `#DBEAFE` | `#2563EB` |
+| **CANCELLED**  | `#FCA5A5` | `#FEE2E2` | `#DC2626` |
+
+## 🛠️ Technologies Utilisées
+**Angular**: Framework front-end pour le web.
+**Firebase**: Backend pour la gestion des données.
+
+## 📜 Licence
+Ce projet est sous licence MIT.
