@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EditTaskDialogData } from 'src/app/model/edit-task-dialog-data.model';
-import { TaskState } from 'src/app/model/task.model';
+import { TaskCategory, TaskState } from 'src/app/model/task.model';
 import { User } from 'src/app/model/user.model';
 
 @Component({
@@ -14,7 +14,8 @@ export class EditTaskDialogComponent implements OnInit {
   users: User[] = [];
   currentUser!: User ;
   reportedBy: User | null = null;
-  TaskStatus = TaskState;
+  TaskState = TaskState;
+  TaskCategory = TaskCategory;
   form: FormGroup;
   
   constructor(
@@ -28,6 +29,7 @@ export class EditTaskDialogComponent implements OnInit {
       title: new FormControl(data.task?.title, [Validators.required]),
       description: new FormControl(data.task?.description, [Validators.required]),
       state: new FormControl(data?.task?.state ?? 'TODO', [Validators.required]),
+      category: new FormControl(data.task?.category ?? 'BUG', [Validators.required]),
       startDate: new FormControl(data.task?.startDate ?? new Date(), [Validators.required, this.dateValidator()]),
       endDate: new FormControl(data.task?.endDate ?? new Date(), [Validators.required, this.dateValidator()]),
       assigneeName: new FormControl(data.task?.AssigneeName ?? this.currentUser.name),
