@@ -32,8 +32,8 @@ export class EditTaskDialogComponent implements OnInit {
       category: new FormControl(data.task?.category ?? 'BUG', [Validators.required]),
       startDate: new FormControl(data.task?.startDate ?? new Date(), [Validators.required, this.dateValidator()]),
       endDate: new FormControl(data.task?.endDate ?? new Date(), [Validators.required, this.dateValidator()]),
-      assigneeName: new FormControl(data.task?.AssigneeName ?? this.currentUser.name),
-      assigneeId: new FormControl(data.task?.AssigneeId ?? this.currentUser.id),
+      assigneeName: new FormControl(data.task?.assigneeName ?? this.currentUser.name),
+      assigneeId: new FormControl(data.task?.assigneeId ?? this.currentUser.id),
     });
   }
   ngOnInit(): void {

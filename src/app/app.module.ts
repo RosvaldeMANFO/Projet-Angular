@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,6 +32,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EditTaskDialogComponent } from './components/edit-task-dialog/edit-task-dialog.component';
+import { TaskCardComponent } from './components/task-card/task-card.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { EditTaskDialogComponent } from './components/edit-task-dialog/edit-task
     HeaderComponent,
     ProfileComponent,
     EditTaskDialogComponent,
+    TaskCardComponent,
   ],
   imports: [
     BrowserModule,

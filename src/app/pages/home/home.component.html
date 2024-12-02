@@ -1,1 +1,5 @@
-<p>Home works!</p>
+<section class="max-w-3xl mx-auto">
+    <div class="flex flex-wrap w-full gap-3 items-center justify-center sm:justify-normal">
+        <app-task-card *ngFor="let task of fakeTasks" [task]="task"></app-task-card>
+    </div>
+</section>

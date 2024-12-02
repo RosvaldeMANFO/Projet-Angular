@@ -1,8 +1,9 @@
 export type Task = {
     id: string;
+    reporterName: String;
     reporterId: string;
-    AssigneeId?: string;
-    AssigneeName?: string;
+    assigneeId?: string;
+    assigneeName?: string;
     title: string;
     description: string;
     state: TaskState;
