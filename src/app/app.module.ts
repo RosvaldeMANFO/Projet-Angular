@@ -37,6 +37,7 @@ import { EditTaskDialogComponent } from './components/edit-task-dialog/edit-task
 import { TaskCardComponent } from './components/task-card/task-card.component';
 import { TaskDetailsDrawerComponent } from './components/task-details-drawer/task-details-drawer.component';
 import { ToggleDrawerDirective } from './directives/toggle-drawer.directive';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ToggleDrawerDirective } from './directives/toggle-drawer.directive';
     TaskCardComponent,
     TaskDetailsDrawerComponent,
     ToggleDrawerDirective,
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,

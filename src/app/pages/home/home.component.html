@@ -1,10 +1,11 @@
-<mat-drawer-container [autosize]="true" class="min-h-full max-w-6xl mx-auto border-x">
+<mat-drawer-container [autosize]="true" class="min-h-full max-w-5xl mx-auto border-x">
 
-    <mat-drawer mode="side" position="end" [appToggleDrawer]="selectedTask !== undefined" class="p-6">
+    <mat-drawer mode="side" position="end" [appToggleDrawer]="selectedTask !== undefined" class="p-7 w-1/3">
         <ng-container *ngTemplateOutlet="taskDetails"></ng-container>
     </mat-drawer>
 
-    <mat-drawer-content  class="p-3">
+    <mat-drawer-content class="p-3">
+        
         <div class="flex flex-wrap gap-4 items-center justify-center w-full max-w-6xl mx-auto">
             <app-task-card class="cursor-pointer" (click)="selectTask(task)" *ngFor="let task of fakeTasks"
                 [task]="task"></app-task-card>
@@ -13,8 +14,13 @@
 </mat-drawer-container>
 
 <ng-template #taskDetails>
-    <div  *ngIf="selectedTask">
-        <h1 class="text-3xl font-bold text-center">{{ selectedTask.title }}</h1>
+    <div *ngIf="selectedTask" class="text-gray-700">
+        <div class="flex justify-end">
+            <button mat-icon-button (click)="selectedTask = undefined">
+                <mat-icon class="text-gray-500">close</mat-icon>
+            </button>
+        </div>
+        <h1 class="text-3xl font-bold">{{ selectedTask.title }}</h1>
         <p class="text-justify">{{ selectedTask.description }}</p>
         <p class="text-sm">{{ selectedTask.startDate | date: 'mediumDate' }} - {{ selectedTask.endDate | date:
             'mediumDate' }}</p>
