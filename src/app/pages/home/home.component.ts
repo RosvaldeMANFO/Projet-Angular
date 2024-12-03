@@ -8,7 +8,10 @@ import { Task, TaskState, TaskCategory } from 'src/app/model/task.model';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-
+ 
+  constructor(
+    private readonly _dialog: MatDialog
+  ) { }
 
   openDrawer = false;
   selectedTask?: Task;
@@ -19,10 +22,6 @@ export class HomeComponent {
     { id: '3', reporterName: 'Charlie', reporterId: '3', title: 'Task 3', description: 'Task 3 Description', state: TaskState.DONE, category: TaskCategory.IMPROVEMENT, startDate: new Date(), endDate: new Date() },
     { id: '4', reporterName: 'Dave', reporterId: '4', assigneeName: 'Eve', assigneeId: '3', title: 'Task 4', description: 'Task 4 Description', state: TaskState.CANCELLED, category: TaskCategory.BUG, startDate: new Date(), endDate: new Date() },
   ];
-
-  constructor(
-    private readonly _dialog: MatDialog
-  ) { }
 
   selectTask = (task: Task) => {
     this.selectedTask = task;
