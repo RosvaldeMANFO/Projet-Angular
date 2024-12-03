@@ -1,5 +1,26 @@
-<section class="max-w-3xl mx-auto">
-    <div class="flex flex-wrap w-full gap-3 items-center justify-center sm:justify-normal">
-        <app-task-card *ngFor="let task of fakeTasks" [task]="task"></app-task-card>
+<mat-drawer-container [autosize]="true" class="min-h-full max-w-6xl mx-auto border-x">
+
+    <mat-drawer mode="side" position="end" [appToggleDrawer]="selectedTask !== undefined" class="p-6">
+        <ng-container *ngTemplateOutlet="taskDetails"></ng-container>
+    </mat-drawer>
+
+    <mat-drawer-content  class="p-3">
+        <div class="flex flex-wrap gap-4 items-center justify-center w-full max-w-6xl mx-auto">
+            <app-task-card class="cursor-pointer" (click)="selectTask(task)" *ngFor="let task of fakeTasks"
+                [task]="task"></app-task-card>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
+
+<ng-template #taskDetails>
+    <div  *ngIf="selectedTask">
+        <h1 class="text-3xl font-bold text-center">{{ selectedTask.title }}</h1>
+        <p class="text-justify">{{ selectedTask.description }}</p>
+        <p class="text-sm">{{ selectedTask.startDate | date: 'mediumDate' }} - {{ selectedTask.endDate | date:
+            'mediumDate' }}</p>
+        <div class="flex items-center gap-2">
+            <mat-icon>person</mat-icon>
+            <p>{{ selectedTask.assigneeName }}</p>
+        </div>
     </div>
-</section>
+</ng-template>

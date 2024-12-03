@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditTaskDialogComponent } from 'src/app/components/edit-task-dialog/edit-task-dialog.component';
 import { Task, TaskState, TaskCategory } from 'src/app/model/task.model';
@@ -7,7 +7,11 @@ import { Task, TaskState, TaskCategory } from 'src/app/model/task.model';
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+
+
+  openDrawer = false;
+  selectedTask?: Task;
 
   fakeTasks: Task[] = [
     { id: '1', reporterName: 'Alice', reporterId: '1', assigneeName: 'John Doe', assigneeId: '1', title: 'Task 1', description: 'Task 1 Description', state: TaskState.TODO, category: TaskCategory.BUG, startDate: new Date(), endDate: new Date() },
@@ -17,14 +21,18 @@ export class HomeComponent implements OnInit {
   ];
 
   constructor(
-    private readonly _dialog: MatDialog,
-  ) {}
-  
-  ngOnInit(): void {
-    
+    private readonly _dialog: MatDialog
+  ) { }
+
+  selectTask = (task: Task) => {
+    this.selectedTask = task;
   }
 
-  openDialog() {
+  closeDrawer = () => {
+    this.selectedTask = undefined;
+  }
+
+  openDialog = () => {
     const dialogRef = this._dialog.open(EditTaskDialogComponent, {
       width: '500px',
       data: {

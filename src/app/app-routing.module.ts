@@ -6,10 +6,10 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', component: HomeComponent},
+  //{ path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent },
-  { path: 'home', component: HomeComponent},
   { path: 'profile', component: ProfileComponent},
 ];
 

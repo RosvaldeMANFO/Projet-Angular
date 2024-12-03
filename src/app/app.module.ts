@@ -16,6 +16,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 
 
@@ -33,6 +35,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EditTaskDialogComponent } from './components/edit-task-dialog/edit-task-dialog.component';
 import { TaskCardComponent } from './components/task-card/task-card.component';
+import { TaskDetailsDrawerComponent } from './components/task-details-drawer/task-details-drawer.component';
+import { ToggleDrawerDirective } from './directives/toggle-drawer.directive';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,8 @@ import { TaskCardComponent } from './components/task-card/task-card.component';
     ProfileComponent,
     EditTaskDialogComponent,
     TaskCardComponent,
+    TaskDetailsDrawerComponent,
+    ToggleDrawerDirective,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +61,7 @@ import { TaskCardComponent } from './components/task-card/task-card.component';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
