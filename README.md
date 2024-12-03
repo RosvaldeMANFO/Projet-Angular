@@ -1,6 +1,6 @@
 # 📝 To-Do Application
 
-Une application multi-plateforme pour la gestion des tâches, développée avec **Angular**.
+Une application pour la gestion des tâches, développée avec **Angular**.
 
 ---
 ## 👤 Collaborateurs

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,23 +7,20 @@ import { Router } from '@angular/router';
   templateUrl: './signup.component.html',
 })
 export class SignupComponent {
-
   email: string = '';
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private auth: Auth, private router: Router) {}
 
   signUp() {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, this.email, this.password)
+    createUserWithEmailAndPassword(this.auth, this.email, this.password)
       .then(() => {
-        this.router.navigate(['/home']); 
+        this.router.navigate(['/home']);
       })
       .catch((error) => {
         console.error('Error during sign up:', error);
         this.errorMessage = error.message;
       });
   }
-  
 }
