@@ -1,6 +1,6 @@
 <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
   <h1 class="text-3xl my-4 font-bold">Tableau de bord</h1>
-  <app-overview-stats></app-overview-stats>
+  <app-overview-stats [nbrUsers]="nbrUsers" [nbrTasks]="nbrTasks" [nbrCategories]="nbrCategories" [nbrComments]="nbrComments"></app-overview-stats>
   <app-task-stats></app-task-stats>
   <app-comment-stats></app-comment-stats>
   <br>
