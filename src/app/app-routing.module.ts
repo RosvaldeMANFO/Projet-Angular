@@ -4,7 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent},

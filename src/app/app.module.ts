@@ -16,11 +16,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-
-
-
-
+import { MatSidenavModule } from "@angular/material/sidenav";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,10 +28,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { TaskStatsComponent } from './dashboard/task-stats/task-stats.component';
-import { CommentStatsComponent } from './dashboard/comment-stats/comment-stats.component';
-import { OverviewComponent } from './dashboard/overview/overview.component';
+import { DashboardComponent } from "./pages/dashboard/dashboard.component";
+import { TaskStatsComponent } from "./pages/dashboard/task-stats/task-stats.component";
+import { CommentStatsComponent } from "./pages/dashboard/comment-stats/comment-stats.component";
+import { OverviewStatsComponent } from "./pages/dashboard/overview-stats/overview-stats.component";
 import { NgChartsModule } from 'ng2-charts';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EditTaskDialogComponent } from './components/edit-task-dialog/edit-task-dialog.component';
@@ -43,6 +39,7 @@ import { TaskCardComponent } from './components/task-card/task-card.component';
 import { TaskDetailsDrawerComponent } from './components/task-details-drawer/task-details-drawer.component';
 import { ToggleDrawerDirective } from './directives/toggle-drawer.directive';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { TwoDigitPipe } from './pipes/two-digit.pipe';
 
 @NgModule({
   declarations: [
@@ -54,13 +51,14 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
     DashboardComponent,
     TaskStatsComponent,
     CommentStatsComponent,
-    OverviewComponent,
+    OverviewStatsComponent,
     ProfileComponent,
     EditTaskDialogComponent,
     TaskCardComponent,
     TaskDetailsDrawerComponent,
     ToggleDrawerDirective,
     SearchBarComponent,
+    TwoDigitPipe,
   ],
   imports: [
     BrowserModule,

@@ -4,19 +4,19 @@
     <div class="flex justify-between mt-4">
         <div class="flex flex-col">
             <span class="text-sm font-semibold text-gray-600">Utilisateurs</span>
-            <span class="text-3xl font-bold text-gray-900">13</span>
+            <span class="text-3xl font-bold text-primary-500">{{ nbrUsers | twoDigit}}</span>
         </div>
         <div class="flex flex-col">
             <span class="text-sm font-semibold text-gray-600">Catégories</span>
-            <span class="text-3xl font-bold text-gray-900">05</span>
+            <span class="text-3xl font-bold text-primary-500">{{ nbrTasks | twoDigit }}</span>
         </div>
         <div class="flex flex-col">
             <span class="text-sm font-semibold text-gray-600">Tâches</span>
-            <span class="text-3xl font-bold text-gray-900">08</span>
+            <span class="text-3xl font-bold text-primary-500">{{ nbrCategories | twoDigit }}</span>
         </div>
         <div class="flex flex-col">
             <span class="text-sm font-semibold text-gray-600">Commentaires</span>
-            <span class="text-3xl font-bold text-gray-900">22</span>
+            <span class="text-3xl font-bold text-primary-500">{{ nbrComments | twoDigit }}</span>
         </div>
     </div>
 </div>

@@ -13,7 +13,7 @@ interface ChartConfig {
   styles: [],
 })
 export class TaskStatsComponent {
-  // Common configuration for chart legends
+  
   private createLegendConfig(
     title: string,
     position: "top" | "bottom" = "top"
