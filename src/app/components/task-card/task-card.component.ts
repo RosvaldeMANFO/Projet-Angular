@@ -8,16 +8,15 @@ import { Task } from 'src/app/model/task.model';
 export class TaskCardComponent {
   @Input() task!: Task;
   @Output() delete = new EventEmitter<void>();
+  @Output() edit = new EventEmitter<void>();
 
-  deleteTask = () => {
+  deleteTask = (event: Event) => {
+    event.stopPropagation();
     this.delete.emit();
   }
 
-  comment = () => {
-    console.log('Commenting on task');
-  }
-
-  viewDetails = () => {
-    console.log('Viewing task details');
+  editTask = (event: Event) => {
+    event.stopPropagation();
+    this.edit.emit();
   }
 }

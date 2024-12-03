@@ -32,14 +32,14 @@ export class HomeComponent {
     this.selectedTask = undefined;
   }
 
-  openDialog = () => {
+  openDialog = (task: Task|undefined) => {
     const dialogRef = this._dialog.open(EditTaskDialogComponent, {
       width: '500px',
       data: {
-        title: 'Create Task',
-        users: [{ id: '1', name: 'John Doe', email: '' }, { id: '2', name: 'Jane Doe', email: '' }],
-        currentUser: { id: '1', name: 'John Doe', email: '' },
-      }
+        task: task,
+        users: [],
+        currentUser: { id: '1', name: 'John Doe' }
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -47,4 +47,23 @@ export class HomeComponent {
     });
   }
 
+  searchTasks = (term: string | undefined) => {
+    console.log(term);
+  }
+
+  filterTasks = (state: string) => {
+    console.log(state);
+  }
+
+  addNewTask = () => {
+    this.openDialog(undefined);
+  }
+
+  deleteTask = (task: Task | undefined) => {
+    console.log('Delete Task');
+  }
+
+  editTask = (task: Task) => {
+    this.openDialog(task)
+  }
 }

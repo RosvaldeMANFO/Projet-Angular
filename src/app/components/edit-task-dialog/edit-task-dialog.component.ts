@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EditTaskDialogData } from 'src/app/model/edit-task-dialog-data.model';
@@ -10,7 +10,6 @@ import { User } from 'src/app/model/user.model';
   templateUrl: './edit-task-dialog.component.html',
 })
 export class EditTaskDialogComponent implements OnInit {
-
   users: User[] = [];
   currentUser!: User ;
   reportedBy: User | null = null;
@@ -22,18 +21,18 @@ export class EditTaskDialogComponent implements OnInit {
     private readonly _fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: EditTaskDialogData
   ) { 
-    this.users = data.users;
-    this.currentUser = data.currentUser;
+    this.users = data?.users;
+    this.currentUser = data?.currentUser;
     this.form = this._fb.group({
-      id: new FormControl(data.task?.id),
-      title: new FormControl(data.task?.title, [Validators.required]),
-      description: new FormControl(data.task?.description, [Validators.required]),
+      id: new FormControl(data?.task?.id),
+      title: new FormControl(data?.task?.title, [Validators.required]),
+      description: new FormControl(data?.task?.description, [Validators.required]),
       state: new FormControl(data?.task?.state ?? 'TODO', [Validators.required]),
-      category: new FormControl(data.task?.category ?? 'BUG', [Validators.required]),
-      startDate: new FormControl(data.task?.startDate ?? new Date(), [Validators.required, this.dateValidator()]),
-      endDate: new FormControl(data.task?.endDate ?? new Date(), [Validators.required, this.dateValidator()]),
-      assigneeName: new FormControl(data.task?.assigneeName ?? this.currentUser.name),
-      assigneeId: new FormControl(data.task?.assigneeId ?? this.currentUser.id),
+      category: new FormControl(data?.task?.category ?? 'BUG', [Validators.required]),
+      startDate: new FormControl(data?.task?.startDate ?? new Date(), [Validators.required, this.dateValidator()]),
+      endDate: new FormControl(data?.task?.endDate ?? new Date(), [Validators.required, this.dateValidator()]),
+      assigneeName: new FormControl(data?.task?.assigneeName ?? this.currentUser.name),
+      assigneeId: new FormControl(data?.task?.assigneeId ?? this.currentUser.id),
     });
   }
   ngOnInit(): void {
