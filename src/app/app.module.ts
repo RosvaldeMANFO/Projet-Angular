@@ -16,6 +16,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { TaskStatsComponent } from './dashboard/task-stats/task-stats.component';
+import { CommentStatsComponent } from './dashboard/comment-stats/comment-stats.component';
+import { OverviewComponent } from './dashboard/overview/overview.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -24,6 +29,10 @@ import { HeaderComponent } from './components/header/header.component';
     SignupComponent,
     LoginComponent,
     HeaderComponent,
+    DashboardComponent,
+    TaskStatsComponent,
+    CommentStatsComponent,
+    OverviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +45,7 @@ import { HeaderComponent } from './components/header/header.component';
     MatInputModule,
     FormsModule,
     MatToolbarModule,
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
