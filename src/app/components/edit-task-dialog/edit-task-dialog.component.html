@@ -1,6 +1,6 @@
 <div mat-dialog-title>
     <div class="flex w-full justify-between items-center">
-        <span class="font-bold">Edit task</span>
+        <span class="font-bold">{{taskID ? 'Edit task':'Create task'}}</span>
         <button mat-dialog-close mat-icon-button>
             <mat-icon class="text-gray-500">close</mat-icon>
         </button>

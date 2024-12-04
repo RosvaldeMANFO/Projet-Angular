@@ -16,11 +16,13 @@ export class EditTaskDialogComponent implements OnInit {
   TaskState = TaskState;
   TaskCategory = TaskCategory;
   form: FormGroup;
+  taskID: string | undefined;
   
   constructor(
     private readonly _fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: EditTaskDialogData
   ) { 
+    this.taskID = data?.task?.id;
     this.users = data?.users;
     this.currentUser = data?.currentUser;
     this.form = this._fb.group({
