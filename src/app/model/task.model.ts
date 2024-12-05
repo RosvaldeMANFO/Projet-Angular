@@ -7,7 +7,8 @@ export type Task = {
     title: string;
     description: string;
     state: TaskState;
-    category: TaskCategory;
+    category?: TaskCategory;
+    category2?: string;
     startDate: Date;
     endDate: Date;
 };
@@ -17,6 +18,12 @@ export enum TaskState {
     DONE = "DONE",
     CANCELLED = "CANCELLED",
     TODO = "TODO",
+}
+
+export type TaskCategory2 ={
+    id: string;
+    name: string;
+    color: string;
 }
 
 export enum TaskCategory {
