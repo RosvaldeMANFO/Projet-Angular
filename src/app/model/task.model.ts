@@ -20,11 +20,11 @@ export enum TaskState {
     TODO = "TODO",
 }
 
-export type TaskCategory2 ={
-    id: string;
-    name: string;
-    color: string;
-}
+export type TaskCategory2 = {
+  id?: string;
+  name: string;
+  color: string;
+};
 
 export enum TaskCategory {
     BUG = "BUG",
