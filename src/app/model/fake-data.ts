@@ -65,16 +65,16 @@ export const fakeUsers: User[] = [
 ];
 
 export const fakeTaskCategories: TaskCategory2[] = [
-  { id: "1", name: "Bug", color: "#FF0000" },
-  { id: "2", name: "Feature", color: "#008000" },
-  { id: "3", name: "Improvement", color: "#0000FF" },
-  { id: "4", name: "Documentation", color: "#FFA500" },
-  { id: "5", name: "Testing", color: "#800080" },
-  { id: "6", name: "Research", color: "#00CED1" },
-  { id: "7", name: "Design", color: "#FFC0CB" },
-  { id: "8", name: "Deployment", color: "#A52A2A" },
-  { id: "9", name: "Maintenance", color: "#708090" },
-  { id: "10", name: "Support", color: "#FFD700" },
+  { name: "Bug", color: "#FF0000" },
+  { name: "Feature", color: "#008000" },
+  { name: "Improvement", color: "#0000FF" },
+  { name: "Documentation", color: "#FFA500" },
+  { name: "Testing", color: "#800080" },
+  { name: "Research", color: "#00CED1" },
+  { name: "Design", color: "#FFC0CB" },
+  { name: "Deployment", color: "#A52A2A" },
+  { name: "Maintenance", color: "#708090" },
+  { name: "Support", color: "#FFD700" },
 ];
 
 export const fakeTasks: Task[] = [
