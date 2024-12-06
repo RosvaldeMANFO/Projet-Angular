@@ -14,7 +14,7 @@ export class EditTaskDialogComponent implements OnInit {
   currentUser!: User ;
   reportedBy: User | null = null;
   TaskState = TaskState;
-  TaskCategory = TaskCategory;
+  categories: TaskCategory[] = [];
   form: FormGroup;
   taskID: string | undefined;
   
@@ -22,6 +22,7 @@ export class EditTaskDialogComponent implements OnInit {
     private readonly _fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: EditTaskDialogData
   ) { 
+    this.categories = data?.categories;
     this.taskID = data?.task?.id;
     this.users = data?.users;
     this.currentUser = data?.currentUser;

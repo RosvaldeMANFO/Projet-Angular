@@ -20,7 +20,9 @@
     "@angular/platform-browser": "^16.2.12",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.12",
+    "chart.js": "^4.3.0",
     "firebase": "^10.14.1",
+    "ng2-charts": "^5.0.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

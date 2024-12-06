@@ -1,4 +1,4 @@
-import { Task, TaskCategory2, TaskState } from "./task.model";
+import { Task, TaskCategory, TaskState } from "./task.model";
 import { User } from "./user.model";
 
 export const fakeUsers: User[] = [
@@ -64,7 +64,7 @@ export const fakeUsers: User[] = [
   },
 ];
 
-export const fakeTaskCategories: TaskCategory2[] = [
+export const fakeTaskCategories: TaskCategory[] = [
   { name: "Bug", color: "#FF0000" },
   { name: "Feature", color: "#008000" },
   { name: "Improvement", color: "#0000FF" },
@@ -88,7 +88,7 @@ export const fakeTasks: Task[] = [
     description:
       "Resolve the issue causing login failures for users with special characters in passwords.",
     state: TaskState.DOING,
-    category2: "1", // BUG
+    category: fakeTaskCategories[0], // BUG
     startDate: new Date("2024-11-20"),
     endDate: new Date("2024-11-30"),
   },
@@ -101,7 +101,7 @@ export const fakeTasks: Task[] = [
     title: "Implement dark mode",
     description: "Add support for a dark theme throughout the application.",
     state: TaskState.TODO,
-    category2: "2", // FEATURE
+    category: fakeTaskCategories[1], // FEATURE
     startDate: new Date("2024-11-25"),
     endDate: new Date("2024-12-10"),
   },
@@ -112,7 +112,7 @@ export const fakeTasks: Task[] = [
     title: "Optimize database queries",
     description: "Refactor and optimize slow-performing SQL queries.",
     state: TaskState.DONE,
-    category2: "3", // IMPROVEMENT
+    category: fakeTaskCategories[2], // IMPROVEMENT
     startDate: new Date("2024-10-15"),
     endDate: new Date("2024-10-30"),
   },
@@ -126,7 +126,7 @@ export const fakeTasks: Task[] = [
     description:
       "Enable users to reset their passwords via email verification.",
     state: TaskState.CANCELLED,
-    category2: "2", // FEATURE
+    category: fakeTaskCategories[3], // FEATURE
     startDate: new Date("2024-09-10"),
     endDate: new Date("2024-09-20"),
   },
@@ -140,7 +140,7 @@ export const fakeTasks: Task[] = [
     description:
       "Resolve issues where push notifications are sent multiple times.",
     state: TaskState.TODO,
-    category2: "1", // BUG
+    category: fakeTaskCategories[4], // BUG
     startDate: new Date("2024-12-01"),
     endDate: new Date("2024-12-15"),
   },
