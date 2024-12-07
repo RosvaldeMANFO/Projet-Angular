@@ -33,12 +33,12 @@
                 </mat-menu>
                 <button class="ml-3" mat-stroked-button color="primary" [matMenuTriggerFor]="category">
                     <mat-icon>keyboard_arrow_down</mat-icon>
-                    {{ form.value.category }}
+                    {{ form.value.category.name }}
                 </button>
                 <mat-menu #category="matMenu">
-                    <button mat-menu-item *ngFor="let category of TaskCategory | keyvalue" class="px-4 py-2 cursor-pointer"
-                        (click)="form.patchValue({ category: category.key })">
-                        {{ category.key }}
+                    <button mat-menu-item *ngFor="let category of categories" class="px-4 py-2 cursor-pointer"
+                        (click)="form.patchValue({ category: category })">
+                        {{ category.name }}
                     </button>
                 </mat-menu>
             </div>

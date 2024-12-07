@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from "@angular/core";
-import { Task, TaskCategory2, TaskState } from "../model/task.model";
+import { Task, TaskCategory, TaskState } from "../model/task.model";
 import { fakeTaskCategories } from "../model/fake-data";
 
 import {
@@ -16,20 +16,20 @@ import { BehaviorSubject, firstValueFrom, Subscription, take } from "rxjs";
   providedIn: "root",
 })
 export class CategoryService {
-  categories = new BehaviorSubject<TaskCategory2[]>([]);
+  categories = new BehaviorSubject<TaskCategory[]>([]);
   constructor(private readonly firestore: Firestore) {
     this.init();
   }
   init(): void {
     console.log("Category Service initialized");
     console.log("Categories fetched", this.categories.value);
-    fakeTaskCategories.forEach((category: TaskCategory2) => {
+    fakeTaskCategories.forEach((category: TaskCategory) => {
       this.addCategory(category);
     });
     this.getCategories();
   }
 
-  async addCategory(category: TaskCategory2): Promise<void> {
+  async addCategory(category: TaskCategory): Promise<void> {
     const categoriesCollectionRef = collection(this.firestore, "categories");
 
     const existingCategories = await firstValueFrom(
@@ -50,7 +50,7 @@ export class CategoryService {
     const categoryCollectionRef = collection(this.firestore, "categories");
     const categoryQuery = query(categoryCollectionRef, orderBy("name"));
     collectionData(categoryQuery, { idField: "id" }).subscribe((categories) => {
-      const mappedCategories = categories.map<TaskCategory2>((category) => {
+      const mappedCategories = categories.map<TaskCategory>((category) => {
         return {
           id: category["id"],
           name: category["name"],

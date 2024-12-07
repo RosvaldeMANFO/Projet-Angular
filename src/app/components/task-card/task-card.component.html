@@ -19,10 +19,10 @@
             </div>
         </div>
         <div class="flex items-center gap-3 w-full mt-3 select-none">
-            <span class="rounded-md border px-2 border-gray-400 text-primary-500">{{ task.category
-                }}</span>
-            <span class="rounded-md border px-2 border-gray-400 text-primary-500">{{ task.state
-                }}</span>
+            <span [appApplyColor]="task.category.color" class="rounded-md border px-2 border-gray-400">
+                {{ task.category.name }}</span>
+            <span class="rounded-md border px-2 border-gray-400 text-primary-500">
+                {{ task.state }}</span>
         </div>
     </mat-card-header>
     <mat-card-content>

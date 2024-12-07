@@ -27,8 +27,8 @@
         <div>
             <h1 class="text-3xl font-bold">{{ selectedTask.title }}</h1>
             <div class="flex items-center gap-3 w-full mt-3 select-none">
-                <span class="rounded-md border px-2 border-gray-400 text-primary-500">{{ selectedTask.category
-                    }}</span>
+                <span [appApplyColor] = "selectedTask.category.color"  class="rounded-md border px-2 border-gray-400 text-primary-500">
+                    {{ selectedTask.category.name }}</span>
                 <span class="rounded-md border px-2 border-gray-400 text-primary-500">{{ selectedTask.state
                     }}</span>
             </div>

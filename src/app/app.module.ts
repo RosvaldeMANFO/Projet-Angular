@@ -36,10 +36,10 @@ import { NgChartsModule } from 'ng2-charts';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EditTaskDialogComponent } from './components/edit-task-dialog/edit-task-dialog.component';
 import { TaskCardComponent } from './components/task-card/task-card.component';
-import { TaskDetailsDrawerComponent } from './components/task-details-drawer/task-details-drawer.component';
 import { ToggleDrawerDirective } from './directives/toggle-drawer.directive';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { TwoDigitPipe } from './pipes/two-digit.pipe';
+import { ApplyColorDirective } from './directives/apply-color.directive';
 
 @NgModule({
   declarations: [
@@ -55,10 +55,10 @@ import { TwoDigitPipe } from './pipes/two-digit.pipe';
     ProfileComponent,
     EditTaskDialogComponent,
     TaskCardComponent,
-    TaskDetailsDrawerComponent,
     ToggleDrawerDirective,
     SearchBarComponent,
     TwoDigitPipe,
+    ApplyColorDirective,
   ],
   imports: [
     BrowserModule,
