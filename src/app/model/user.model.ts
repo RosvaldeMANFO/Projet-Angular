@@ -6,5 +6,5 @@ export type User = {
     nickname?: string;
     bio?: string;
     role?: string;
-    joinedDate?: Date;
+    createdAt?: Date;
 }

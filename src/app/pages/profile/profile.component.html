@@ -3,16 +3,17 @@
   <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-4xl">
     <div class="flex items-center space-x-4 mb-4">
       <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
-        {{ user.name.charAt(0) }}
+        {{ user.nickname?.charAt(0) }}
       </div>
       <div>
-        <h1 class="text-xl font-bold">{{ user.name }}</h1>
-        <p class="text-gray-600">{{ user.bio }}</p>
+        <h1 class="text-xl font-bold">{{ user.nickname }}</h1>
+        <p class="text-gray-600">{{ user.role }}</p>
       </div>
     </div>
     <div class="text-sm text-gray-700">
+      <p><span class="font-medium">{{ user.bio }}</span></p>
       <p>Email: <span class="font-medium">{{ user.email }}</span></p>
-      <p>Joined: <span class="font-medium">{{ user.joinedDate }}</span></p>
+      <p>Joined: <span class="font-medium">{{ user.createdAt | date:'dd-MM-yyyy' }}</span></p>
     </div>
     <div class="mt-4">
       <a
@@ -22,7 +23,7 @@
         Edit Profile
       </a>
     </div>
-  
+  </div>
     <!-- Tasks Section -->
     <div class="mt-8 w-full max-w-4xl">
       <h2 class="text-lg font-bold mb-4">Tasks</h2>
