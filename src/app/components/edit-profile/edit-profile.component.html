@@ -1,0 +1,27 @@
+<div class="edit-profile-container flex flex-col items-center p-6 bg-gray-100 min-h-screen">
+    <h2 class="text-2xl font-semibold mb-6">Edit Profile</h2>
+    <form (ngSubmit)="saveProfile()" class="space-y-6 w-full max-w-md">
+      <input
+        type="text"
+        [(ngModel)]="nickname"
+        name="nickname"
+        placeholder="Nickname"
+        required
+        class="w-full p-3 border rounded-lg"
+      />
+      <textarea
+        [(ngModel)]="bio"
+        name="bio"
+        placeholder="Tell us about yourself"
+        class="w-full p-3 border rounded-lg"
+      ></textarea>
+      <button
+        type="submit"
+        class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+      >
+        Save Changes
+      </button>
+      <p *ngIf="errorMessage" class="text-red-500">{{ errorMessage }}</p>
+    </form>
+  </div>
+  
