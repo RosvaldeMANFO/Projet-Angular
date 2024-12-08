@@ -19,14 +19,14 @@ export class EditTaskDialogComponent {
   taskID: string | undefined;
 
   constructor(
-    private readonly _fb: FormBuilder,
+    private readonly fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: EditTaskDialogData
   ) {
     this.categories = data?.categories;
     this.taskID = data?.task?.id;
     this.users = data?.users;
     this.currentUser = data?.currentUser;
-    this.form = this._fb.group({
+    this.form = this.fb.group({
       id: new FormControl(data?.task?.id),
       title: new FormControl(data?.task?.title, [Validators.required]),
       reporterName: new FormControl(data?.task?.reporterName ?? this.currentUser.nickname),
