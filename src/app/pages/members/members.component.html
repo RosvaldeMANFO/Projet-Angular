@@ -14,8 +14,8 @@
             </div>
             <p *ngIf="member.bio" class="text-sm text-gray-600 mt-1">{{ member.bio }}</p>
           </div>
-          <div *ngIf="member.uid" class="ml-4">
-            <a (click)="goToProfile(member.uid)"
+          <div *ngIf="member.id" class="ml-4">
+            <a (click)="goToProfile(member.id)"
                class="text-blue-500 hover:text-blue-700 font-semibold text-sm cursor-pointer">
               View Profile
             </a>

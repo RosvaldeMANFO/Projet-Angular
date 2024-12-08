@@ -26,7 +26,7 @@ export class MembersComponent implements OnInit {
     }
   }
 
-  goToProfile(uid: string): void {
-    this.router.navigate([`/profile/${uid}`]); 
+  goToProfile(id: string): void {
+    this.router.navigate([`/profile/${id}`]); 
   }
 }

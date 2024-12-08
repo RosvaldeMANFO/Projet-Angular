@@ -11,8 +11,8 @@ import { Timestamp } from 'firebase/firestore';
   templateUrl: './profile.component.html',
 })
 export class ProfileComponent implements OnInit {
-  user: Partial<User> = {}; // Holds the user data
-  currentUserId: string = ''; // Current logged-in user's ID
+  user: Partial<User> = {};
+  currentUserId: string = '';
   tasks = [
     { title: 'Design Task Management App', description: 'Create mockups and prototype', completed: true },
     { title: 'Implement Authentication', description: 'Set up Firebase Auth', completed: false },
@@ -27,32 +27,14 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    const uidFromRoute = this.route.snapshot.paramMap.get('uid'); // Get UID from route
+    const uidFromRoute = this.route.snapshot.paramMap.get('uid');
     onAuthStateChanged(this.auth, async (currentUser) => {
       if (currentUser) {
-<<<<<<< HEAD
-        this.currentUserId = currentUser.uid; // Get current user UID
+        this.currentUserId = currentUser.uid;
         if (uidFromRoute) {
-          // If UID is in the route, load that user's profile
           await this.loadUserProfile(uidFromRoute);
         } else {
-          // If no UID in the route, load the current logged-in user's profile
           await this.loadUserProfile(currentUser.uid);
-=======
-        const userProfile = await this.userService.getUserProfile(currentUser.uid);
-        if (userProfile) {
-          this.user = {
-            id: currentUser.uid,
-            name: userProfile.name || 'N/A',
-            nickname: userProfile.nickname || 'N/A',
-            email: userProfile.email,
-            bio: userProfile.bio || 'N/A',
-            createdAt: userProfile.createdAt instanceof Timestamp
-              ? userProfile.createdAt.toDate() 
-              : undefined,
-            role: userProfile.role || 'User',
-          };
->>>>>>> b30d126eeeaf7b0911f1ad56e5152b0338aed1bb
         }
       }
     });
@@ -70,13 +52,11 @@ export class ProfileComponent implements OnInit {
           ? userProfile.createdAt.toDate()
           : undefined,
         role: userProfile.role || 'User',
-        uid: uid, // Add UID to the user object for comparison in the template
+        id: uid,
       };
     }
   }
-
-  // Check if the profile is for the current user
   isCurrentUserProfile(): boolean {
-    return this.user.uid === this.currentUserId;
+    return this.user.id === this.currentUserId;
   }
 }
