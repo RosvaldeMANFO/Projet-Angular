@@ -40,6 +40,7 @@ import { ToggleDrawerDirective } from './directives/toggle-drawer.directive';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { TwoDigitPipe } from './pipes/two-digit.pipe';
 import { ApplyColorDirective } from './directives/apply-color.directive';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { ApplyColorDirective } from './directives/apply-color.directive';
     SearchBarComponent,
     TwoDigitPipe,
     ApplyColorDirective,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

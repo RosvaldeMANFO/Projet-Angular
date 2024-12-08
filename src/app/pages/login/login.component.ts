@@ -16,7 +16,7 @@ export class LoginComponent {
   login() {
     signInWithEmailAndPassword(this.auth, this.email, this.password)
       .then(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       })
       .catch((error) => {
         this.errorMessage = error.message;
