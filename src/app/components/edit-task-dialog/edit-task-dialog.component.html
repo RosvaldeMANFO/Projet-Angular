@@ -16,9 +16,9 @@
             <p class="flex items-center gap-2">
                 <span
                     class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
-                    {{ (reportedBy?.name ?? currentUser.name).charAt(0) }}
+                    {{ (reportedBy?.nickname ?? currentUser.nickname)?.charAt(0) }}
                 </span>
-                {{reportedBy?.name ?? currentUser.name}}
+                {{reportedBy?.nickname ?? currentUser.nickname}}
             </p>
             <div class="flow items-center">
                 <button mat-stroked-button color="primary" [matMenuTriggerFor]="state">
@@ -48,8 +48,8 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-select formControlName="assigneeName">
-                <mat-option *ngFor="let user of users" [value]="user.name">
-                    {{ user.name }}
+                <mat-option *ngFor="let user of users" [value]="user.id">
+                    {{ user.nickname }}
                 </mat-option>
             </mat-select>
         </mat-form-field>

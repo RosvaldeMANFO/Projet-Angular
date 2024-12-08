@@ -36,7 +36,7 @@ export class UserService {
     const userRef = doc(this.firestore, `users/${uid}`);
     const userSnap = await getDoc(userRef);
     if (userSnap.exists()) {
-      return { ...userSnap.data(), uid } as User;
+      return { ...userSnap.data(), id: uid } as User;
     }
     return null;
   }
@@ -46,7 +46,7 @@ export class UserService {
     const userDocs = await getDocs(usersCollection);
 
     return userDocs.docs.map(doc => ({
-      uid: doc.id,
+      id: doc.id,
       ...doc.data(),
     } as User));
   }

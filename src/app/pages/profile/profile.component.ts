@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
     const uidFromRoute = this.route.snapshot.paramMap.get('uid'); // Get UID from route
     onAuthStateChanged(this.auth, async (currentUser) => {
       if (currentUser) {
+<<<<<<< HEAD
         this.currentUserId = currentUser.uid; // Get current user UID
         if (uidFromRoute) {
           // If UID is in the route, load that user's profile
@@ -37,6 +38,21 @@ export class ProfileComponent implements OnInit {
         } else {
           // If no UID in the route, load the current logged-in user's profile
           await this.loadUserProfile(currentUser.uid);
+=======
+        const userProfile = await this.userService.getUserProfile(currentUser.uid);
+        if (userProfile) {
+          this.user = {
+            id: currentUser.uid,
+            name: userProfile.name || 'N/A',
+            nickname: userProfile.nickname || 'N/A',
+            email: userProfile.email,
+            bio: userProfile.bio || 'N/A',
+            createdAt: userProfile.createdAt instanceof Timestamp
+              ? userProfile.createdAt.toDate() 
+              : undefined,
+            role: userProfile.role || 'User',
+          };
+>>>>>>> b30d126eeeaf7b0911f1ad56e5152b0338aed1bb
         }
       }
     });
