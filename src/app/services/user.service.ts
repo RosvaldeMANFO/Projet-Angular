@@ -35,15 +35,18 @@ export class UserService {
   async getUserProfile(uid: string): Promise<User | null> {
     const userRef = doc(this.firestore, `users/${uid}`);
     const userSnap = await getDoc(userRef);
-    return userSnap.exists() ? (userSnap.data() as User) : null;
+    if (userSnap.exists()) {
+      return { ...userSnap.data(), uid } as User;
+    }
+    return null;
   }
-
+  
   async getUsers(): Promise<User[]> {
     const usersCollection = collection(this.firestore, 'users');
     const userDocs = await getDocs(usersCollection);
 
     return userDocs.docs.map(doc => ({
-      id: doc.id,
+      uid: doc.id,
       ...doc.data(),
     } as User));
   }
