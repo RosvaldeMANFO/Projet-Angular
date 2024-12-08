@@ -9,7 +9,7 @@ import { User } from 'src/app/model/user.model';
   selector: 'app-edit-task-dialog',
   templateUrl: './edit-task-dialog.component.html',
 })
-export class EditTaskDialogComponent implements OnInit {
+export class EditTaskDialogComponent {
   users: User[] = [];
   currentUser!: User;
   reportedBy: User | null = null;
@@ -36,14 +36,8 @@ export class EditTaskDialogComponent implements OnInit {
       category: new FormControl(data?.task?.category ?? this.categories[0], [Validators.required]),
       startDate: new FormControl(data?.task?.startDate ?? new Date(), [Validators.required, this.dateValidator()]),
       endDate: new FormControl(data?.task?.endDate ?? new Date(), [Validators.required, this.dateValidator()]),
-      assigneeName: new FormControl(data?.task?.assigneeName),
       assigneeId: new FormControl(data?.task?.assigneeId),
       createdAt: new FormControl(data?.task?.createdAt ?? new Date()),
-    });
-  }
-  ngOnInit(): void {
-    this.form.get('assigneeName')?.valueChanges.subscribe(value => {
-      this.form.get('assigneeId')?.setValue(this.users.find(user => user.name === value)?.id);
     });
   }
 

@@ -4,7 +4,8 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { Firestore, collection, collectionData, addDoc, orderBy, query, doc, setDoc } from '@angular/fire/firestore';
 import { CategoryService } from './category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { UserService } from './user.service';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +16,18 @@ export class TaskService {
   task = new BehaviorSubject<Task[]>([])
   taskListSubscription?: Subscription;
   cachedTask: Task[] = [];
+  users: User[] = [];
 
   constructor(
     private readonly snackBar: MatSnackBar,
     private readonly firestore: Firestore,
     private readonly categoryService: CategoryService,
+    private readonly userService: UserService,
   ) {
     this.getTasks();
+    this.userService.getUsers().then(users => {
+      this.users = users;
+    });
   }
 
   getTasks() {
@@ -40,7 +46,7 @@ export class TaskService {
           reporterId: task['reporterId'],
           reporterName: task['reporterName'],
           assigneeId: task['assigneeId'],
-          assigneeName: task['assigneeName'],
+          assigneeName: this.users.find(user => user.id === task['assigneeId'])?.nickname,
           description: task['description'],
           state: task['state'] as TaskState,
           category: category!!,
@@ -55,12 +61,12 @@ export class TaskService {
   }
 
   setTask(task: Task) {
+    console.log(task);
     const data = {
       title: task.title,
       reporterId: task.reporterId,
       reporterName: task.reporterName,
       assigneeId: task.assigneeId,
-      assigneeName: task.assigneeName,
       description: task.description,
       state: task.state,
       categoryId: task.category.id,

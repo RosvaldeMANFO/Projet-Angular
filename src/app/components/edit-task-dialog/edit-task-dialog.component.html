@@ -47,7 +47,7 @@
             <textarea matInput formControlName="description" [placeholder]="'Task description'" rows="5"></textarea>
         </mat-form-field>
         <mat-form-field appearance="outline">
-            <mat-select formControlName="assigneeName">
+            <mat-select formControlName="assigneeId">
                 <mat-option *ngFor="let user of users" [value]="user.id">
                     {{ user.nickname }}
                 </mat-option>
