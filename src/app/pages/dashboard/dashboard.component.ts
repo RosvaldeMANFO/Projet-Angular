@@ -22,10 +22,12 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    const tasks = this.taskService.getTasks();
+    this.taskService.task.subscribe((tasks) => {
+      this.nbrTasks = tasks.length;
+    });
     const users = await this.userService.getUsers();
     this.categoryService.categories.subscribe((categories) => {
-      this.nbrTasks = tasks.length;
+      this.nbrTasks = this.nbrTasks;
       this.nbrUsers = users.length;
       this.nbrCategories = categories.length;
       this.nbrComments = 100;

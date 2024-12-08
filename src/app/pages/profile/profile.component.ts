@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
         const userProfile = await this.userService.getUserProfile(currentUser.uid);
         if (userProfile) {
           this.user = {
-            uid: currentUser.uid,
+            id: currentUser.uid,
             name: userProfile.name || 'N/A',
             nickname: userProfile.nickname || 'N/A',
             email: userProfile.email,
