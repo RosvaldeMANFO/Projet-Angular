@@ -49,7 +49,7 @@ export function getStateColor(state: TaskState): string {
       return "#FFCE56";
 
     default:
-      return "#36A2EB";
+      return "#3669EBFF";
   }
 }
  
