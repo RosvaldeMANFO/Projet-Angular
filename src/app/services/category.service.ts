@@ -21,8 +21,6 @@ export class CategoryService {
     this.init();
   }
   init(): void {
-    console.log("Category Service initialized");
-    console.log("Categories fetched", this.categories.value);
     fakeTaskCategories.forEach((category: TaskCategory) => {
       this.addCategory(category);
     });
@@ -57,7 +55,6 @@ export class CategoryService {
           color: category["color"],
         };
       });
-      console.log("Categories", mappedCategories);
       this.categories.next(mappedCategories);
     });
   }

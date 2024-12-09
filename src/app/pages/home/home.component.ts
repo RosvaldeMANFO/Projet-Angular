@@ -10,11 +10,10 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/model/user.model';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
+  selector: "app-home",
+  templateUrl: "./home.component.html",
 })
 export class HomeComponent implements OnInit {
-
   constructor(
     private readonly dialog: MatDialog,
     private readonly categoryService: CategoryService,
@@ -40,9 +39,9 @@ export class HomeComponent implements OnInit {
   }
 
   categories: TaskCategory[] = [];
-  currentUser = { id: '1', name: 'John Doe' };
+  currentUser = { id: "1", name: "John Doe" };
   openDrawer = false;
-  newComment = '';
+  newComment = "";
   selectedTask?: Task;
   selectedTaskComments: Comment[] = [];
 
@@ -51,11 +50,11 @@ export class HomeComponent implements OnInit {
 
   selectTask = (task: Task) => {
     this.selectedTask = task;
-  }
+  };
 
   closeDrawer = () => {
     this.selectedTask = undefined;
-  }
+  };
 
   openDialog = (task: Task | undefined) => {
     const dialogRef = this.dialog.open(EditTaskDialogComponent, {
@@ -74,30 +73,30 @@ export class HomeComponent implements OnInit {
         this.taskService.setTask(result);
       }
     });
-  }
+  };
 
   searchTasks = (term: string | undefined) => {
     console.log(term);
-  }
+  };
 
   filterTasks = (state: string) => {
     console.log(state);
-  }
+  };
 
   addNewTask = () => {
     this.openDialog(undefined);
-  }
+  };
 
   deleteTask = (task: Task | undefined) => {
-    console.log('Delete Task');
-  }
+    console.log("Delete Task");
+  };
 
   editTask = (task: Task) => {
-    this.openDialog(task)
-  }
+    this.openDialog(task);
+  };
 
   addComment = () => {
     console.log(this.newComment);
-    this.newComment = '';
-  }
+    this.newComment = "";
+  };
 }

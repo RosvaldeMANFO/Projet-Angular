@@ -4,11 +4,9 @@
   <div class="flex justify-center items-center">
       <canvas 
           baseChart
-          [data]="barChartData"
-          [type]="barChartOptions.type"
-          [options]="barChartOptions.options"
-          (chartHover)="chartHovered($event)"
-          (chartClick)="chartClicked($event)">
+          [data]="commentChartData"
+          [type]="'bar'"
+          [options]="commentChartOptions">
       </canvas>
   </div>
 </div>
