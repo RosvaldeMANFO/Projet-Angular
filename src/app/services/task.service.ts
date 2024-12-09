@@ -5,8 +5,7 @@ import { Firestore, collection, collectionData, addDoc, orderBy, query, doc, set
 import { CategoryService } from './category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from './user.service';
-import { User } from '../model/user.model';
-import { fakeTasks } from '../model/fake-data';
+import { User } from "../model/user.model";
 
 @Injectable({
   providedIn: "root",
@@ -102,11 +101,11 @@ export class TaskService {
  */
   async addTasks() {
     const taskCollection = collection(this.firestore, 'tasks');
-    for (const user of fakeTasks) {
+    for (const user of this.cachedTask) {
       try {
         await addDoc(taskCollection, {
           assigneeId: user.assigneeId,
-          categoryId: user.categoryId,
+          categoryId: user.category.id,
           createdAt: user.createdAt,
           description: user.description,
           endDate: user.endDate,
@@ -114,7 +113,7 @@ export class TaskService {
           reporterName: user.reporterName,
           startDate: user.startDate,
           state: user.state,
-          title: user.title
+          title: user.title,
         });
         console.log(`Task for ${user.assigneeName} added successfully!`);
       } catch (error) {
