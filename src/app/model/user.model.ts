@@ -7,4 +7,5 @@ export type User = {
     bio?: string;
     role?: string;
     createdAt?: Date;
+    userRole?: 'admin' | 'user';
 }

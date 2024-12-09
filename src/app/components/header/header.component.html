@@ -12,7 +12,7 @@
         <button mat-menu-item (click)="openProfile()">
           <mat-icon>person</mat-icon> Profile
         </button>
-        <button mat-menu-item (click)="openDashboard()">
+        <button mat-menu-item *ngIf="userRole === 'admin'" (click)="openDashboard()">
           <mat-icon>dashboard</mat-icon> Tableau de bord
         </button>
         <button mat-menu-item (click)="openMembers()">

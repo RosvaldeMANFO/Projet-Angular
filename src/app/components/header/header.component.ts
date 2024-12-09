@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth, signOut, User } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -8,12 +9,22 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   user: User | null = null;
-  
-  constructor(private auth: Auth, private router: Router) {}
+  userRole: string | null = null;
+
+  constructor(
+    private auth: Auth,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
-    this.auth.onAuthStateChanged((user) => {
+    this.auth.onAuthStateChanged(async (user) => {
       this.user = user;
+
+      if (user) {
+        const profile = await this.userService.getUserProfile(user.uid);
+        this.userRole = profile?.userRole || null;
+      }
     });
   }
 

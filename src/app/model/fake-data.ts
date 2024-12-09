@@ -77,7 +77,7 @@ export const fakeTaskCategories: TaskCategory[] = [
   { name: "Support", color: "#FFD700" },
 ];
 
-export const fakeTasks = [
+export const fakeTasks2 = [
     {
       assigneeId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", 
       assigneeName: "Sarah Smith",

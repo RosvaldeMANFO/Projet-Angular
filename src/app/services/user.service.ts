@@ -1,7 +1,7 @@
 // user.service.ts
 import { Injectable } from '@angular/core';
-import { Firestore, doc, getDoc, setDoc, collection, getDocs } from '@angular/fire/firestore';
-import { Auth } from '@angular/fire/auth';
+import { Firestore, doc, getDoc, setDoc, collection, getDocs, updateDoc } from '@angular/fire/firestore';
+import { Auth, user } from '@angular/fire/auth';
 import { User } from '../model/user.model';
 
 @Injectable({
@@ -25,6 +25,7 @@ export class UserService {
     } else {
       const newData = {
         ...data,
+        userRole: 'user',
         createdAt: new Date(),
         updatedAt: new Date(),
       };
@@ -50,4 +51,20 @@ export class UserService {
       ...doc.data(),
     } as User));
   }
+
+  async isAdmin(uid: string): Promise<boolean> {
+    const userProfile = await this.getUserProfile(uid);
+    return userProfile?.userRole === 'admin';
+  }
+
+  async updateUserRole(userId: string, newRole: string): Promise<void> {
+    try {
+      const userRef = doc(this.firestore, 'users', userId);
+      await updateDoc(userRef, { userRole: newRole });
+    } catch (error) {
+      console.error('Error updating user role:', error);
+      throw error;
+    }
+  }
 }
+

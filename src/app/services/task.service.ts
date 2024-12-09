@@ -6,7 +6,7 @@ import { CategoryService } from './category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from './user.service';
 import { User } from '../model/user.model';
-import { fakeTasks } from '../model/fake-data';
+import { fakeTasks2 } from '../model/fake-data';
 
 @Injectable({
   providedIn: 'root'
@@ -103,7 +103,7 @@ export class TaskService {
  */
   async addTasks() {
     const taskCollection = collection(this.firestore, 'tasks');
-    for (const user of fakeTasks) {
+    for (const user of fakeTasks2) {
       try {
         await addDoc(taskCollection, {
           assigneeId: user.assigneeId,
