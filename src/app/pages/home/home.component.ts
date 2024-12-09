@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
       this.categories = categories;
     });
     this.taskService.task.subscribe(tasks => {
-      console.log(tasks);
       this.fakeTasks = tasks;
     });
     this.userService.getUsers().then(users => {

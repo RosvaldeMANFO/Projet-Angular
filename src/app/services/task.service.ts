@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { getStateColor, Period, Task, TasksByKey, TaskState } from '../model/task.model';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { Firestore, collection, collectionData, addDoc, orderBy, query, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, orderBy, query, doc, setDoc, writeBatch, getDocs } from '@angular/fire/firestore';
 import { CategoryService } from './category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from './user.service';
-import { User } from "../model/user.model";
+import { User } from '../model/user.model';
+import { fakeTasks2 } from '../model/fake-data';
 
 @Injectable({
   providedIn: "root",
@@ -89,23 +90,13 @@ export class TaskService {
 
   }
 
-/**
- *  add this code to an existing component to test:
-  addTasksToFirebase() {
-    this.taskService.addTasks();
-  }
-*   and this tmplate:
-  <div>
-  <button (click)="addTasksToFirebase()">Add Mock Tasks</button>
-  </div>
- */
-  async addTasks() {
+  async addMockTasks() {
     const taskCollection = collection(this.firestore, 'tasks');
-    for (const user of this.cachedTask) {
+    for (const user of fakeTasks2) {
       try {
         await addDoc(taskCollection, {
           assigneeId: user.assigneeId,
-          categoryId: user.category.id,
+          categoryId: user.categoryId,
           createdAt: user.createdAt,
           description: user.description,
           endDate: user.endDate,
@@ -209,5 +200,34 @@ export class TaskService {
 
       return acc;
     }, {});
+  }
+  
+  deleteAllTasks() {
+    const tasksCollection = collection(this.firestore, 'tasks');
+
+    const batch = writeBatch(this.firestore);
+
+    getDocs(tasksCollection).then(querySnapshot => {
+      querySnapshot.forEach((docSnapshot) => {
+        batch.delete(doc(this.firestore, `tasks/${docSnapshot.id}`));
+      });
+
+      batch.commit().then(() => {
+        this.snackBar.open('All tasks deleted successfully', 'Close', {
+          duration: 2000,
+        });
+        console.log('All tasks deleted');
+      }).catch((error) => {
+        console.error('Error deleting tasks: ', error);
+        this.snackBar.open('Error deleting tasks', 'Close', {
+          duration: 2000,
+        });
+      });
+    }).catch((error) => {
+      console.error('Error fetching tasks: ', error);
+      this.snackBar.open('Error fetching tasks', 'Close', {
+        duration: 2000,
+      });
+    });
   }
 }

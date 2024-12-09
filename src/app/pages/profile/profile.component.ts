@@ -61,6 +61,6 @@ export class ProfileComponent implements OnInit {
   }
 
   isCurrentUserProfile(): boolean {
-    return this.user.id === this.currentUserId;
+    return this.user.id === this.currentUserId || this.user.id === undefined;
   }
 }
