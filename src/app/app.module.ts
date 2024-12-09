@@ -42,6 +42,7 @@ import { TwoDigitPipe } from './pipes/two-digit.pipe';
 import { ApplyColorDirective } from './directives/apply-color.directive';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { MembersComponent } from './pages/members/members.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { MembersComponent } from './pages/members/members.component';
     TwoDigitPipe,
     ApplyColorDirective,
     EditProfileComponent,
-    MembersComponent
+    MembersComponent,
+    ConfirmDialogComponent
   
   ],
   imports: [
