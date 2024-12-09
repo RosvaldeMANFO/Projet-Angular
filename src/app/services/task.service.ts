@@ -6,6 +6,7 @@ import { CategoryService } from './category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from './user.service';
 import { User } from '../model/user.model';
+import { fakeTasks } from '../model/fake-data';
 
 @Injectable({
   providedIn: 'root'
@@ -88,6 +89,39 @@ export class TaskService {
       });
     }
 
+  }
+
+/**
+ *  add this code to an existing component to test:
+  addTasksToFirebase() {
+    this.taskService.addTasks();
+  }
+*   and this tmplate:
+  <div>
+  <button (click)="addTasksToFirebase()">Add Mock Tasks</button>
+  </div>
+ */
+  async addTasks() {
+    const taskCollection = collection(this.firestore, 'tasks');
+    for (const user of fakeTasks) {
+      try {
+        await addDoc(taskCollection, {
+          assigneeId: user.assigneeId,
+          categoryId: user.categoryId,
+          createdAt: user.createdAt,
+          description: user.description,
+          endDate: user.endDate,
+          reporterId: user.reporterId,
+          reporterName: user.reporterName,
+          startDate: user.startDate,
+          state: user.state,
+          title: user.title
+        });
+        console.log(`Task for ${user.assigneeName} added successfully!`);
+      } catch (error) {
+        console.error("Error adding task: ", error);
+      }
+    }
   }
 
   getTaskByUserId(userId: string): Task[] {
