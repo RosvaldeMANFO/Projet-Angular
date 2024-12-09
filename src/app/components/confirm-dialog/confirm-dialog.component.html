@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Confirmer</h2>
+<mat-dialog-content>
+  <p>Voulez-vous réellement supprimer ?</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Annuler</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="'confirm'">Confirmer</button>
+</mat-dialog-actions>
