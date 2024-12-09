@@ -177,7 +177,7 @@ export const fakeTasks2 = [
       reporterName: "Olivia Lee",
       title: "Conduct user research for new feature",
       description: "Gather user feedback and insights to inform the development of the upcoming new feature.",
-      state: "IN PROGRESS",
+      state: "CANCELLED",
       startDate: new Date('2024-12-08T13:00:00Z'),
       endDate: new Date('2024-12-08T17:00:00Z'),
       createdAt: new Date('2024-12-08T12:30:00Z')

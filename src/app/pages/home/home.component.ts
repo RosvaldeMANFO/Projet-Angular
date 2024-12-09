@@ -68,7 +68,6 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: Task) => {
-      console.log(result);
       if (result) {
         this.taskService.setTask(result);
       }
@@ -106,7 +105,6 @@ export class HomeComponent implements OnInit {
   };
 
   addComment = () => {
-    console.log(this.newComment);
     this.newComment = "";
   };
 }

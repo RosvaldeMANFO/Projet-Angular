@@ -44,7 +44,6 @@ export class MembersComponent implements OnInit {
   async updateUserRole(userId: string, newRole: string): Promise<void> {
     try {
       await this.userService.updateUserRole(userId, newRole);
-      alert(`User role updated to ${newRole}`);
       this.loadMembers();
     } catch (error) {
       console.error('Error updating user role', error);

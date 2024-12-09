@@ -4,6 +4,7 @@ import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confir
 import { TaskService } from 'src/app/services/task.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { UserService } from 'src/app/services/user.service';
+import { Task } from 'src/app/model/task.model';
 
 @Component({
   selector: 'app-management',
@@ -22,10 +23,15 @@ export class ManagementComponent {
   }
 
   deleteAllTasks() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
 
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: "Delete All Tasks",
+        message: "Are you sure you want to delete all the tasks?",
+      },
+    });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'confirm') {
+      if (result) {
         this.taskService.deleteAllTasks();
       }
     });
@@ -53,4 +59,5 @@ export class ManagementComponent {
       console.error('Error fetching users:', error);
     }
   }
+
 }
