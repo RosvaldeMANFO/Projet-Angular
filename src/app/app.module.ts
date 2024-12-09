@@ -40,8 +40,10 @@ import { ToggleDrawerDirective } from './directives/toggle-drawer.directive';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { TwoDigitPipe } from './pipes/two-digit.pipe';
 import { ApplyColorDirective } from './directives/apply-color.directive';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { MembersComponent } from './pages/members/members.component';
+import { ManagementComponent } from './pages/management/management.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
@@ -65,6 +67,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     ApplyColorDirective,
     EditProfileComponent,
     MembersComponent,
+    CapitalizePipe,
+    ManagementComponent,
     ConfirmDialogComponent
   
   ],

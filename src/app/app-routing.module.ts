@@ -10,6 +10,7 @@ import { authGuard } from './guards/auth.guard';
 import { noAuthGuard } from './guards/no-auth.guard';
 import { roleGuard } from './guards/role.guard';
 import { MembersComponent } from './pages/members/members.component';
+import { ManagementComponent } from './pages/management/management.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] }, 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: "edit-profile", component: EditProfileComponent, canActivate: [authGuard] }, 
   { path: 'profile/:uid', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'members', component: MembersComponent, canActivate: [authGuard] },
+  { path: 'management', component: ManagementComponent, canActivate: [roleGuard] }
 ];
 
 

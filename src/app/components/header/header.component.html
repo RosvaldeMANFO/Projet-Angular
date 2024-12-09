@@ -7,27 +7,30 @@
     <mat-menu #userMenu="matMenu">
       <ng-container *ngIf="user; else notLoggedIn">
         <button mat-menu-item disabled>
-          Logged in as: {{ user.email }}
+          Connecté en tant que: {{ user.email }}
         </button>
         <button mat-menu-item (click)="openProfile()">
-          <mat-icon>person</mat-icon> Profile
+          <mat-icon>person</mat-icon> Profil
         </button>
         <button mat-menu-item *ngIf="userRole === 'admin'" (click)="openDashboard()">
           <mat-icon>dashboard</mat-icon> Tableau de bord
         </button>
+        <button mat-menu-item *ngIf="userRole === 'admin'" (click)="openTaskManagement()">
+          <mat-icon>check_box</mat-icon> Gestion des tâches
+        </button>
         <button mat-menu-item (click)="openMembers()">
-          <mat-icon>group</mat-icon> Members
+          <mat-icon>group</mat-icon> Membres
         </button>
         <button mat-menu-item (click)="signOutUser()">
-          <mat-icon>logout</mat-icon> Logout
+          <mat-icon>logout</mat-icon> Se déconnecter
         </button>
       </ng-container>
       <ng-template #notLoggedIn>
         <button mat-menu-item routerLink="/login">
-          <mat-icon>login</mat-icon> Log in
+          <mat-icon>login</mat-icon> Se connecter
         </button>
         <button mat-menu-item routerLink="/signup">
-          <mat-icon>login</mat-icon> Sign up
+          <mat-icon>login</mat-icon> S'inscrire
         </button>
       </ng-template>
     </mat-menu>

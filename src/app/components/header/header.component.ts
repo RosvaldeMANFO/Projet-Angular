@@ -50,4 +50,8 @@ export class HeaderComponent implements OnInit {
   openMembers() {
     this.router.navigate(['/members']);
   }
+
+  openTaskManagement() {
+    this.router.navigate(['/management']);
+  }
 }
