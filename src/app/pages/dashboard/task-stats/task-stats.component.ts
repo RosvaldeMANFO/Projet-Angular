@@ -1,105 +1,163 @@
-import { Component } from "@angular/core";
+import {
+  Component,
+  ViewChild,
+  OnChanges,
+  SimpleChanges,
+  Input,
+} from "@angular/core";
+import { BaseChartDirective } from "ng2-charts";
+import { Period, TasksByKey } from "src/app/model/task.model";
 import { ChartConfiguration } from "chart.js";
-import Config from "chart.js/dist/core/core.config";
-
-interface ChartConfig {
-  data: ChartConfiguration["data"];
-  options: ChartConfiguration["options"];
-}
 
 @Component({
   selector: "app-task-stats",
   templateUrl: "./task-stats.component.html",
   styles: [],
 })
-export class TaskStatsComponent {
-  
-  private createLegendConfig(
-    title: string,
-    position: "top" | "bottom" = "top"
-  ): Config["plugins"]["legend"] {
-    return {
-      display: true,
-      position: position,
-      title: {
-        display: true,
-        text: title,
-        font: {
-          size: 17,
-          weight: "bold",
-          style: "oblique",
-        },
-        padding: {
-          top: 10,
-          bottom: 20,
-        },
-      },
-    };
-  }
+export class TaskStatsComponent implements OnChanges {
+  @Input() period!: Period;
+  @Input() tasksByStatus: TasksByKey = {};
+  @Input() tasksByCategory: TasksByKey = {};
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  // Bar Chart Configuration
-  public barChartData: ChartConfiguration["data"] = {
+  statusChartData: ChartConfiguration["data"] = {
+    labels: [],
     datasets: [
       {
-        data: [65, 59, 80, 81, 56, 55, 40],
-        label: "Du 02/12/2024 au 08/12/2024",
-        backgroundColor: "#1976D26A",
-        borderColor: "#1976d2",
+        data: [],
+        backgroundColor: [],
+      },
+    ],
+  };
+
+  statusChartOptions: ChartConfiguration["options"] = {
+    responsive: true,
+    aspectRatio: 1.7,
+    plugins: {
+      legend: {
+        display: true,
+        position: "top",
+        title: {
+          display: true,
+          text: `Par statut ${this.labelFromPeriod()}`,
+          font: {
+            size: 17,
+            weight: "bold",
+            style: "oblique",
+          },
+          padding: {
+            top: 10,
+            bottom: 20,
+          },
+        },
+      },
+    },
+  };
+
+  categoryChartData: ChartConfiguration["data"] = {
+    labels: [],
+    datasets: [
+      {
+        data: [],
+        label: "",
+        backgroundColor: [],
+        borderColor: [],
         borderWidth: 1,
       },
     ],
-    labels: [
-      "Development",
-      "Design",
-      "Testing",
-      "Deployment",
-      "Documentation",
-      "Review",
-      "Meeting",
-    ],
   };
 
-  public barChartOptions: ChartConfiguration = {
-    type: "bar",
-    data: this.barChartData,
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      aspectRatio: 1.5,
-      plugins: {
-        legend: this.createLegendConfig("Par catégories"),
+  categoryChartOptions: ChartConfiguration["options"] = {
+    responsive: true,
+    aspectRatio: 1.5,
+    plugins: {
+      legend: {
+        display: true,
+        position: "top",
+        title: {
+          display: true,
+          text: "Par catégories",
+          font: {
+            size: 17,
+            // weight: "bold",
+            style: "oblique",
+          },
+          padding: {
+            top: 10,
+            bottom: 20,
+          },
+        },
       },
     },
   };
 
-  public pieChartData: ChartConfiguration["data"] = {
-    labels: ["En cours", "Terminé", "À faire", "Annulée"],
-    datasets: [
-      {
-        data: [3, 50, 10, 5],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#FFEE99"],
-      },
-    ],
-  };
-
-  public pieChartOptions: ChartConfiguration = {
-    type: "pie",
-    data: this.pieChartData,
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      aspectRatio: 1.7,
-      plugins: {
-        legend: this.createLegendConfig("Par statut"),
-      },
-    },
-  };
-
-  public chartClicked(event: any): void {
-    console.log("Chart Clicked:", event);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes["tasksByStatus"] ||
+      changes["tasksByCategory"] ||
+      changes["period"]
+    ) {
+      this.updateCharts();
+    }
   }
 
-  public chartHovered(event: any): void {
-    console.log("Chart Hovered:", event);
+  private updateCharts(): void {
+    this.updateStatusChart();
+    this.updateCategoryChart();
+
+    if (this.chart) {
+      this.chart.update();
+    }
+  }
+
+  private updateStatusChart(): void {
+    const statusData = this.tasksByStatus;
+
+    this.statusChartData = {
+      ...this.statusChartData,
+      labels: Object.keys(statusData),
+      datasets: [
+        {
+          ...this.statusChartData.datasets[0],
+          data: Object.values(statusData).map((status) => status.count),
+          backgroundColor: Object.values(statusData).map(
+            (status) => status.color
+          ),
+        },
+      ],
+    };
+    this.statusChartOptions &&
+      this.statusChartOptions.plugins &&
+      this.statusChartOptions.plugins.legend &&
+      this.statusChartOptions.plugins.legend.title &&
+      (this.statusChartOptions.plugins.legend.title.text =  this.labelFromPeriod() ?`Par statut ${this.labelFromPeriod()}` : "Par statut");
+  }
+
+  private updateCategoryChart(): void {
+    const categoryData = this.tasksByCategory;
+
+    this.categoryChartData = {
+      ...this.categoryChartData,
+      labels: Object.keys(categoryData),
+      datasets: [
+        {
+          ...this.categoryChartData.datasets[0],
+          data: Object.values(categoryData).map((category) => category.count),
+          backgroundColor: Object.values(categoryData).map(
+            (category) => category.color
+          ),
+          label: this.labelFromPeriod(),
+          borderColor: Object.values(categoryData).map(
+            (category) => category.color.slice(0, -2) + "1"
+          ),
+        },
+      ],
+    };
+  }
+
+  private labelFromPeriod(): string {
+    return this.period?.startDate && this.period?.endDate
+      ? `${this.period.startDate.toLocaleDateString()} au ${this.period.endDate.toLocaleDateString()}`
+      : "Aucune période sélectionnée";
   }
 }

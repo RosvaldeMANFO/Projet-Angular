@@ -95,6 +95,6 @@ import { MembersComponent } from './pages/members/members.component';
     MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

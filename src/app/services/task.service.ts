@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Task, TaskState } from '../model/task.model';
+import { getStateColor, Period, Task, TasksByKey, TaskState } from '../model/task.model';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Firestore, collection, collectionData, addDoc, orderBy, query, doc, setDoc } from '@angular/fire/firestore';
 import { CategoryService } from './category.service';
@@ -9,10 +9,9 @@ import { User } from '../model/user.model';
 import { fakeTasks } from '../model/fake-data';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class TaskService {
-
 
   task = new BehaviorSubject<Task[]>([])
   taskListSubscription?: Subscription;
@@ -128,4 +127,88 @@ export class TaskService {
     return this.cachedTask.filter(task => task.reporterId === userId);
   }
 
+  countTasksByStatusAndDate(period?: Period): TasksByKey {
+    return this.cachedTask.reduce((acc: TasksByKey, task) => {
+      if (!period) {
+        const status = task.state;
+
+        if (acc[status]) {
+          acc[status].count += 1;
+        } else {
+          acc[status] = {
+            count: 1,
+            color: task.category.color,
+            createdAt: task.createdAt,
+          };
+        }
+        return acc;
+      }
+
+      const isWithinPeriod =
+        ((!period.startDate || task.createdAt >= period.startDate) &&
+          (!period.endDate || task.createdAt <= period.endDate)) ||
+        (period.startDate &&
+          period.endDate &&
+          task.startDate <= period.endDate &&
+          task.endDate >= period.startDate);
+
+      if (isWithinPeriod) {
+        const status = task.state;
+
+        if (acc[status]) {
+          acc[status].count += 1;
+        } else {
+          acc[status] = {
+            count: 1,
+            color: getStateColor(status),
+            createdAt: task.createdAt,
+          };
+        }
+      }
+      return acc;
+    }, {});
+  }
+
+  countTasksByCategoryAndDate(period?: Period): TasksByKey {
+    return this.cachedTask.reduce((acc: TasksByKey, task) => {
+      if (!period) {
+        const categoryName = task.category.name;
+
+        if (acc[categoryName]) {
+          acc[categoryName].count += 1;
+        } else {
+          acc[categoryName] = {
+            count: 1,
+            color: task.category.color,
+            createdAt: task.createdAt,
+          };
+        }
+        return acc;
+      }
+
+      const isWithinPeriod =
+        ((!period.startDate || task.createdAt >= period.startDate) &&
+          (!period.endDate || task.createdAt <= period.endDate)) ||
+        (period.startDate &&
+          period.endDate &&
+          task.startDate <= period.endDate &&
+          task.endDate >= period.startDate);
+
+      if (isWithinPeriod) {
+        const categoryName = task.category.name;
+
+        if (acc[categoryName]) {
+          acc[categoryName].count += 1;
+        } else {
+          acc[categoryName] = {
+            count: 1,
+            color: task.category.color,
+            createdAt: task.createdAt,
+          };
+        }
+      }
+
+      return acc;
+    }, {});
+  }
 }

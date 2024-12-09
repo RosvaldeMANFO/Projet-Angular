@@ -5,21 +5,17 @@
         <div class="flex justify-center items-center">
             <canvas 
                 baseChart
-                [data]="pieChartData"
-                [type]="pieChartOptions.type"
-                [options]="pieChartOptions.options"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)">
+                [data]="statusChartData"
+                [type]="'pie'"
+                [options]="statusChartOptions">
             </canvas>
         </div>
         <div class="flex justify-center items-center">
-            <canvas 
+            <canvas
                 baseChart
-                [data]="barChartData"
-                [type]="barChartOptions.type"
-                [options]="barChartOptions.options"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)">
+                [data]="categoryChartData"
+                [type]="'bar'"
+                [options]="categoryChartOptions">
             </canvas>
         </div>
     </div>
