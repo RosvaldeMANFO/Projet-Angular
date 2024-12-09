@@ -41,6 +41,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { TwoDigitPipe } from './pipes/two-digit.pipe';
 import { ApplyColorDirective } from './directives/apply-color.directive';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { MembersComponent } from './pages/members/members.component';
+
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     TwoDigitPipe,
     ApplyColorDirective,
     EditProfileComponent,
+    MembersComponent
+  
   ],
   imports: [
     BrowserModule,

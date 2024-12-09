@@ -91,6 +91,7 @@ export const fakeTasks: Task[] = [
     category: fakeTaskCategories[0], // BUG
     startDate: new Date("2024-11-20"),
     endDate: new Date("2024-11-30"),
+    createdAt: new Date("2024-11-15"),
   },
   {
     id: "2",
@@ -104,6 +105,7 @@ export const fakeTasks: Task[] = [
     category: fakeTaskCategories[1], // FEATURE
     startDate: new Date("2024-11-25"),
     endDate: new Date("2024-12-10"),
+    createdAt: new Date("2024-11-20"),
   },
   {
     id: "3",
@@ -115,6 +117,7 @@ export const fakeTasks: Task[] = [
     category: fakeTaskCategories[2], // IMPROVEMENT
     startDate: new Date("2024-10-15"),
     endDate: new Date("2024-10-30"),
+    createdAt: new Date("2024-10-10"),
   },
   {
     id: "4",
@@ -129,6 +132,7 @@ export const fakeTasks: Task[] = [
     category: fakeTaskCategories[3], // FEATURE
     startDate: new Date("2024-09-10"),
     endDate: new Date("2024-09-20"),
+    createdAt: new Date("2024-09-05"),
   },
   {
     id: "5",
@@ -143,5 +147,6 @@ export const fakeTasks: Task[] = [
     category: fakeTaskCategories[4], // BUG
     startDate: new Date("2024-12-01"),
     endDate: new Date("2024-12-15"),
+    createdAt: new Date("2024-11-30"),
   },
 ];

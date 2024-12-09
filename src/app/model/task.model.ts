@@ -10,6 +10,7 @@ export type Task = {
     category: TaskCategory;
     startDate: Date;
     endDate: Date;
+    createdAt: Date;
 };
 
 export enum TaskState {

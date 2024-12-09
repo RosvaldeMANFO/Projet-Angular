@@ -9,38 +9,35 @@ import { User } from 'src/app/model/user.model';
   selector: 'app-edit-task-dialog',
   templateUrl: './edit-task-dialog.component.html',
 })
-export class EditTaskDialogComponent implements OnInit {
+export class EditTaskDialogComponent {
   users: User[] = [];
-  currentUser!: User ;
+  currentUser!: User;
   reportedBy: User | null = null;
   TaskState = TaskState;
   categories: TaskCategory[] = [];
   form: FormGroup;
   taskID: string | undefined;
-  
+
   constructor(
-    private readonly _fb: FormBuilder,
+    private readonly fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: EditTaskDialogData
-  ) { 
+  ) {
     this.categories = data?.categories;
     this.taskID = data?.task?.id;
     this.users = data?.users;
     this.currentUser = data?.currentUser;
-    this.form = this._fb.group({
+    this.form = this.fb.group({
       id: new FormControl(data?.task?.id),
       title: new FormControl(data?.task?.title, [Validators.required]),
+      reporterName: new FormControl(data?.task?.reporterName ?? this.currentUser.nickname),
+      reporterId: new FormControl(data?.task?.reporterId ?? this.currentUser.id),
       description: new FormControl(data?.task?.description, [Validators.required]),
       state: new FormControl(data?.task?.state ?? 'TODO', [Validators.required]),
-      category: new FormControl(data?.task?.category ?? 'BUG', [Validators.required]),
+      category: new FormControl(data?.task?.category ?? this.categories[0], [Validators.required]),
       startDate: new FormControl(data?.task?.startDate ?? new Date(), [Validators.required, this.dateValidator()]),
       endDate: new FormControl(data?.task?.endDate ?? new Date(), [Validators.required, this.dateValidator()]),
-      assigneeName: new FormControl(data?.task?.assigneeName ?? this.currentUser.name),
-      assigneeId: new FormControl(data?.task?.assigneeId ?? this.currentUser.id),
-    });
-  }
-  ngOnInit(): void {
-    this.form.get('assigneeName')?.valueChanges.subscribe(value => {
-      this.form.get('assigneeId')?.setValue(this.users.find(user => user.name === value)?.id);
+      assigneeId: new FormControl(data?.task?.assigneeId),
+      createdAt: new FormControl(data?.task?.createdAt ?? new Date()),
     });
   }
 

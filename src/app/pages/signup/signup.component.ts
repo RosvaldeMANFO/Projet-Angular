@@ -16,7 +16,7 @@ export class SignupComponent {
   signUp() {
     createUserWithEmailAndPassword(this.auth, this.email, this.password)
       .then(() => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       })
       .catch((error) => {
         console.error('Error during sign up:', error);

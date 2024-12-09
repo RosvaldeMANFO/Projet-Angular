@@ -8,6 +8,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { authGuard } from './guards/auth.guard';
 import { noAuthGuard } from './guards/no-auth.guard';
+import { MembersComponent } from './pages/members/members.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] }, 
@@ -16,6 +17,8 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] }, 
   { path: "dashboard", component: DashboardComponent, canActivate: [authGuard] }, 
   { path: "edit-profile", component: EditProfileComponent, canActivate: [authGuard] }, 
+  { path: 'profile/:uid', component: ProfileComponent, canActivate: [authGuard] },
+  { path: 'members', component: MembersComponent, canActivate: [authGuard] },
 ];
 
 
