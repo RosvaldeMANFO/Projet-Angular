@@ -65,88 +65,217 @@ export const fakeUsers: User[] = [
 ];
 
 export const fakeTaskCategories: TaskCategory[] = [
-  { name: "Bug", color: "#FF0000" },
-  { name: "Feature", color: "#008000" },
-  { name: "Improvement", color: "#0000FF" },
-  { name: "Documentation", color: "#FFA500" },
-  { name: "Testing", color: "#800080" },
-  { name: "Research", color: "#00CED1" },
-  { name: "Design", color: "#FFC0CB" },
-  { name: "Deployment", color: "#A52A2A" },
-  { name: "Maintenance", color: "#708090" },
-  { name: "Support", color: "#FFD700" },
+  { name: "Bug", color: "#E57373" },
+  { name: "Feature", color: "#81C784" },
+  { name: "Improvement", color: "#64B5F6" },
+  { name: "Documentation", color: "#A1887F" },
+  { name: "Testing", color: "#9575CD" }, 
+  { name: "Research", color: "#4CAF50" }, 
+  { name: "Design", color: "#42A5F5" }, 
+  { name: "Deployment", color: "#F44336" },
+  { name: "Maintenance", color: "#FFB74D" },
+  { name: "Support", color: "#F06292" },
 ];
 
-export const fakeTasks: Task[] = [
-  {
-    id: "1",
-    reporterName: "Alice Johnson",
-    reporterId: "U001",
-    assigneeId: "U002",
-    assigneeName: "Bob Smith",
-    title: "Fix login bug",
-    description:
-      "Resolve the issue causing login failures for users with special characters in passwords.",
-    state: TaskState.DOING,
-    category: fakeTaskCategories[0], // BUG
-    startDate: new Date("2024-11-20"),
-    endDate: new Date("2024-11-30"),
-    createdAt: new Date("2024-11-15"),
-  },
-  {
-    id: "2",
-    reporterName: "Charlie Taylor",
-    reporterId: "U003",
-    assigneeId: "U004",
-    assigneeName: "Diana Green",
-    title: "Implement dark mode",
-    description: "Add support for a dark theme throughout the application.",
-    state: TaskState.TODO,
-    category: fakeTaskCategories[1], // FEATURE
-    startDate: new Date("2024-11-25"),
-    endDate: new Date("2024-12-10"),
-    createdAt: new Date("2024-11-20"),
-  },
-  {
-    id: "3",
-    reporterName: "Emma Davis",
-    reporterId: "U005",
-    title: "Optimize database queries",
-    description: "Refactor and optimize slow-performing SQL queries.",
-    state: TaskState.DONE,
-    category: fakeTaskCategories[2], // IMPROVEMENT
-    startDate: new Date("2024-10-15"),
-    endDate: new Date("2024-10-30"),
-    createdAt: new Date("2024-10-10"),
-  },
-  {
-    id: "4",
-    reporterName: "Frank Wilson",
-    reporterId: "U006",
-    assigneeId: "U007",
-    assigneeName: "Grace White",
-    title: "Add password reset functionality",
-    description:
-      "Enable users to reset their passwords via email verification.",
-    state: TaskState.CANCELLED,
-    category: fakeTaskCategories[3], // FEATURE
-    startDate: new Date("2024-09-10"),
-    endDate: new Date("2024-09-20"),
-    createdAt: new Date("2024-09-05"),
-  },
-  {
-    id: "5",
-    reporterName: "Hannah Lee",
-    reporterId: "U001",
-    assigneeId: "U009",
-    assigneeName: "Ivy Brown",
-    title: "Fix notification bug",
-    description:
-      "Resolve issues where push notifications are sent multiple times.",
-    state: TaskState.TODO,
-    category: fakeTaskCategories[4], // BUG
-    startDate: new Date("2024-12-01"),
-    endDate: new Date("2024-12-15"),
-    createdAt: new Date("2024-11-30"),
-  },
+// export const fakeTasks: Task[] = [
+//   {
+//     id: "1",
+//     reporterName: "Alice Johnson",
+//     reporterId: "U001",
+//     assigneeId: "U002",
+//     assigneeName: "Bob Smith",
+//     title: "Fix login bug",
+//     description:
+//       "Resolve the issue causing login failures for users with special characters in passwords.",
+//     state: TaskState.DOING,
+//     category: fakeTaskCategories[0], // BUG
+//     startDate: new Date("2024-11-20"),
+//     endDate: new Date("2024-11-30"),
+//     createdAt: new Date("2024-11-15"),
+//   },
+//   {
+//     id: "2",
+//     reporterName: "Charlie Taylor",
+//     reporterId: "U003",
+//     assigneeId: "U004",
+//     assigneeName: "Diana Green",
+//     title: "Implement dark mode",
+//     description: "Add support for a dark theme throughout the application.",
+//     state: TaskState.TODO,
+//     category: fakeTaskCategories[1], // FEATURE
+//     startDate: new Date("2024-11-25"),
+//     endDate: new Date("2024-12-10"),
+//     createdAt: new Date("2024-11-20"),
+//   },
+//   {
+//     id: "3",
+//     reporterName: "Emma Davis",
+//     reporterId: "U003",
+//     assigneeId: "U004",
+//     assigneeName: "Diana Green",
+//     title: "Optimize database queries",
+//     description: "Refactor and optimize slow-performing SQL queries.",
+//     state: TaskState.DONE,
+//     category: fakeTaskCategories[2], // IMPROVEMENT
+//     startDate: new Date("2024-10-15"),
+//     endDate: new Date("2024-10-30"),
+//     createdAt: new Date("2024-10-10"),
+//   },
+//   {
+//     id: "4",
+//     reporterName: "Frank Wilson",
+//     reporterId: "U006",
+//     assigneeId: "U007",
+//     assigneeName: "Grace White",
+//     title: "Add password reset functionality",
+//     description:
+//       "Enable users to reset their passwords via email verification.",
+//     state: TaskState.CANCELLED,
+//     category: fakeTaskCategories[3], // FEATURE
+//     startDate: new Date("2024-09-10"),
+//     endDate: new Date("2024-09-20"),
+//     createdAt: new Date("2024-09-05"),
+//   },
+//   {
+//     id: "5",
+//     reporterName: "Hannah Lee",
+//     reporterId: "U001",
+//     assigneeId: "U009",
+//     assigneeName: "Ivy Brown",
+//     title: "Fix notification bug",
+//     description:
+//       "Resolve issues where push notifications are sent multiple times.",
+//     state: TaskState.TODO,
+//     category: fakeTaskCategories[4], // BUG
+//     startDate: new Date("2024-12-01"),
+//     endDate: new Date("2024-12-15"),
+//     createdAt: new Date("2024-12-01"),
+//   },
+//   {
+//     id: "5",
+//     reporterName: "Hannah Lee",
+//     reporterId: "U001",
+//     assigneeId: "U009",
+//     assigneeName: "Ivy Brown",
+//     title: "Fix notification bug",
+//     description:
+//       "Resolve issues where push notifications are sent multiple times.",
+//     state: TaskState.TODO,
+//     category: fakeTaskCategories[4], // BUG
+//     startDate: new Date("2024-12-01"),
+//     endDate: new Date("2024-12-15"),
+//     createdAt: new Date("2024-12-01"),
+//   },
+//   {
+//     id: "5",
+//     reporterName: "Hannah Lee",
+//     reporterId: "U001",
+//     assigneeId: "U009",
+//     assigneeName: "Ivy Brown",
+//     title: "Fix notification bug",
+//     description:
+//       "Resolve issues where push notifications are sent multiple times.",
+//     state: TaskState.TODO,
+//     category: fakeTaskCategories[4], // BUG
+//     startDate: new Date("2024-12-01"),
+//     endDate: new Date("2024-12-15"),
+//     createdAt: new Date("2024-12-01"),
+//   },
+//   {
+//     id: "5",
+//     reporterName: "Hannah Lee",
+//     reporterId: "U001",
+//     assigneeId: "U009",
+//     assigneeName: "Ivy Brown",
+//     title: "Fix notification bug",
+//     description:
+//       "Resolve issues where push notifications are sent multiple times.",
+//     state: TaskState.TODO,
+//     category: fakeTaskCategories[4], // BUG
+//     startDate: new Date("2024-12-01"),
+//     endDate: new Date("2024-12-15"),
+//     createdAt: new Date("2024-12-01"),
+//   },
+//   {
+//     id: "5",
+//     reporterName: "Hannah Lee",
+//     reporterId: "U001",
+//     assigneeId: "U009",
+//     assigneeName: "Ivy Brown",
+//     title: "Fix notification bug",
+//     description:
+//       "Resolve issues where push notifications are sent multiple times.",
+//     state: TaskState.TODO,
+//     category: fakeTaskCategories[4], // BUG
+//     startDate: new Date("2024-12-01"),
+//     endDate: new Date("2024-12-15"),
+//     createdAt: new Date("2024-12-01"),
+//   },
+//   {
+//     id: "5",
+//     reporterName: "Hannah Lee",
+//     reporterId: "U001",
+//     assigneeId: "U009",
+//     assigneeName: "Ivy Brown",
+//     title: "Fix notification bug",
+//     description:
+//       "Resolve issues where push notifications are sent multiple times.",
+//     state: TaskState.TODO,
+//     category: fakeTaskCategories[4], // BUG
+//     startDate: new Date("2024-12-01"),
+//     endDate: new Date("2024-12-15"),
+//     createdAt: new Date("2024-12-01"),
+//   },
+//   {
+//     id: "5",
+//     reporterName: "Hannah Lee",
+//     reporterId: "U001",
+//     assigneeId: "U009",
+//     assigneeName: "Ivy Brown",
+//     title: "Fix notification bug",
+//     description:
+//       "Resolve issues where push notifications are sent multiple times.",
+//     state: TaskState.TODO,
+//     category: fakeTaskCategories[4], // BUG
+//     startDate: new Date("2024-12-01"),
+//     endDate: new Date("2024-12-15"),
+//     createdAt: new Date("2024-12-01"),
+//   },
+//   {
+//     id: "5",
+//     reporterName: "Hannah Lee",
+//     reporterId: "U001",
+//     assigneeId: "U009",
+//     assigneeName: "Ivy Brown",
+//     title: "Fix notification bug",
+//     description:
+//       "Resolve issues where push notifications are sent multiple times.",
+//     state: TaskState.TODO,
+//     category: fakeTaskCategories[2], // BUG
+//     startDate: new Date("2024-12-01"),
+//     endDate: new Date("2024-12-15"),
+//     createdAt: new Date("2024-12-01"),
+//   },
+//   {
+//     id: "5",
+//     reporterName: "Hannah Lee",
+//     reporterId: "U001",
+//     assigneeId: "U009",
+//     assigneeName: "Ivy Brown",
+//     title: "Fix notification bug",
+//     description:
+//       "Resolve issues where push notifications are sent multiple times.",
+//     state: TaskState.TODO,
+//     category: fakeTaskCategories[4], // BUG
+//     startDate: new Date("2024-12-01"),
+//     endDate: new Date("2024-12-15"),
+//     createdAt: new Date("2024-12-01"),
+//   },
+// ];
+
+export const fakeComments: { taskName: string; commentCount: number }[] = [
+  { taskName: "Task 1", commentCount: 10 },
+  { taskName: "Task 2", commentCount: 20 },
+  { taskName: "Task 3", commentCount: 30 },
+  { taskName: "Task 4", commentCount: 40 },
 ];

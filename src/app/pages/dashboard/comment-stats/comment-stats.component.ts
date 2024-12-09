@@ -1,51 +1,81 @@
-import { Component } from "@angular/core";
-import { ChartConfiguration, LegendElement } from "chart.js";
-import Config from "chart.js/dist/core/core.config";
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from "@angular/core";
+import { ChartConfiguration } from "chart.js";
+import { BaseChartDirective } from "ng2-charts";
+import { Period } from "src/app/model/task.model";
 
 @Component({
   selector: "app-comment-stats",
   templateUrl: "./comment-stats.component.html",
   styles: [],
 })
-export class CommentStatsComponent {
+export class CommentStatsComponent implements OnChanges {
+  @Input() period!: Period;
+  @Input() commentData: { taskName: string; commentCount: number }[] = [];
 
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
-  public barChartData: ChartConfiguration["data"] = {
+  commentChartData: ChartConfiguration["data"] = {
+    labels: [],
     datasets: [
       {
         indexAxis: "y",
-        data: [65, 59, 80, 81, 56, 55, 40],
-        label: "Du 02/12/2024 au 08/12/2024",
-        backgroundColor: "#D26F197B",
+        data: [],
+        label: "",
+        backgroundColor: "#288EDDFF",
         borderColor: "#D26F19FF",
         borderWidth: 1,
       },
     ],
-    labels: [
-      "Je vais manger",
-      "Je vais dormir",
-      "Je vais travailler",
-      "Je vais étudier",
-      "Je vais lire",
-    ],
   };
 
-  public barChartOptions: ChartConfiguration = {
-    type: "bar",
-    data: this.barChartData,
-    options: {
-      responsive: true,
-      maintainAspectRatio: true,
-      aspectRatio: 4,
+  commentChartOptions: ChartConfiguration["options"] = {
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 4,
+    plugins: {
+      legend: {
+        display: true,
+        position: "top",
+      },
     },
   };
 
-   // Event Handlers
-   public chartClicked(event: any): void {
-    console.log('Chart Clicked:', event);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes["commentData"] || changes["period"]) {
+      this.updateChart();
+    }
   }
 
-  public chartHovered(event: any): void {
-    console.log('Chart Hovered:', event);
+  private updateChart(): void {
+    if (this.commentData && this.commentData.length > 0) {
+      this.commentChartData = {
+        ...this.commentChartData,
+        labels: this.commentData.map((item) => item.taskName),
+        datasets: [
+          {
+            ...this.commentChartData.datasets[0],
+            data: this.commentData.map((item) => item.commentCount),
+            label: this.labelFromPeriod(),
+          },
+        ],
+      };
+
+      if (this.chart) {
+        this.chart.update();
+      }
+    }
+  }
+
+  private labelFromPeriod(): string {
+    return this.period?.startDate && this.period?.endDate
+      ? `${this.period.startDate.toLocaleDateString()} - ${this.period.endDate.toLocaleDateString()}`
+      : "Aucune période sélectionnée";
   }
 }
