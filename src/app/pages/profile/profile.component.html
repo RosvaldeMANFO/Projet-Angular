@@ -28,7 +28,7 @@
   <div class="mt-8 w-full max-w-4xl">
     <h2 class="text-lg font-bold mb-4">Tasks</h2>
     <div class="bg-white shadow-md rounded-lg">
-      <ul>
+      <ul *ngIf="tasks.length > 0; else noTasks">
         <li
           *ngFor="let task of tasks"
           class="flex items-center justify-between p-4 border-b last:border-none hover:bg-gray-50"
@@ -40,22 +40,26 @@
           <div>
             <span
               class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
-              [class.bg-green-100]="task.completed"
-              [class.text-green-800]="task.completed"
-              [class.bg-gray-200]="!task.completed"
-              [class.text-gray-800]="!task.completed"
+              [class.bg-green-100]="task.state === 'DONE'"
+              [class.text-green-800]="task.state === 'DONE'"
+              [class.bg-gray-200]="task.state !== 'DONE'"
+              [class.text-gray-800]="task.state !== 'DONE'"
             >
               <span class="mr-2">
-                <i class="material-icons" *ngIf="task.completed">check_circle</i>
-                <i class="material-icons" *ngIf="!task.completed">radio_button_unchecked</i>
+                <i class="material-icons" *ngIf="task.state === 'DONE'">check_circle</i>
+                <i class="material-icons" *ngIf="task.state !== 'DONE'">radio_button_unchecked</i>
               </span>
-              {{ task.completed ? 'Completed' : 'Pending' }}
+              {{ task.state }}
             </span>
           </div>
         </li>
       </ul>
+      <ng-template #noTasks>
+        <p class="p-4 text-gray-500">No tasks found for this user.</p>
+      </ng-template>
     </div>
   </div>
+  
 
   <!-- View All Tasks Button -->
   <div class="mt-6 w-full max-w-4xl text-center">

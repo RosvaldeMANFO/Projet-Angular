@@ -7,7 +7,7 @@
                     class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
                     {{ (task.reporterName).charAt(0) }}
                 </span>
-                {{task.reporterName}}
+                {{ task.reporterName }}
             </p>
             <div class="flex">
                 <button mat-icon-button (click)="deleteTask($event)">
@@ -19,10 +19,12 @@
             </div>
         </div>
         <div class="flex items-center gap-3 w-full mt-3 select-none">
-            <span [appApplyColor]="task.category.color" class="rounded-md border px-2 border-gray-400">
-                {{ task.category.name }}</span>
+            <span *ngIf="task.category?.color" [ngStyle]="{'background-color': task.category.color}" class="rounded-md border px-2 border-gray-400">
+                {{ task.category.name }}
+            </span>
             <span class="rounded-md border px-2 border-gray-400 text-primary-500">
-                {{ task.state }}</span>
+                {{ task.state }}
+            </span>
         </div>
     </mat-card-header>
     <mat-card-content>

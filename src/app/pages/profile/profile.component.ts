@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { UserService } from '../../services/user.service';
+import { TaskService } from '../../services/task.service';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../model/user.model';
+import { Task } from '../../model/task.model';
 import { onAuthStateChanged } from '@angular/fire/auth';
 import { Timestamp } from 'firebase/firestore';
 
@@ -13,16 +15,12 @@ import { Timestamp } from 'firebase/firestore';
 export class ProfileComponent implements OnInit {
   user: Partial<User> = {};
   currentUserId: string = '';
-  tasks = [
-    { title: 'Design Task Management App', description: 'Create mockups and prototype', completed: true },
-    { title: 'Implement Authentication', description: 'Set up Firebase Auth', completed: false },
-    { title: 'Create Profile Page', description: 'Build using Angular Material', completed: false },
-    { title: 'Test Application', description: 'Perform end-to-end testing', completed: true },
-  ];
+  tasks: Task[] = [];
 
   constructor(
     private auth: Auth,
     private userService: UserService,
+    private taskService: TaskService,
     private route: ActivatedRoute
   ) {}
 
@@ -36,6 +34,7 @@ export class ProfileComponent implements OnInit {
         } else {
           await this.loadUserProfile(currentUser.uid);
         }
+        this.loadTasks(this.user.id || this.currentUserId);
       }
     });
   }
@@ -56,6 +55,11 @@ export class ProfileComponent implements OnInit {
       };
     }
   }
+
+  private loadTasks(userId: string): void {
+    this.tasks = this.taskService.getTaskByUserId(userId);
+  }
+
   isCurrentUserProfile(): boolean {
     return this.user.id === this.currentUserId;
   }
