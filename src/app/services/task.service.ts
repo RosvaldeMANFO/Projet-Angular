@@ -201,7 +201,7 @@ export class TaskService {
       return acc;
     }, {});
   }
-
+  
   deleteAllTasks() {
     const tasksCollection = collection(this.firestore, 'tasks');
 
