@@ -8,6 +8,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { Auth } from '@angular/fire/auth';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/model/user.model';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: "app-home",
@@ -75,11 +76,11 @@ export class HomeComponent implements OnInit {
   };
 
   searchTasks = (term: string | undefined) => {
-    console.log(term);
+    this.taskService.searchTask(term);
   };
 
   filterTasks = (state: string) => {
-    console.log(state);
+    this.taskService.filterByState(state);
   };
 
   addNewTask = () => {
@@ -87,7 +88,17 @@ export class HomeComponent implements OnInit {
   };
 
   deleteTask = (task: Task | undefined) => {
-    console.log("Delete Task");
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: "Delete Task",
+        message: "Are you sure you want to delete this task?",
+      },
+    });
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.taskService.deleteTask(task?.id ?? '');
+      }
+    });
   };
 
   editTask = (task: Task) => {

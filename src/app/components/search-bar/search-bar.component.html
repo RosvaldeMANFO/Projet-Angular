@@ -14,7 +14,7 @@
         {{currentState}}</span>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="switchSate('ALL')">
-          {{currentState}}</button>
+          {{'ALL'}}</button>
         <div *ngFor="let state of TaskState | keyvalue" class="py-2">
           <button mat-menu-item (click)="switchSate(state.key)">
             {{state.value}}</button>

@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from './user.service';
 import { User } from '../model/user.model';
 import { fakeTasks2 } from '../model/fake-data';
+import { deleteDoc } from 'firebase/firestore/lite';
 
 @Injectable({
   providedIn: "root",
@@ -17,6 +18,7 @@ export class TaskService {
   taskListSubscription?: Subscription;
   cachedTask: Task[] = [];
   users: User[] = [];
+  currentState = 'ALL';
 
   constructor(
     private readonly snackBar: MatSnackBar,
@@ -90,6 +92,54 @@ export class TaskService {
 
   }
 
+  async deleteTask(taskId: string) {
+    const taskRef = doc(this.firestore, 'tasks', taskId);
+    await deleteDoc(taskRef);
+    this.getTasks();
+    this.snackBar.open('Task deleted successfully', 'Close', {
+      duration: 2000,
+    });
+  }
+
+  filterByState(state: string) {
+    if (state === 'ALL') {
+      this.task.next(this.cachedTask);
+    } else {
+      const filteredTasks = this.cachedTask.filter((task) => {
+        return task.state === state;
+      });
+      this.task.next(filteredTasks);
+    }
+    this.currentState = state;
+  }
+
+  searchTask(term: string | undefined) {
+    if (term) {
+      const filteredTasks = this.cachedTask.filter((task) => {
+        return (task.title.toLowerCase().includes(term.toLowerCase()) ||
+          task.description.toLowerCase().includes(term.toLowerCase())) &&
+          (this.currentState === 'ALL' || task.state === this.currentState);
+      });
+      this.task.next(filteredTasks);
+    } else {
+      this.task.next(
+        this.cachedTask.filter((task) => {
+          return this.currentState === 'ALL' || task.state === this.currentState;
+        })
+      );
+    }
+  }
+
+/**
+ *  add this code to an existing component to test:
+  addTasksToFirebase() {
+    this.taskService.addTasks();
+  }
+*   and this tmplate:
+  <div>
+  <button (click)="addTasksToFirebase()">Add Mock Tasks</button>
+  </div>
+ */
   async addMockTasks() {
     const taskCollection = collection(this.firestore, 'tasks');
     for (const user of fakeTasks2) {
