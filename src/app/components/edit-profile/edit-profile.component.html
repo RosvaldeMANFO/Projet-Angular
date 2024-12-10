@@ -1,7 +1,14 @@
 <div class="edit-profile-container flex flex-col items-center p-6 bg-gray-100 min-h-screen">
-    <h2 class="text-2xl font-semibold mb-6">{{ languageService.translate('profile.editProfile') }}</h2>
-    <form (ngSubmit)="saveProfile()" class="space-y-6 w-full max-w-md">
-        <input
+  <h2 class="text-2xl font-semibold mb-6">
+    {{ languageService.translate('profile.editProfile') }}
+  </h2>
+  <form (ngSubmit)="saveProfile()" class="space-y-6 w-full max-w-md">
+    <div>
+      <label for="nickname" class="block text-sm font-medium text-gray-700 mb-2">
+        {{ languageService.translate('profile.nickname') }}
+      </label>
+      <input
+        id="nickname"
         type="text"
         [(ngModel)]="nickname"
         name="nickname"
@@ -9,13 +16,25 @@
         required
         class="w-full p-3 border rounded-lg focus:outline-blue-500"
       />
+    </div>
+    <div>
+      <label for="bio" class="block text-sm font-medium text-gray-700 mb-2">
+        {{ languageService.translate('profile.bio') }}
+      </label>
       <textarea
+        id="bio"
         [(ngModel)]="bio"
         name="bio"
-        placeholder="{{ languageService.translate('profile.bio') }}"
+        placeholder="{{ languageService.translate('profile.talkAboutYourself') }}"
         class="w-full p-3 border rounded-lg focus:outline-blue-500"
       ></textarea>
+    </div>
+    <div>
+      <label for="role" class="block text-sm font-medium text-gray-700 mb-2">
+        {{ languageService.translate('profile.role') }}
+      </label>
       <input
+        id="role"
         type="text"
         [(ngModel)]="role"
         name="role"
@@ -23,13 +42,13 @@
         required
         class="w-full p-3 border rounded-lg focus:outline-blue-500"
       />
-      <button
-        type="submit"
-        class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
-      >
+    </div>
+    <button
+      type="submit"
+      class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+    >
       {{ languageService.translate('profile.save') }}
-      </button>
-      <p *ngIf="errorMessage" class="text-red-500">{{ errorMessage }}</p>
-    </form>
-  </div>
-  
+    </button>
+    <p *ngIf="errorMessage" class="text-red-500">{{ errorMessage }}</p>
+  </form>
+</div>
