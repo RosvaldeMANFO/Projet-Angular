@@ -42,7 +42,9 @@
             'mediumDate' }}</p>
         <p class="flex items-center">
             <mat-icon>person</mat-icon>
-            <span>{{ selectedTask.assigneeName }}</span>
+            <a [routerLink]="['/profile', selectedTask.assigneeId]" class="text-blue-500 hover:underline">
+                {{ selectedTask.assigneeName }}
+            </a>
         </p>
         <h3 class="text-lg font-bold">{{ this.languageService.translate('home.comments') }}</h3>
         <div>
@@ -55,10 +57,12 @@
             <div *ngFor="let comment of selectedTaskComments">
                 <div class="flex flex-col items-start gap-3 text-md">
                     <p class="flex gap-3 items-center">
-                        <span class="w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center text-white">
-                            {{ (comment.authorName).charAt(0) }}
-                        </span>
-                        {{ comment.authorName }}
+                        <a [routerLink]="['/profile', comment.authorId]" class="text-primary-500 hover:underline">
+                            <span class="w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center text-white">
+                                {{ (comment.authorName).charAt(0) }}
+                            </span>
+                            {{ comment.authorName }}
+                        </a>
                     </p>
                     <p class="flex flex-col gap-3 w-full">
                         {{ comment.content }}
