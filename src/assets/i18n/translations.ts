@@ -25,6 +25,7 @@ export const translations: Translations  = {
         comments: 'Comments',
         add: 'Add',
         save: 'Save',
+        selectAssignee: 'Select Assignee',
       },
       auth: {
         login: {
@@ -136,6 +137,7 @@ export const translations: Translations  = {
         comments: 'Commentaires',
         add: 'Ajouter',
         save: 'Enregistrer',
+        selectAssignee: 'Sélectionner un assigné',
       },
       auth: {
         login: {
@@ -247,6 +249,7 @@ export const translations: Translations  = {
         comments: 'Comentarios',
         add: 'Añadir',
         save: 'Guardar',
+        selectAssignee: 'Seleccionar asignado',
       },
       auth: {
         login: {
@@ -358,6 +361,7 @@ export const translations: Translations  = {
         comments: 'Comentários',
         add: 'Adicionar',
         save: 'Salvar',
+        selectAssignee: 'Selecionar Responsável',
       },
       auth: {
         login: {
@@ -469,6 +473,7 @@ export const translations: Translations  = {
         comments: 'Kommentare',
         add: 'Hinzufügen',
         save: 'Speichern',
+        selectAssignee: 'Zuständigen auswählen',
       },
       auth: {
         login: {
@@ -580,6 +585,7 @@ export const translations: Translations  = {
         comments: 'Комментарии',
         add: 'Добавить',
         save: 'Сохранить',
+        selectAssignee: 'Выбрать исполнителя',
       },
       auth: {
         login: {
@@ -691,6 +697,7 @@ export const translations: Translations  = {
         comments: 'コメント',
         add: '追加',
         save: '保存',
+        selectAssignee: '担当者を選択',
       },
       auth: {
         login: {
@@ -802,6 +809,7 @@ export const translations: Translations  = {
         comments: '댓글',
         add: '추가',
         save: '저장',
+        selectAssignee: '담당자 선택',
       },
       auth: {
         login: {
