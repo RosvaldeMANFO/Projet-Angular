@@ -129,23 +129,23 @@ export class TaskService {
     }
   }
 
-/**
- *  add this code to an existing component to test:
-  addTasksToFirebase() {
-    this.taskService.addTasks();
-  }
-*   and this tmplate:
-  <div>
-  <button (click)="addTasksToFirebase()">Add Mock Tasks</button>
-  </div>
- */
+  /**
+   *  add this code to an existing component to test:
+    addTasksToFirebase() {
+      this.taskService.addTasks();
+    }
+  *   and this tmplate:
+    <div>
+    <button (click)="addTasksToFirebase()">Add Mock Tasks</button>
+    </div>
+   */
   async addMockTasks() {
     const taskCollection = collection(this.firestore, 'tasks');
     const categories = this.categoryService.categories.value;
     const users = await this.userService.getUsers();
     const fakeTasks = fakeTasks2.map((task) => {
-      const category = categories[Math.floor(Math.random() * categories.length)];
-      const assignee = users[Math.floor(Math.random() * users.length)];      
+      const category = categories.filter(category => category.name === task.categoryName)[0];
+      const assignee = users[Math.floor(Math.random() * users.length)];
       return {
         ...task,
         categoryId: category?.id,
@@ -248,7 +248,7 @@ export class TaskService {
       return acc;
     }, {});
   }
-  
+
   deleteAllTasks() {
     const tasksCollection = collection(this.firestore, 'tasks');
 
