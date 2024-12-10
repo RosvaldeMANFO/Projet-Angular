@@ -11,7 +11,9 @@ export class ApplyColorDirective implements OnInit {
 
   ngOnInit() {
     this.renderer.setStyle(this.el.nativeElement, 'color', this.appApplyColor);
-    this.renderer.setStyle(this.el.nativeElement, 'background-color', this.hexToRgba(this.appApplyColor, 0.5));
+    this.renderer.setStyle(this.el.nativeElement, 'background-color', this.hexToRgba(this.appApplyColor, 0.2));
+    this.renderer.setStyle(this.el.nativeElement, 'border-color', this.appApplyColor);
+    this.renderer.setStyle(this.el.nativeElement, 'border-width', '1px');
   }
 
   private hexToRgba(hex: string, opacity: number): string {
