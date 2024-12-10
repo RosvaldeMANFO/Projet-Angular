@@ -9,6 +9,7 @@ import {
 import { ChartConfiguration } from "chart.js";
 import { BaseChartDirective } from "ng2-charts";
 import { Period } from "src/app/model/task.model";
+import { LanguageService } from "src/app/services/language.service";
 
 @Component({
   selector: "app-comment-stats",
@@ -20,6 +21,8 @@ export class CommentStatsComponent implements OnChanges {
   @Input() commentData: { taskName: string; commentCount: number }[] = [];
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+
+  constructor(public readonly languageService: LanguageService) {}
 
   commentChartData: ChartConfiguration["data"] = {
     labels: [],
@@ -76,6 +79,6 @@ export class CommentStatsComponent implements OnChanges {
   private labelFromPeriod(): string {
     return this.period?.startDate && this.period?.endDate
       ? `${this.period.startDate.toLocaleDateString()} - ${this.period.endDate.toLocaleDateString()}`
-      : "Aucune période sélectionnée";
+      : this.languageService.translate('dashboard.noPeriod');
   }
 }

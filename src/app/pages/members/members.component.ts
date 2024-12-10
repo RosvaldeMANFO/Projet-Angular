@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { User } from '../../model/user.model';
 import { Auth } from '@angular/fire/auth';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-members',
@@ -16,7 +17,8 @@ export class MembersComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private auth: Auth
+    private auth: Auth,
+    public readonly languageService: LanguageService,
   ) {}
 
   async ngOnInit(): Promise<void> {

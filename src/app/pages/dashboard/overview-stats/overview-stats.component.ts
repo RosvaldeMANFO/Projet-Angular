@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { LanguageService } from "src/app/services/language.service";
 
 @Component({
   selector: "app-overview-stats",
@@ -10,4 +11,6 @@ export class OverviewStatsComponent {
   @Input() nbrTasks: number = 0;
   @Input() nbrCategories: number = 0;
   @Input() nbrComments: number = 0;
+
+  constructor(public readonly languageService: LanguageService) {}
 }

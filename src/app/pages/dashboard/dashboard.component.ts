@@ -5,6 +5,7 @@ import { Period, TasksByKey } from "src/app/model/task.model";
 import { CategoryService } from "src/app/services/category.service";
 import { TaskService } from "src/app/services/task.service";
 import { UserService } from "src/app/services/user.service";
+import { LanguageService } from "src/app/services/language.service";
 
 @Component({
   selector: "app-dashboard",
@@ -25,7 +26,8 @@ export class DashboardComponent implements OnInit {
     private readonly taskService: TaskService,
     private readonly userService: UserService,
     private readonly categoryService: CategoryService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public readonly languageService: LanguageService
   ) {}
 
 

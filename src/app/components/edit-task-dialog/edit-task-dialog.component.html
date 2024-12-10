@@ -1,6 +1,6 @@
 <div mat-dialog-title>
     <div class="flex w-full justify-between items-center">
-        <h2 class="font-bold">{{taskID ? 'Edit task':'Create task'}}</h2>
+        <h2 class="font-bold">{{taskID ? languageService.translate('home.edit'):languageService.translate('home.create')}}</h2>
         <button mat-dialog-close mat-icon-button>
             <mat-icon class="text-gray-500">close</mat-icon>
         </button>
@@ -10,7 +10,7 @@
 <mat-dialog-content>
     <form [formGroup]="form" class="flex flex-col gap-3 w-full">
         <mat-form-field appearance="outline">
-            <input matInput formControlName="title" [placeholder]="'Task title'">
+            <input matInput formControlName="title" [placeholder]="languageService.translate('home.taskTitle')">
         </mat-form-field>
         <div class="w-full flex flex-col justify-between items-start mb-3 gap-3">
             <p class="flex items-center gap-2">
@@ -44,7 +44,7 @@
             </div>
         </div>
         <mat-form-field appearance="outline">
-            <textarea matInput formControlName="description" [placeholder]="'Task description'" rows="5"></textarea>
+            <textarea matInput formControlName="description" [placeholder]="languageService.translate('home.description')" rows="5"></textarea>
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-select formControlName="assigneeId">
@@ -66,5 +66,5 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
-    <button class="w-[75%]" mat-raised-button [disabled]="!form.valid" color="primary" [mat-dialog-close]="form.value">Save</button>
+    <button class="w-[75%]" mat-raised-button [disabled]="!form.valid" color="primary" [mat-dialog-close]="form.value">{{ this.languageService.translate('home.save') }}</button>
 </mat-dialog-actions>

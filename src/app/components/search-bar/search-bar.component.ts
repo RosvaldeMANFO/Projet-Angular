@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TaskState } from 'src/app/model/task.model';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -15,6 +16,7 @@ export class SearchBarComponent {
   @Output() delete = new EventEmitter<void>();
   @Output() state = new EventEmitter<string>();
   
+  constructor(public readonly languageService: LanguageService) {}
 
   submitSearch = () => {
     this.search.emit(this.searchTerm);

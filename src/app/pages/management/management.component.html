@@ -1,30 +1,31 @@
-<div class="min-h-screen bg-gray-100 p-6 flex items-center justify-center">
-    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
-      <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Task Management</h2>
+<div class="min-h-screen bg-gradient-to-r from-gray-100 to-gray-300 flex items-center justify-center p-6">
+  <div class="bg-white shadow-xl rounded-lg p-8 w-full max-w-md">
+    <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">{{ this.languageService.translate('management.title') }}</h2>
+    <div class="space-y-4">
       <button (click)="printOK()"
-              class="w-full py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 mb-4">
-        Print OK to Console
+              class="w-full py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300">
+              {{ this.languageService.translate('management.OK') }}
       </button>
       <button (click)="addTasksToFirebase()"
-              class="w-full py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 mb-4">
-        Add Mock Tasks in Bulk
+              class="w-full py-3 bg-teal-500 text-white rounded-lg shadow-md hover:bg-teal-600 transition duration-300">
+              {{ this.languageService.translate('management.mockTasks') }}
       </button>
       <button (click)="deleteAllTasks()"
-              class="w-full py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition duration-300 mb-4">
-        Delete All Tasks
+              class="w-full py-3 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 transition duration-300">
+              {{ this.languageService.translate('management.deleteAll') }}
       </button>
       <button (click)="printAllCategories()"
-              class="w-full py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 mb-4">
-        Print All Categories
+              class="w-full py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300">
+              {{ this.languageService.translate('management.printCategories') }}
       </button>
       <button (click)="printAllTasks()"
-              class="w-full py-3 bg-green-500 text-white rounded-lg hover:bg-yellow-600 transition duration-300 mb-4">
-        Print All Tasks
+              class="w-full py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300">
+              {{ this.languageService.translate('management.printTasks') }}
       </button>
       <button (click)="printAllUsers()"
-              class="w-full py-3 bg-green-500 text-white rounded-lg hover:bg-purple-600 transition duration-300">
-        Print All Users
+              class="w-full py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300">
+              {{ this.languageService.translate('management.printUsers') }}
       </button>
     </div>
   </div>
-  
+</div>

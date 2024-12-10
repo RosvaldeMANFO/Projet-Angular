@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -17,7 +18,8 @@ export class EditProfileComponent implements OnInit {
   constructor(
     private auth: Auth,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    public readonly languageService: LanguageService,
   ) {}
 
   async ngOnInit() {

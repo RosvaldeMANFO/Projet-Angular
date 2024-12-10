@@ -41,12 +41,12 @@
             <mat-icon>person</mat-icon>
             <span>{{ selectedTask.assigneeName }}</span>
         </p>
-        <h3 class="text-lg font-bold">Comments</h3>
+        <h3 class="text-lg font-bold">{{ this.languageService.translate('home.comments') }}</h3>
         <div>
             <mat-form-field class="w-full" appearance="outline">
                 <input matInput [(ngModel)]="newComment">
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="addComment()">Add</button>
+            <button mat-raised-button color="primary" (click)="addComment()">{{ this.languageService.translate('home.add') }}</button>
         </div>
         <div class="max-h-96 overflow-y-auto">
             <div *ngFor="let comment of selectedTaskComments">
