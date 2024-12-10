@@ -80,7 +80,6 @@ export const fakeTaskCategories: TaskCategory[] = [
 export const fakeTasks2 = [
     {
       assigneeId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", 
-      assigneeName: "Sarah Smith",
       categoryId: "xMC3Amgk8JLO6p5df7AT", // Bug
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2", 
       reporterName: "Testor",
@@ -93,7 +92,6 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "8O9neIbuUZUHVGn882tpwjYaI7w1", 
-      assigneeName: "James Wilson",
       categoryId: "3RZjSrGGeSovJStnTVTW", // Deployment
       reporterId: "VLcytYIROvSQxSh1lkCoVtHuF143", 
       reporterName: "John Doe",
@@ -106,7 +104,6 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "OBSXIzSP1lONHK8a9DApje0cmaX2", 
-      assigneeName: "Michael Brown",
       categoryId: "TuzWB2WQdST73J3t1q1k", // Design
       reporterId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", 
       reporterName: "Daniel Clark",
@@ -119,7 +116,6 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", 
-      assigneeName: "Olivia Lee",
       categoryId: "KBZb5DA847GaxsByLDmj", // Documentation
       reporterId: "errWpgAOsKaQoUp0OfmfwlygUS92", 
       reporterName: "Emma White",
@@ -132,7 +128,6 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "VLcytYIROvSQxSh1lkCoVtHuF143", 
-      assigneeName: "John Doe",
       categoryId: "1qUrBOgMlflIYcAQ4nKE", // Feature
       reporterId: "jBKn4PXLKESC1ktcYPV6Y0FkD7u1", 
       reporterName: "Testo",
@@ -145,7 +140,6 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "errWpgAOsKaQoUp0OfmfwlygUS92", 
-      assigneeName: "Emma White",
       categoryId: "QQ23QZlZku5TtLssMVAm", // Improvement
       reporterId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", 
       reporterName: "Sarah Smith",
@@ -158,7 +152,6 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2", 
-      assigneeName: "Testor",
       categoryId: "8LA8pPy0U4sL1RZFdEyB", // Maintenance
       reporterId: "8O9neIbuUZUHVGn882tpwjYaI7w1", 
       reporterName: "James Wilson",
@@ -171,7 +164,6 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", 
-      assigneeName: "Daniel Clark",
       categoryId: "hzISsSXcXFGSL7N36cHI", // Research
       reporterId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", 
       reporterName: "Olivia Lee",
@@ -184,7 +176,6 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "8O9neIbuUZUHVGn882tpwjYaI7w1", 
-      assigneeName: "James Wilson",
       categoryId: "juArGH6K4EhRgqXC8aov", // Support
       reporterId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", 
       reporterName: "Sarah Smith",
@@ -197,7 +188,6 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "8O9neIbuUZUHVGn882tpwjYaI7w1",
-      assigneeName: "James Wilson",
       categoryId: "xMC3Amgk8JLO6p5df7AT", // Bug
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
       reporterName: "Testor",
@@ -210,7 +200,6 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "errWpgAOsKaQoUp0OfmfwlygUS92",
-      assigneeName: "Emma White",
       categoryId: "TuzWB2WQdST73J3t1q1k", // Design
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
       reporterName: "Testor",
@@ -223,7 +212,6 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "VLcytYIROvSQxSh1lkCoVtHuF143",
-      assigneeName: "John Doe",
       categoryId: "KBZb5DA847GaxsByLDmj", // Documentation
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
       reporterName: "Testor",
@@ -236,7 +224,6 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2",
-      assigneeName: "Olivia Lee",
       categoryId: "8LA8pPy0U4sL1RZFdEyB", // Maintenance
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
       reporterName: "Testor",
