@@ -9,12 +9,12 @@ import { User } from '../model/user.model';
 import { fakeTasks2 } from '../model/fake-data';
 import { DocumentData, where } from 'firebase/firestore';
 
+
 @Injectable({
   providedIn: "root",
 })
 export class TaskService {
-
-  task = new BehaviorSubject<Task[]>([])
+  task = new BehaviorSubject<Task[]>([]);
   taskListSubscription?: Subscription;
   cachedTask: Task[] = [];
   currentState = 'ALL';
@@ -23,7 +23,7 @@ export class TaskService {
     private readonly snackBar: MatSnackBar,
     private readonly firestore: Firestore,
     private readonly categoryService: CategoryService,
-    private readonly userService: UserService,
+    private readonly userService: UserService
   ) {
     this.getTasks();
   }
@@ -65,8 +65,35 @@ export class TaskService {
     });
   }
 
+  async getComents(taskId: string): Promise<Comment[]> {
+    const currentComments: Comment[] = [];
+    const commentsCollection = collection(this.firestore, "comments");
+    const commentsQuery = query(
+      commentsCollection,
+      where("taskId", "==", taskId),
+      orderBy("createdAt")
+    );
+    collectionData(commentsQuery, { idField: "id" }).subscribe((comments) => {
+      const mappedComments = comments.map<Comment>((comment) => {
+        const author = this.users.find(
+          (user) => user.id === comment["authorId"]
+        );
+        return {
+          id: comment["id"],
+          taskId: taskId,
+          authorId: comment["authorId"],
+          authorName: author?.nickname ?? "",
+          content: comment["content"],
+          createdAt: comment["createdAt"].toDate(),
+        };
+      });
+      currentComments.push(...mappedComments);
+    });
+
+    return currentComments;
+  }
+
   setTask(task: Task) {
-    console.log(task);
     const data = {
       title: task.title,
       reporterId: task.reporterId,
@@ -78,88 +105,89 @@ export class TaskService {
       startDate: task.startDate,
       endDate: task.endDate,
       createdAt: task.createdAt,
-    }
+    };
+
     if (task.id) {
       const taskDocRef = doc(this.firestore, `tasks/${task.id}`);
       setDoc(taskDocRef, data);
-      this.snackBar.open('Task updated successfully', 'Close', {
+      this.snackBar.open("Task updated successfully", "Close", {
         duration: 2000,
       });
     } else {
-      const tasksCollection = collection(this.firestore, 'tasks');
+      const tasksCollection = collection(this.firestore, "tasks");
       addDoc(tasksCollection, data);
-      this.snackBar.open('Task added successfully', 'Close', {
+      this.snackBar.open("Task added successfully", "Close", {
         duration: 2000,
       });
     }
-
   }
 
   async deleteTask(taskId: string) {
-    const taskRef = doc(this.firestore, 'tasks', taskId);
+    const taskRef = doc(this.firestore, "tasks", taskId);
     await deleteDoc(taskRef);
     this.getTasks();
-    this.snackBar.open('Task deleted successfully', 'Close', {
+    this.snackBar.open("Task deleted successfully", "Close", {
       duration: 2000,
     });
   }
 
   filterByState(state: string) {
-    if (state === 'ALL') {
-      this.task.next(this.cachedTask);
-    } else {
-      const filteredTasks = this.cachedTask.filter((task) => {
-        return task.state === state;
-      });
-      this.task.next(filteredTasks);
-    }
+    this.task.next(
+      state === "ALL"
+        ? this.cachedTask
+        : this.cachedTask.filter((task) => task.state === state)
+    );
     this.currentState = state;
   }
 
   searchTask(term: string | undefined) {
     if (term) {
       const filteredTasks = this.cachedTask.filter((task) => {
-        return (task.title.toLowerCase().includes(term.toLowerCase()) ||
-          task.description.toLowerCase().includes(term.toLowerCase())) &&
-          (this.currentState === 'ALL' || task.state === this.currentState);
+        const matchesTerm =
+          task.title.toLowerCase().includes(term.toLowerCase()) ||
+          task.description.toLowerCase().includes(term.toLowerCase());
+        const matchesState =
+          this.currentState === "ALL" || task.state === this.currentState;
+        return matchesTerm && matchesState;
       });
       this.task.next(filteredTasks);
     } else {
       this.task.next(
-        this.cachedTask.filter((task) => {
-          return this.currentState === 'ALL' || task.state === this.currentState;
-        })
+        this.cachedTask.filter(
+          (task) =>
+            this.currentState === "ALL" || task.state === this.currentState
+        )
       );
     }
   }
 
-  /**
-   *  add this code to an existing component to test:
-    addTasksToFirebase() {
-      this.taskService.addTasks();
-    }
-  *   and this tmplate:
-    <div>
-    <button (click)="addTasksToFirebase()">Add Mock Tasks</button>
-    </div>
-   */
   async addMockTasks() {
-    const taskCollection = collection(this.firestore, 'tasks');
+    const taskCollection = collection(this.firestore, "tasks");
     const categories = this.categoryService.categories.value;
     const users = await this.userService.getUsers();
+
     const fakeTasks = fakeTasks2.map((task) => {
-      const category = categories.filter(category => category.name === task.categoryName)[0];
+      const category = categories.find(
+        (category) => category.name === task.categoryName
+      );
       const assignee = users[Math.floor(Math.random() * users.length)];
+
       return {
         ...task,
         categoryId: category?.id,
         assigneeId: assignee?.id,
       };
     });
-    fakeTasks.forEach(async (task) => {
-      await addDoc(taskCollection, task);
+
+    const batch = writeBatch(this.firestore);
+    fakeTasks.forEach((task) => {
+      const docRef = doc(taskCollection);
+      batch.set(docRef, task);
     });
-    this.snackBar.open('Mock tasks added successfully', 'Close', {
+
+    await batch.commit();
+
+    this.snackBar.open("Mock tasks added successfully", "Close", {
       duration: 2000,
     });
   }
@@ -177,39 +205,27 @@ export class TaskService {
     return this.cachedTask.reduce((acc: TasksByKey, task) => {
       if (!period) {
         const status = task.state;
-
-        if (acc[status]) {
-          acc[status].count += 1;
-        } else {
-          acc[status] = {
-            count: 1,
-            color: task.category.color,
-            createdAt: task.createdAt,
-          };
-        }
+        acc[status] = acc[status]
+          ? { ...acc[status], count: acc[status].count + 1 }
+          : {
+              count: 1,
+              color: getStateColor(status),
+              createdAt: task.createdAt,
+            };
         return acc;
       }
 
-      const isWithinPeriod =
-        ((!period.startDate || task.createdAt >= period.startDate) &&
-          (!period.endDate || task.createdAt <= period.endDate)) ||
-        (period.startDate &&
-          period.endDate &&
-          task.startDate <= period.endDate &&
-          task.endDate >= period.startDate);
+      const isWithinPeriod = this.isTaskWithinPeriod(task, period);
 
       if (isWithinPeriod) {
         const status = task.state;
-
-        if (acc[status]) {
-          acc[status].count += 1;
-        } else {
-          acc[status] = {
-            count: 1,
-            color: getStateColor(status),
-            createdAt: task.createdAt,
-          };
-        }
+        acc[status] = acc[status]
+          ? { ...acc[status], count: acc[status].count + 1 }
+          : {
+              count: 1,
+              color: getStateColor(status),
+              createdAt: task.createdAt,
+            };
       }
       return acc;
     }, {});
@@ -219,69 +235,56 @@ export class TaskService {
     return this.cachedTask.reduce((acc: TasksByKey, task) => {
       if (!period) {
         const categoryName = task.category.name;
-
-        if (acc[categoryName]) {
-          acc[categoryName].count += 1;
-        } else {
-          acc[categoryName] = {
-            count: 1,
-            color: task.category.color,
-            createdAt: task.createdAt,
-          };
-        }
+        acc[categoryName] = acc[categoryName]
+          ? { ...acc[categoryName], count: acc[categoryName].count + 1 }
+          : { count: 1, color: task.category.color, createdAt: task.createdAt };
         return acc;
       }
 
-      const isWithinPeriod =
-        ((!period.startDate || task.createdAt >= period.startDate) &&
-          (!period.endDate || task.createdAt <= period.endDate)) ||
-        (period.startDate &&
-          period.endDate &&
-          task.startDate <= period.endDate &&
-          task.endDate >= period.startDate);
+      const isWithinPeriod = this.isTaskWithinPeriod(task, period);
 
       if (isWithinPeriod) {
         const categoryName = task.category.name;
-
-        if (acc[categoryName]) {
-          acc[categoryName].count += 1;
-        } else {
-          acc[categoryName] = {
-            count: 1,
-            color: task.category.color,
-            createdAt: task.createdAt,
-          };
-        }
+        acc[categoryName] = acc[categoryName]
+          ? { ...acc[categoryName], count: acc[categoryName].count + 1 }
+          : { count: 1, color: task.category.color, createdAt: task.createdAt };
       }
-
       return acc;
     }, {});
   }
 
-  deleteAllTasks() {
-    const tasksCollection = collection(this.firestore, 'tasks');
+  private isTaskWithinPeriod(task: Task, period: Period): boolean {
+    return (
+      ((!period.startDate || task.createdAt >= period.startDate) &&
+        (!period.endDate || task.createdAt <= period.endDate)) ||
+      (period.startDate &&
+        period.endDate &&
+        task.startDate <= period.endDate &&
+        task.endDate >= period.startDate)
+    );
+  }
 
-    const batch = writeBatch(this.firestore);
+  async deleteAllTasks() {
+    try {
+      const tasksCollection = collection(this.firestore, "tasks");
+      const querySnapshot = await getDocs(tasksCollection);
 
-    getDocs(tasksCollection).then(querySnapshot => {
+      const batch = writeBatch(this.firestore);
       querySnapshot.forEach((docSnapshot) => {
         batch.delete(doc(this.firestore, `tasks/${docSnapshot.id}`));
       });
 
-      batch.commit().then(() => {
-        this.snackBar.open('All tasks deleted successfully', 'Close', {
-          duration: 2000,
-        });
-        console.log('All tasks deleted');
-      }).catch((error) => {
-        this.snackBar.open('Error deleting tasks', 'Close', {
-          duration: 2000,
-        });
-      });
-    }).catch((error) => {
-      this.snackBar.open('Error fetching tasks', 'Close', {
+      await batch.commit();
+
+      this.snackBar.open("All tasks deleted successfully", "Close", {
         duration: 2000,
       });
-    });
+      console.log("All tasks deleted");
+    } catch (error) {
+      this.snackBar.open("Error deleting tasks", "Close", {
+        duration: 2000,
+      });
+      console.error("Error deleting tasks:", error);
+    }
   }
 }

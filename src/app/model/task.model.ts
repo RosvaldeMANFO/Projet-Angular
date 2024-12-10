@@ -1,3 +1,5 @@
+import { Comment } from "./comment.model";
+
 export type Task = {
   id: string;
   reporterName: String;
@@ -10,6 +12,7 @@ export type Task = {
   category: TaskCategory;
   startDate: Date;
   endDate: Date;
+  comments?: Comment[];
   createdAt: Date;
 };
 
