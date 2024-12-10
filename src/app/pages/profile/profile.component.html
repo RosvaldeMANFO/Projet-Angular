@@ -32,6 +32,7 @@
         <li
           *ngFor="let task of tasks"
           class="flex items-center justify-between p-4 border-b last:border-none hover:bg-gray-50"
+          (click)="onTaskClick(task)"
         >
           <div>
             <p class="font-medium">{{ task.title }}</p>
@@ -60,7 +61,6 @@
     </div>
   </div>
   
-
   <!-- View All Tasks Button -->
   <div class="mt-6 w-full max-w-4xl text-center">
     <a
