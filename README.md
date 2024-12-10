@@ -45,7 +45,7 @@ root/
 
 Cloner le projet :
 ```bash
-git clone https://github.com/RanylFoumbi/Projet-web-2.git
+git clone https://github.com/RanylFoumbi/Projet-Angular.git
 cd web
 ```
 Installer les dépendances :
