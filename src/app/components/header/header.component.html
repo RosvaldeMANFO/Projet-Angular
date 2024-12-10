@@ -1,38 +1,69 @@
 <mat-toolbar class="flex justify-between items-center relative" color="primary">
-  <a routerLink="/" mat-button class="text-3xl">TICKET APP</a>
-  <div>
-    <button mat-icon-button [matMenuTriggerFor]="userMenu">
-      <mat-icon>person</mat-icon>
-    </button>
-    <mat-menu #userMenu="matMenu">
-      <ng-container *ngIf="user; else notLoggedIn">
-        <button mat-menu-item disabled>
-          Connecté en tant que: {{ user.email }}
+  <a routerLink="/" mat-button class="text-3xl">TODO</a>
+  <div class="flex items-center space-x-4">
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="languageMenu">
+        <img [src]="currentFlag" alt="Flag">
+      </button>
+      <mat-menu #languageMenu="matMenu">
+        <button
+          mat-menu-item
+          *ngFor="let lang of [
+            { code: 'fr', name: 'Français', flag: 'france.png' },
+            { code: 'en', name: 'English', flag: 'etats-unis.png' },
+            { code: 'es', name: 'Español', flag: 'espagne.png' },
+            { code: 'pt', name: 'Português', flag: 'portugal.png' },
+            { code: 'de', name: 'Deutsch', flag: 'allemagne.png' },
+            { code: 'ru', name: 'Русский', flag: 'russie.png' },
+            { code: 'ja', name: '日本語', flag: 'japon.png' },
+            { code: 'kr', name: '한국어', flag: 'coree-du-sud.png' },
+          ]"
+          (click)="changeLanguage(lang.code)"
+          class="flex items-center w-full gap-2"
+        >
+          <img
+            [src]="'assets/language-flags/' + lang.flag"
+            alt="{{ lang.name }} flag"
+            class="w-6 h-6 inline mr-3"
+          />
+          <span class="text-sm font-medium">{{ lang.name }}</span>
         </button>
-        <button mat-menu-item (click)="openProfile()">
-          <mat-icon>person</mat-icon> Profil
-        </button>
-        <button mat-menu-item *ngIf="userRole === 'admin'" (click)="openDashboard()">
-          <mat-icon>dashboard</mat-icon> Tableau de bord
-        </button>
-        <button mat-menu-item *ngIf="userRole === 'admin'" (click)="openTaskManagement()">
-          <mat-icon>check_box</mat-icon> Gestion des tâches
-        </button>
-        <button mat-menu-item (click)="openMembers()">
-          <mat-icon>group</mat-icon> Membres
-        </button>
-        <button mat-menu-item (click)="signOutUser()">
-          <mat-icon>logout</mat-icon> Se déconnecter
-        </button>
-      </ng-container>
-      <ng-template #notLoggedIn>
-        <button mat-menu-item routerLink="/login">
-          <mat-icon>login</mat-icon> Se connecter
-        </button>
-        <button mat-menu-item routerLink="/signup">
-          <mat-icon>login</mat-icon> S'inscrire
-        </button>
-      </ng-template>
-    </mat-menu>
-  </div>  
+      </mat-menu>
+    </div>
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>person</mat-icon>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <ng-container *ngIf="user; else notLoggedIn">
+          <button mat-menu-item disabled>
+            {{ this.languageService.translate('login.connectedAs') }}: {{ user.email }}
+          </button>
+          <button mat-menu-item (click)="openProfile()">
+            <mat-icon>person</mat-icon> {{ this.languageService.translate('profile.title') }}
+          </button>
+          <button mat-menu-item *ngIf="userRole === 'admin'" (click)="openDashboard()">
+            <mat-icon>dashboard</mat-icon> {{ this.languageService.translate('dashboard.title') }}
+          </button>
+          <button mat-menu-item *ngIf="userRole === 'admin'" (click)="openTaskManagement()">
+            <mat-icon>check_box</mat-icon> {{ this.languageService.translate('management.title') }}
+          </button>
+          <button mat-menu-item (click)="openMembers()">
+            <mat-icon>group</mat-icon> {{ this.languageService.translate('members.title') }}
+          </button>
+          <button mat-menu-item (click)="signOutUser()">
+            <mat-icon>logout</mat-icon> {{ this.languageService.translate('auth.logout.logout') }}
+          </button>
+        </ng-container>
+        <ng-template #notLoggedIn>
+          <button mat-menu-item routerLink="/login">
+            <mat-icon>login</mat-icon> {{ this.languageService.translate('auth.login.title') }}
+          </button>
+          <button mat-menu-item routerLink="/signup">
+            <mat-icon>login</mat-icon> {{ this.languageService.translate('auth.signup.title') }}
+          </button>
+        </ng-template>
+      </mat-menu>
+    </div>  
+  </div>
 </mat-toolbar>

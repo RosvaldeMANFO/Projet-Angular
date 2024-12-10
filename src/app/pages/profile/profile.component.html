@@ -12,15 +12,15 @@
     </div>
     <div class="text-sm text-gray-700">
       <p><span class="font-medium">{{ user.bio }}</span></p>
-      <p>Email: <span class="font-medium">{{ user.email }}</span></p>
-      <p>Joined: <span class="font-medium">{{ user.createdAt | date:'dd-MM-yyyy' }}</span></p>
+      <p>{{ languageService.translate('profile.email') }}: <span class="font-medium">{{ user.email }}</span></p>
+      <p>{{ languageService.translate('profile.joined') }}: <span class="font-medium">{{ user.createdAt | date:'dd-MM-yyyy' }}</span></p>
     </div>
     <div class="mt-4" *ngIf="isCurrentUserProfile()">
       <a
         routerLink="/edit-profile"
         class="inline-block bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
       >
-        Edit Profile
+      {{ languageService.translate('profile.editProfile') }}
       </a>
     </div>
   </div>
@@ -32,6 +32,7 @@
         <li
           *ngFor="let task of tasks"
           class="flex items-center justify-between p-4 border-b last:border-none hover:bg-gray-50"
+          (click)="onTaskClick(task)"
         >
           <div>
             <p class="font-medium">{{ task.title }}</p>
@@ -55,19 +56,18 @@
         </li>
       </ul>
       <ng-template #noTasks>
-        <p class="p-4 text-gray-500">No tasks found for this user.</p>
+        <p class="p-4 text-gray-500">{{ languageService.translate('profile.noTasks') }}</p>
       </ng-template>
     </div>
   </div>
   
-
   <!-- View All Tasks Button -->
   <div class="mt-6 w-full max-w-4xl text-center">
     <a
       routerLink="/"
       class="inline-block px-6 py-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
     >
-      View All Tasks
+    {{ languageService.translate('profile.viewAllTasks') }}
     </a>
   </div>
 </div>

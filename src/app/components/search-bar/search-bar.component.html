@@ -4,7 +4,7 @@
       <span class="text-gray-400 hover:cursor-pointer" (click)="submitSearch()">
         <mat-icon>search</mat-icon>
       </span>
-      <input class="focus:outline-none pl-10 pr-10 w-full h-full" [placeholder]="'Search'" [(ngModel)]="searchTerm"
+      <input class="focus:outline-none pl-10 pr-10 w-full h-full" [placeholder]="this.languageService.translate('home.search')" [(ngModel)]="searchTerm"
         (keyup)="submitSearch()">
       <span class="text-gray-400 hover:cursor-pointer" (click)="addNewTask()">
         <mat-icon>add</mat-icon>

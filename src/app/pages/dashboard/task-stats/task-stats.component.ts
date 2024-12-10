@@ -8,6 +8,7 @@ import {
 import { BaseChartDirective } from "ng2-charts";
 import { Period, TasksByKey } from "src/app/model/task.model";
 import { ChartConfiguration } from "chart.js";
+import { LanguageService } from "src/app/services/language.service";
 
 @Component({
   selector: "app-task-stats",
@@ -19,6 +20,8 @@ export class TaskStatsComponent implements OnChanges {
   @Input() tasksByStatus: TasksByKey = {};
   @Input() tasksByCategory: TasksByKey = {};
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+
+  constructor(public readonly languageService: LanguageService) {}
 
   statusChartData: ChartConfiguration["data"] = {
     labels: [],
@@ -39,7 +42,7 @@ export class TaskStatsComponent implements OnChanges {
         position: "top",
         title: {
           display: true,
-          text: `Par statut ${this.labelFromPeriod()}`,
+          text: `${this.languageService.translate('dashboard.byStatus')} ${this.labelFromPeriod()}`,
           font: {
             size: 17,
             weight: "bold",
@@ -76,7 +79,7 @@ export class TaskStatsComponent implements OnChanges {
         position: "top",
         title: {
           display: true,
-          text: "Par catégories",
+          text: this.languageService.translate('dashboard.byCategories'),
           font: {
             size: 17,
             // weight: "bold",
@@ -130,7 +133,7 @@ export class TaskStatsComponent implements OnChanges {
       this.statusChartOptions.plugins &&
       this.statusChartOptions.plugins.legend &&
       this.statusChartOptions.plugins.legend.title &&
-      (this.statusChartOptions.plugins.legend.title.text =  this.labelFromPeriod() ?`Par statut ${this.labelFromPeriod()}` : "Par statut");
+      (this.statusChartOptions.plugins.legend.title.text =  this.labelFromPeriod() ?`${this.languageService.translate('dashboard.byStatusFrom')} ${this.labelFromPeriod()}` : this.languageService.translate('dashboard.byStatus'));
   }
 
   private updateCategoryChart(): void {
@@ -157,7 +160,7 @@ export class TaskStatsComponent implements OnChanges {
 
   private labelFromPeriod(): string {
     return this.period?.startDate && this.period?.endDate
-      ? `${this.period.startDate.toLocaleDateString()} au ${this.period.endDate.toLocaleDateString()}`
-      : "Aucune période sélectionnée";
+      ? `${this.period.startDate.toLocaleDateString()} ${this.languageService.translate('dashboard.toStatus')} ${this.period.endDate.toLocaleDateString()}`
+      : this.languageService.translate('dashboard.noPeriod');
   }
 }

@@ -9,6 +9,7 @@ import { Auth } from '@angular/fire/auth';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/model/user.model';
 import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: "app-home",
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
     private readonly taskService: TaskService,
     private readonly userService: UserService,
     private auth: Auth,
+    public readonly languageService: LanguageService,
   ) { }
 
   ngOnInit(): void {
@@ -68,7 +70,6 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: Task) => {
-      console.log(result);
       if (result) {
         this.taskService.setTask(result);
       }
@@ -90,8 +91,8 @@ export class HomeComponent implements OnInit {
   deleteTask = (task: Task | undefined) => {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: "Delete Task",
-        message: "Are you sure you want to delete this task?",
+        title: this.languageService.translate('home.deleteTask'),
+        message: this.languageService.translate('home.confirmDelete'),
       },
     });
     dialogRef.afterClosed().subscribe((result: boolean) => {
@@ -106,7 +107,6 @@ export class HomeComponent implements OnInit {
   };
 
   addComment = () => {
-    console.log(this.newComment);
     this.newComment = "";
   };
 }

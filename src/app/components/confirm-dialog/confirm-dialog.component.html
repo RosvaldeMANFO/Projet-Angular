@@ -5,6 +5,6 @@
   <p>{{message}}</p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>No</button>
-  <button mat-raised-button color="warn" [mat-dialog-close]="true">Yes</button>
+  <button mat-button mat-dialog-close>{{ this.languageService.translate('confirm.no') }}</button>
+  <button mat-raised-button color="warn" [mat-dialog-close]="true">{{ this.languageService.translate('confirm.yes') }}</button>
 </mat-dialog-actions>

@@ -7,6 +7,8 @@ import { User } from '../../model/user.model';
 import { Task } from '../../model/task.model';
 import { onAuthStateChanged } from '@angular/fire/auth';
 import { Timestamp } from 'firebase/firestore';
+import { LanguageService } from '../../services/language.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +23,9 @@ export class ProfileComponent implements OnInit {
     private auth: Auth,
     private userService: UserService,
     private taskService: TaskService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public readonly languageService: LanguageService,
+    private router: Router,
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -62,5 +66,9 @@ export class ProfileComponent implements OnInit {
 
   isCurrentUserProfile(): boolean {
     return this.user.id === this.currentUserId || this.user.id === undefined;
+  }
+
+  onTaskClick(task: any): void {
+    this.router.navigate(['/']);
   }
 }

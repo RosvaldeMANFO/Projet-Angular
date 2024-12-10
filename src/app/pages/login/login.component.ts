@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,9 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private router: Router, private auth: Auth) {}
+  constructor(private router: Router, private auth: Auth,
+    public readonly languageService: LanguageService,
+  ) {}
 
   login() {
     signInWithEmailAndPassword(this.auth, this.email, this.password)

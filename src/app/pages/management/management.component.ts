@@ -4,6 +4,8 @@ import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confir
 import { TaskService } from 'src/app/services/task.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { UserService } from 'src/app/services/user.service';
+import { Task } from 'src/app/model/task.model';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-management',
@@ -14,7 +16,8 @@ export class ManagementComponent {
     private dialog: MatDialog,
     private taskService: TaskService,
     private categoryService: CategoryService,
-    private userService: UserService
+    private userService: UserService,
+    public readonly languageService: LanguageService,
   ) {}
 
   printOK() {
@@ -22,10 +25,15 @@ export class ManagementComponent {
   }
 
   deleteAllTasks() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
 
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: this.languageService.translate('management.deleteAll'),
+        message: this.languageService.translate('management.confirmDelete'),
+      },
+    });
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'confirm') {
+      if (result) {
         this.taskService.deleteAllTasks();
       }
     });
@@ -53,4 +61,5 @@ export class ManagementComponent {
       console.error('Error fetching users:', error);
     }
   }
+
 }

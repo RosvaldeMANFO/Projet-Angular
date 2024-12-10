@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EditTaskDialogData } from 'src/app/model/edit-task-dialog-data.model';
 import { TaskCategory, TaskState } from 'src/app/model/task.model';
 import { User } from 'src/app/model/user.model';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-edit-task-dialog',
@@ -20,7 +21,8 @@ export class EditTaskDialogComponent {
 
   constructor(
     private readonly fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: EditTaskDialogData
+    @Inject(MAT_DIALOG_DATA) public data: EditTaskDialogData,
+    public readonly languageService: LanguageService,
   ) {
     this.categories = data?.categories;
     this.taskID = data?.task?.id;

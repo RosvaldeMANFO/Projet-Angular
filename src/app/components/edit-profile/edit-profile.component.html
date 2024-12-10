@@ -1,25 +1,25 @@
 <div class="edit-profile-container flex flex-col items-center p-6 bg-gray-100 min-h-screen">
-    <h2 class="text-2xl font-semibold mb-6">Edit Profile</h2>
+    <h2 class="text-2xl font-semibold mb-6">{{ languageService.translate('profile.editProfile') }}</h2>
     <form (ngSubmit)="saveProfile()" class="space-y-6 w-full max-w-md">
         <input
         type="text"
         [(ngModel)]="nickname"
         name="nickname"
-        placeholder="Nickname"
+        placeholder="{{ languageService.translate('profile.nickname') }}"
         required
         class="w-full p-3 border rounded-lg focus:outline-blue-500"
       />
       <textarea
         [(ngModel)]="bio"
         name="bio"
-        placeholder="Tell us about yourself"
+        placeholder="{{ languageService.translate('profile.bio') }}"
         class="w-full p-3 border rounded-lg focus:outline-blue-500"
       ></textarea>
       <input
         type="text"
         [(ngModel)]="role"
         name="role"
-        placeholder="Role"
+        placeholder="{{ languageService.translate('profile.role') }}"
         required
         class="w-full p-3 border rounded-lg focus:outline-blue-500"
       />
@@ -27,7 +27,7 @@
         type="submit"
         class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
       >
-        Save Changes
+      {{ languageService.translate('profile.save') }}
       </button>
       <p *ngIf="errorMessage" class="text-red-500">{{ errorMessage }}</p>
     </form>

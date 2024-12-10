@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { LanguageService } from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,7 +12,9 @@ export class SignupComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private auth: Auth, private router: Router) {}
+  constructor(private auth: Auth, private router: Router,
+    public readonly languageService: LanguageService,
+  ) {}
 
   signUp() {
     createUserWithEmailAndPassword(this.auth, this.email, this.password)
