@@ -24,7 +24,12 @@ Une application pour la gestion des tâches, développée avec **Angular**.
 - Détail des tâches
 - Dashboard pour affichage des tâches et statistiques
 - Ajout de commentaires sur les tâches
-- Interface responsive pour le web.
+- Pages de profil
+- Page membres avec redirection au profil par l'id du membre
+- Traduction dans 8 langues
+- Page gestion des tâches pour administrer plus facilement les tâches (tout supprimer et tout réimporter par exemple)
+- Roles user et admin avec accès privilégié à certaines pages (Dashboard et Task Management)
+- Interface responsive pour le web
 
 
 ---
@@ -45,7 +50,7 @@ root/
 
 Cloner le projet :
 ```bash
-git clone https://github.com/RanylFoumbi/Projet-web-2.git
+git clone https://github.com/RosvaldeMANFO/Projet-Angular.git
 cd web
 ```
 Installer les dépendances :
@@ -58,17 +63,12 @@ ng serve
 ```
 Le projet sera accessible à http://localhost:4200.
 
-
-## 🎨 Charte graphique
-
-Voici les styles utilisés pour les statuts dans l'application Angular :
-
-| Statut        | Bordure  | Fond     | Texte    |
-|---------------|----------|----------|----------|
-| **TODO**   | `#FDE047` | `#FEF9C3` | `#CA8A04` |
-| **DONE** | `#86EFAC` | `#DCFCE7` | `#16A34A` |
-| **DOING** | `#93C5FD` | `#DBEAFE` | `#2563EB` |
-| **CANCELLED**  | `#FCA5A5` | `#FEE2E2` | `#DC2626` |
+Se connecter:
+Lancer le projet :
+```bash
+Email: test2@test.com
+Password: test123
+```
 
 ## 🛠️ Technologies Utilisées
 **Angular**: Framework front-end pour le web.
