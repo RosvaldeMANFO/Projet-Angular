@@ -31,9 +31,6 @@ Une application pour la gestion des tâches, développée avec **Angular**.
 - Roles user et admin avec accès privilégié à certaines pages (Dashboard et Task Management)
 - Interface responsive pour le web
 
-
----
-
 ## 📂 Structure du projet
 
 ```plaintext
@@ -64,7 +61,6 @@ ng serve
 Le projet sera accessible à http://localhost:4200.
 
 Se connecter:
-Lancer le projet :
 ```bash
 Email: test2@test.com
 Password: test123
@@ -72,6 +68,7 @@ Password: test123
 
 ## 🛠️ Technologies Utilisées
 **Angular**: Framework front-end pour le web.
+
 **Firebase**: Backend pour la gestion des données.
 
 ## 📜 Licence

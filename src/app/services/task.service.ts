@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { getStateColor, Period, Task, TasksByKey, TaskState } from '../model/task.model';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { Firestore, collection, collectionData, addDoc, orderBy, query, doc, setDoc, writeBatch, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, addDoc, orderBy, query, doc, setDoc, writeBatch, getDocs, deleteDoc } from '@angular/fire/firestore';
 import { CategoryService } from './category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from './user.service';
 import { User } from '../model/user.model';
 import { fakeTasks2 } from '../model/fake-data';
-import { deleteDoc } from 'firebase/firestore/lite';
 
 @Injectable({
   providedIn: "root",
@@ -130,37 +129,35 @@ export class TaskService {
     }
   }
 
-/**
- *  add this code to an existing component to test:
-  addTasksToFirebase() {
-    this.taskService.addTasks();
-  }
-*   and this tmplate:
-  <div>
-  <button (click)="addTasksToFirebase()">Add Mock Tasks</button>
-  </div>
- */
+  /**
+   *  add this code to an existing component to test:
+    addTasksToFirebase() {
+      this.taskService.addTasks();
+    }
+  *   and this tmplate:
+    <div>
+    <button (click)="addTasksToFirebase()">Add Mock Tasks</button>
+    </div>
+   */
   async addMockTasks() {
     const taskCollection = collection(this.firestore, 'tasks');
-    for (const user of fakeTasks2) {
-      try {
-        await addDoc(taskCollection, {
-          assigneeId: user.assigneeId,
-          categoryId: user.categoryId,
-          createdAt: user.createdAt,
-          description: user.description,
-          endDate: user.endDate,
-          reporterId: user.reporterId,
-          reporterName: user.reporterName,
-          startDate: user.startDate,
-          state: user.state,
-          title: user.title,
-        });
-        console.log(`Task for ${user.assigneeName} added successfully!`);
-      } catch (error) {
-        console.error("Error adding task: ", error);
-      }
-    }
+    const categories = this.categoryService.categories.value;
+    const users = await this.userService.getUsers();
+    const fakeTasks = fakeTasks2.map((task) => {
+      const category = categories.filter(category => category.name === task.categoryName)[0];
+      const assignee = users[Math.floor(Math.random() * users.length)];
+      return {
+        ...task,
+        categoryId: category?.id,
+        assigneeId: assignee?.id,
+      };
+    });
+    fakeTasks.forEach(async (task) => {
+      await addDoc(taskCollection, task);
+    });
+    this.snackBar.open('Mock tasks added successfully', 'Close', {
+      duration: 2000,
+    });
   }
 
   getTaskByUserId(userId: string): Task[] {
@@ -251,7 +248,7 @@ export class TaskService {
       return acc;
     }, {});
   }
-  
+
   deleteAllTasks() {
     const tasksCollection = collection(this.firestore, 'tasks');
 
@@ -268,13 +265,11 @@ export class TaskService {
         });
         console.log('All tasks deleted');
       }).catch((error) => {
-        console.error('Error deleting tasks: ', error);
         this.snackBar.open('Error deleting tasks', 'Close', {
           duration: 2000,
         });
       });
     }).catch((error) => {
-      console.error('Error fetching tasks: ', error);
       this.snackBar.open('Error fetching tasks', 'Close', {
         duration: 2000,
       });

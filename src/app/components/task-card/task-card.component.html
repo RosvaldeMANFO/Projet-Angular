@@ -1,4 +1,4 @@
-<mat-card *ngIf="task" class="text-gray-500 min-w-[320px]">
+<mat-card *ngIf="task" class="text-gray-500 min-w-[320px] max-w-[320px] text-wrap">
 
     <mat-card-header class="flex flex-col mb-7">
         <div class="flex justify-between items-center w-full">
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="flex items-center gap-3 w-full mt-3 select-none">
-            <span *ngIf="task.category?.color" [ngStyle]="{'background-color': task.category.color}" class="rounded-md border px-2 border-gray-400">
+            <span [appApplyColor]="task.category.color" class="rounded-md px-2">
                 {{ task.category.name }}
             </span>
             <span class="rounded-md border px-2 border-gray-400 text-primary-500">
@@ -30,7 +30,7 @@
     <mat-card-content>
         <div class="flex flex-col gap-5 w-full">
             <p class="text-xl font-bold text-gray-600">{{ task.title }}</p>
-            <p class="text-justify">{{ task.description }}</p>
+            <p class="text-justify break-words">{{ task.description }}</p>
             <p class="text-sm">{{ task.startDate | date: 'mediumDate' }} - {{ task.endDate | date: 'mediumDate' }}</p>
             <div class="flex items-center gap-2">
                 <mat-icon>person</mat-icon>
