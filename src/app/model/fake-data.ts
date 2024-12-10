@@ -80,7 +80,7 @@ export const fakeTaskCategories: TaskCategory[] = [
 export const fakeTasks2 = [
     {
       assigneeId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", 
-      categoryId: "xMC3Amgk8JLO6p5df7AT", // Bug
+      categoryName: "Bug",
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2", 
       reporterName: "Testor",
       title: "Enhance login security features",
@@ -92,7 +92,7 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "8O9neIbuUZUHVGn882tpwjYaI7w1", 
-      categoryId: "3RZjSrGGeSovJStnTVTW", // Deployment
+      categoryName: "Deployment",
       reporterId: "VLcytYIROvSQxSh1lkCoVtHuF143", 
       reporterName: "John Doe",
       title: "Deploy latest backend update",
@@ -104,7 +104,7 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "OBSXIzSP1lONHK8a9DApje0cmaX2", 
-      categoryId: "TuzWB2WQdST73J3t1q1k", // Design
+      categoryName: "Design",
       reporterId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", 
       reporterName: "Daniel Clark",
       title: "Design new user dashboard UI",
@@ -116,7 +116,7 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", 
-      categoryId: "KBZb5DA847GaxsByLDmj", // Documentation
+      categoryName: "Documentation",
       reporterId: "errWpgAOsKaQoUp0OfmfwlygUS92", 
       reporterName: "Emma White",
       title: "Update API documentation for v2",
@@ -128,7 +128,7 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "VLcytYIROvSQxSh1lkCoVtHuF143", 
-      categoryId: "1qUrBOgMlflIYcAQ4nKE", // Feature
+      categoryName: "Feature",
       reporterId: "jBKn4PXLKESC1ktcYPV6Y0FkD7u1", 
       reporterName: "Testo",
       title: "Implement search feature for users",
@@ -140,7 +140,7 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "errWpgAOsKaQoUp0OfmfwlygUS92", 
-      categoryId: "QQ23QZlZku5TtLssMVAm", // Improvement
+      categoryName: "Improvement", 
       reporterId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", 
       reporterName: "Sarah Smith",
       title: "Improve mobile responsiveness for homepage",
@@ -152,7 +152,7 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2", 
-      categoryId: "8LA8pPy0U4sL1RZFdEyB", // Maintenance
+      categoryName: "Maintenance", 
       reporterId: "8O9neIbuUZUHVGn882tpwjYaI7w1", 
       reporterName: "James Wilson",
       title: "Fix performance issues in the login screen",
@@ -164,7 +164,7 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", 
-      categoryId: "hzISsSXcXFGSL7N36cHI", // Research
+      categoryName: "Research", 
       reporterId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", 
       reporterName: "Olivia Lee",
       title: "Conduct user research for new feature",
@@ -176,7 +176,7 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "8O9neIbuUZUHVGn882tpwjYaI7w1", 
-      categoryId: "juArGH6K4EhRgqXC8aov", // Support
+      categoryName: "Support", 
       reporterId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", 
       reporterName: "Sarah Smith",
       title: "Provide technical support for integration issues",
@@ -188,7 +188,7 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "8O9neIbuUZUHVGn882tpwjYaI7w1",
-      categoryId: "xMC3Amgk8JLO6p5df7AT", // Bug
+      categoryName: "Bug", 
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
       reporterName: "Testor",
       title: "Fix intermittent login issue",
@@ -200,7 +200,7 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "errWpgAOsKaQoUp0OfmfwlygUS92",
-      categoryId: "TuzWB2WQdST73J3t1q1k", // Design
+      categoryName: "Design", 
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
       reporterName: "Testor",
       title: "Redesign the landing page",
@@ -212,7 +212,7 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "VLcytYIROvSQxSh1lkCoVtHuF143",
-      categoryId: "KBZb5DA847GaxsByLDmj", // Documentation
+      categoryName: "Documentation", 
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
       reporterName: "Testor",
       title: "Update API documentation",
@@ -224,7 +224,7 @@ export const fakeTasks2 = [
     },
     {
       assigneeId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2",
-      categoryId: "8LA8pPy0U4sL1RZFdEyB", // Maintenance
+      categoryName: "Maintenance", 
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
       reporterName: "Testor",
       title: "Optimize database performance",
