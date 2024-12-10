@@ -10,6 +10,9 @@
                 (state)="filterTasks($event)">
             </app-search-bar>
             <div class="flex flex-wrap gap-4 items-center justify-center w-full max-w-6xl mx-auto">
+                <div *ngIf="fakeTasks.length === 0" class="w-full text-center text-2xl text-gray-500">
+                    {{ languageService.translate('home.noTasks') }}
+                </div>
                 <app-task-card class="cursor-pointer" (delete)="deleteTask(task)" (edit)="editTask(task)"
                     (click)="selectTask(task)" *ngFor="let task of fakeTasks" [task]="task"></app-task-card>
             </div>
