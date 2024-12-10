@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
         createdAt: userProfile.createdAt instanceof Timestamp
           ? userProfile.createdAt.toDate()
           : undefined,
-        role: userProfile.role || 'User',
+        role: userProfile.role || 'N/A',
         id: uid,
       };
     }
@@ -65,7 +65,7 @@ export class ProfileComponent implements OnInit {
   }
 
   isCurrentUserProfile(): boolean {
-    return this.user.id === this.currentUserId || this.user.id === undefined;
+    return this.user.id === this.currentUserId;
   }
 
   onTaskClick(task: any): void {
