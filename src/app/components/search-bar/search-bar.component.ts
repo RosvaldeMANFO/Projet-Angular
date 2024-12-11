@@ -13,7 +13,6 @@ export class SearchBarComponent {
   @Input() showDeleteIcon = false;
   @Output() search = new EventEmitter<string | undefined>();
   @Output() add = new EventEmitter<void>();
-  @Output() delete = new EventEmitter<void>();
   @Output() state = new EventEmitter<string>();
   
   constructor(public readonly languageService: LanguageService) {}

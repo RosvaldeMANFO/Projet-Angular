@@ -1,6 +1,6 @@
-<div class="members-container flex flex-col items-center p-6 bg-gray-100 min-h-screen">
+<div class="h-full max-w-8xl mx-auto flex flex-col items-center overflow-y-auto p-3">
   <h2 class="text-2xl font-semibold mb-6">{{ this.languageService.translate('members.title') }}</h2>
-  <div class="members-list w-full max-w-4xl bg-white shadow-lg rounded-lg p-6">
+  <div class="members-list w-full max-w-4xl bg-white shadow-xl rounded-lg p-6">
     <ul>
       <li *ngFor="let member of members" 
           class="flex items-center p-4 border-b last:border-none hover:bg-gray-50 transition duration-300 ease-in-out">

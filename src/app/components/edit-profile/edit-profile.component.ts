@@ -26,6 +26,7 @@ export class EditProfileComponent implements OnInit {
     const user = this.auth.currentUser;
     if (user) {
       const profile = await this.userService.getUserProfile(user.uid);
+      console.log(profile);
       this.nickname = profile?.nickname || '';
       this.bio = profile?.bio || '';
       this.role = profile?.role || '';
@@ -42,7 +43,6 @@ export class EditProfileComponent implements OnInit {
           role: this.role,
           email: user.email ?? '',
         });
-        alert('Profile updated successfully!');
         this.router.navigate(['/profile']);
       } catch (error) {
         this.errorMessage = 'Failed to save profile.';

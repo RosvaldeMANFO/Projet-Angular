@@ -1,9 +1,9 @@
-<div class="min-h-screen bg-gradient-to-r from-gray-100 to-gray-300 flex items-center justify-center p-6">
+<div class="h-full max-w-8xl mx-auto flex flex-col justify-center items-center overflow-y-auto p-3">
   <div class="bg-white shadow-xl rounded-lg p-8 w-full max-w-md">
     <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">{{ this.languageService.translate('management.title') }}</h2>
     <div class="space-y-4">
       <button (click)="printOK()"
-              class="w-full py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300">
+              class="w-full py-3 bg-primary-500 text-white rounded-lg shadow-md hover:bg-primary-600 transition duration-300">
               {{ this.languageService.translate('management.OK') }}
       </button>
       <button (click)="addTasksToFirebase()"
@@ -15,15 +15,15 @@
               {{ this.languageService.translate('management.deleteAll') }}
       </button>
       <button (click)="printAllCategories()"
-              class="w-full py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300">
+              class="w-full py-3 bg-primary-500 text-white rounded-lg shadow-md hover:bg-primary-600 transition duration-300">
               {{ this.languageService.translate('management.printCategories') }}
       </button>
       <button (click)="printAllTasks()"
-              class="w-full py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300">
+              class="w-full py-3 bg-primary-500 text-white rounded-lg shadow-md hover:bg-primary-600 transition duration-300">
               {{ this.languageService.translate('management.printTasks') }}
       </button>
       <button (click)="printAllUsers()"
-              class="w-full py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300">
+              class="w-full py-3 bg-primary-500 text-white rounded-lg shadow-md hover:bg-primary-600 transition duration-300">
               {{ this.languageService.translate('management.printUsers') }}
       </button>
     </div>

@@ -1,15 +1,14 @@
-<mat-drawer-container [autosize]="true" class="min-h-full max-w-5xl mx-auto border-x">
+<mat-drawer-container [autosize]="true" class="h-full max-w-8xl mx-auto">
 
-    <mat-drawer mode="side" position="end" [appToggleDrawer]="selectedTask !== undefined" class="p-7 w-1/3">
+    <mat-drawer mode="side" position="end" [appToggleDrawer]="selectedTask !== undefined" class="p-7 w-1/4">
         <ng-container *ngTemplateOutlet="taskDetails"></ng-container>
     </mat-drawer>
 
     <mat-drawer-content class="bg-white">
-        <div class="flex flex-col gap-7 w-full p-3">
-            <app-search-bar (search)="searchTasks($event)" (add)="addNewTask()" (delete)="deleteTask(undefined)"
-                (state)="filterTasks($event)">
+        <div class="flex flex-col gap-7 px-3 h-full overflow-hidden">
+            <app-search-bar (search)="searchTasks($event)" (add)="addNewTask()" (state)="filterTasks($event)">
             </app-search-bar>
-            <div class="flex flex-wrap gap-4 items-center justify-center w-full max-w-6xl mx-auto">
+            <div class="py-3 flex flex-wrap gap-4 items-start justify-center w-full max-w-full m-auto overflow-y-auto">
                 <div *ngIf="fakeTasks.length === 0" class="w-full text-center text-2xl text-gray-500">
                     {{ languageService.translate('home.noTasks') }}
                 </div>
@@ -21,7 +20,7 @@
 </mat-drawer-container>
 
 <ng-template #taskDetails>
-    <div *ngIf="selectedTask" class="text-gray-700 flex flex-col gap-7 h-full">
+    <div *ngIf="selectedTask" class="text-gray-700 flex flex-col gap-7 h-full overflow-y-auto">
         <div class="flex justify-end">
             <button mat-icon-button (click)="selectedTask = undefined">
                 <mat-icon class="text-gray-500">close</mat-icon>
@@ -30,7 +29,7 @@
         <div>
             <h1 class="text-3xl font-bold">{{ selectedTask.title }}</h1>
             <div class="flex items-center gap-3 w-full mt-3 select-none">
-                <span [appApplyColor] = "selectedTask.category.color"  class="rounded-md px-2 text-primary-500">
+                <span [appApplyColor]="selectedTask.category.color" class="rounded-md px-2 text-primary-500">
                     {{ selectedTask.category.name }}</span>
                 <span class="rounded-md border px-2 border-gray-400 text-primary-500">{{ selectedTask.state
                     }}</span>
@@ -51,14 +50,16 @@
             <mat-form-field class="w-full" appearance="outline">
                 <input matInput [(ngModel)]="newComment">
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="addComment()">{{ this.languageService.translate('home.add') }}</button>
+            <button mat-raised-button color="primary" (click)="addComment()">{{
+                this.languageService.translate('home.add') }}</button>
         </div>
         <div class="max-h-96 overflow-y-auto">
             <div *ngFor="let comment of selectedTaskComments">
                 <div class="flex flex-col items-start gap-3 text-md">
                     <p class="flex gap-3 items-center">
                         <a [routerLink]="['/profile', comment.authorId]" class="text-primary-500 hover:underline">
-                            <span class="w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center text-white">
+                            <span
+                                class="w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center text-white">
                                 {{ (comment.authorName).charAt(0) }}
                             </span>
                             {{ comment.authorName }}
