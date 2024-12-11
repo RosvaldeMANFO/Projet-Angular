@@ -52,7 +52,6 @@ export class EditProfileComponent implements OnInit {
           facebook: this.facebook,
           linkedin: this.linkedin,
         });
-        this.router.navigate(['/profile']);
       } catch (error) {
         this.errorMessage = 'Failed to save profile.';
         console.error(error);
