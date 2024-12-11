@@ -29,6 +29,11 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    onAuthStateChanged(this.auth, user => {
+      if (user) {
+        this.currentUserId = user.uid;
+      }
+    });
     this.route.paramMap.subscribe(async params => {
       const uidFromRoute = params.get('uid');
       if (uidFromRoute) {
@@ -51,10 +56,14 @@ export class ProfileComponent implements OnInit {
           ? userProfile.createdAt.toDate()
           : undefined,
         role: userProfile.role || 'N/A',
+        twitter: userProfile.twitter || '',
+        facebook: userProfile.facebook || '',
+        linkedin: userProfile.linkedin || '',
         id: uid,
       };
     }
   }
+  
 
   private async loadTasks(userId: string): Promise<void> {
     this.taskService.getTaskByUserId(userId).subscribe(async tasks => {

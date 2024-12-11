@@ -37,7 +37,7 @@
       <mat-menu #userMenu="matMenu">
         <ng-container *ngIf="user; else notLoggedIn">
           <button mat-menu-item disabled>
-            {{ this.languageService.translate('login.connectedAs') }}: {{ user.email }}
+            {{ this.languageService.translate('auth.login.connectedAs') }}: {{ user.email }}
           </button>
           <button mat-menu-item (click)="openProfile()">
             <mat-icon>person</mat-icon> {{ this.languageService.translate('profile.title') }}

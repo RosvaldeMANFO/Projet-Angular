@@ -1,5 +1,4 @@
 <div class="h-full max-w-8xl mx-auto flex flex-col items-center overflow-y-auto p-3">
-
   <div class="bg-white shadow-xl rounded-lg p-6 w-full max-w-4xl">
     <div class="flex items-center space-x-4 mb-4">
       <div class="w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
@@ -13,14 +12,25 @@
     <div class="text-sm text-gray-700">
       <p><span class="font-medium">{{ user.bio }}</span></p>
       <p>{{ languageService.translate('profile.email') }}: <span class="font-medium">{{ user.email }}</span></p>
-      <p>{{ languageService.translate('profile.joined') }}: <span class="font-medium">{{ user.createdAt |
-          date:'dd-MM-yyyy' }}</span></p>
+      <p>{{ languageService.translate('profile.joined') }}: <span class="font-medium">{{ user.createdAt | date:'dd-MM-yyyy' }}</span></p>
     </div>
+    <div class="mt-4 space-x-4">
+      <a *ngIf="user.twitter" [href]="user.twitter" target="_blank" class="text-blue-500 hover:text-blue-600">
+        <i class="fab fa-twitter" style="font-size: 1.5rem;"></i>
+      </a>
+      <a *ngIf="user.facebook" [href]="user.facebook" target="_blank" class="text-blue-600 hover:text-blue-700">
+        <i class="fab fa-facebook" style="font-size: 1.5rem;"></i>
+      </a>
+      <a *ngIf="user.linkedin" [href]="user.linkedin" target="_blank" class="text-blue-700 hover:text-blue-800">
+        <i class="fab fa-linkedin" style="font-size: 1.5rem;"></i>
+      </a>
+    </div>
+    
+
     <div class="mt-4" *ngIf="isCurrentUserProfile()">
-      <a routerLink="/edit-profile"
-        class="inline-block bg-primary-500 text-white py-2 px-4 rounded-md hover:bg-primary-600 items-center gap-3">
+      <a routerLink="/edit-profile" class="inline-block bg-primary-500 text-white py-2 px-4 rounded-md hover:bg-primary-600 items-center gap-3">
         {{ languageService.translate('profile.editProfile') }}
-        <mat-icon>edit</mat-icon>
+        <mat-icon class="inline-block" style="padding-top: 0.15rem; padding-left: 0.15rem; font-size: 1.25rem; width: 1.25rem; height: 1.25rem;">edit</mat-icon>
       </a>
     </div>
   </div>
@@ -29,9 +39,7 @@
     <h2 class="text-lg font-bold mb-4">Tasks</h2>
     <div class="bg-white shadow-xl rounded-lg">
       <ul *ngIf="tasks.length > 0; else noTasks">
-        <li *ngFor="let task of tasks"
-          class="flex items-center justify-between p-4 border-b last:border-none hover:bg-gray-50"
-          (click)="onTaskClick(task)">
+        <li *ngFor="let task of tasks" class="flex items-center justify-between p-4 border-b last:border-none hover:bg-gray-50" (click)="onTaskClick(task)">
           <div>
             <p class="font-medium">{{ task.title }}</p>
             <p class="text-gray-500 text-sm">{{ task.description }}</p>

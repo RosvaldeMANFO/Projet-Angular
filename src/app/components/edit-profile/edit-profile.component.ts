@@ -14,6 +14,9 @@ export class EditProfileComponent implements OnInit {
   bio: string = '';
   role: string = '';
   errorMessage: string = '';
+  twitter: string = '';
+  facebook: string = '';
+  linkedin: string = '';
 
   constructor(
     private auth: Auth,
@@ -30,6 +33,9 @@ export class EditProfileComponent implements OnInit {
       this.nickname = profile?.nickname || '';
       this.bio = profile?.bio || '';
       this.role = profile?.role || '';
+      this.twitter = profile?.twitter || '';
+      this.facebook = profile?.facebook || '';
+      this.linkedin = profile?.linkedin || '';
     }
   }
 
@@ -42,6 +48,9 @@ export class EditProfileComponent implements OnInit {
           bio: this.bio,
           role: this.role,
           email: user.email ?? '',
+          twitter: this.twitter,
+          facebook: this.facebook,
+          linkedin: this.linkedin,
         });
         this.router.navigate(['/profile']);
       } catch (error) {

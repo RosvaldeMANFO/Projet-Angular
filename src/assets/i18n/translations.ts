@@ -64,6 +64,9 @@ export const translations: Translations  = {
         role: 'Role',
         save: 'Save Changes',
         bio: 'Bio',
+        twitter: 'Twitter',
+        facebook: 'Facebook',
+        linkedin: 'LinkedIn',
       },
       dashboard: {
         title: 'Dashboard',
@@ -176,6 +179,9 @@ export const translations: Translations  = {
         role: 'Rôle',
         save: 'Enregistrer les modifications',
         bio: 'Bio',
+        twitter: 'Twitter',
+        facebook: 'Facebook',
+        linkedin: 'LinkedIn',
       },
       dashboard: {
         title: 'Tableau de bord',
@@ -288,6 +294,9 @@ export const translations: Translations  = {
         role: 'Rol',
         save: 'Guardar camtalkAboutYourselfs',
         bio: 'Biografía',
+        twitter: 'Twitter',
+        facebook: 'Facebook',
+        linkedin: 'LinkedIn',
       },
       dashboard: {
         title: 'Panel de control',
@@ -400,6 +409,9 @@ export const translations: Translations  = {
         role: 'Função',
         save: 'Salvar Alterações',
         bio: 'Biografia',
+        twitter: 'Twitter',
+        facebook: 'Facebook',
+        linkedin: 'LinkedIn',
       },
       dashboard: {
         title: 'Painel',
@@ -512,6 +524,9 @@ export const translations: Translations  = {
         role: 'Rolle',
         save: 'Änderungen Speichern',
         bio: 'Biografie',
+        twitter: 'Twitter',
+        facebook: 'Facebook',
+        linkedin: 'LinkedIn',
       },
       dashboard: {
         title: 'Dashboard',
@@ -624,6 +639,9 @@ export const translations: Translations  = {
         role: 'Роль',
         save: 'Сохранить изменения',
         bio: 'Биография',
+        twitter: 'Твиттер',
+        facebook: 'Фейсбук',
+        linkedin: 'Линкедин',
       },
       dashboard: {
         title: 'Панель управления',
@@ -736,6 +754,9 @@ export const translations: Translations  = {
         role: '役割',
         save: '変更を保存',
         bio: '自己紹介',
+        twitter: 'Twitter',
+        facebook: 'Facebook',
+        linkedin: 'LinkedIn',
       },
       dashboard: {
         title: 'ダッシュボード',
@@ -848,6 +869,9 @@ export const translations: Translations  = {
         role: '역할',
         save: '변경사항 저장',
         bio: '소개',
+        twitter: '트위터',
+        facebook: '페이스북',
+        linkedin: '링크드인',
       },
       dashboard: {
         title: '대시보드',
