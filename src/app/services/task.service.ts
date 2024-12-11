@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from './user.service';
 import { User } from '../model/user.model';
 import { fakeTasks2 } from '../model/fake-data';
-import { where } from 'firebase/firestore';
+import { DocumentData, where } from 'firebase/firestore';
 
 @Injectable({
   providedIn: "root",
@@ -29,7 +29,7 @@ export class TaskService {
   }
 
   
-  private async taskMapper(tasks: (import("@angular/fire/firestore").DocumentData | (import("@angular/fire/firestore").DocumentData & { id: string; }))[]): Promise<Task[]> {
+  private async taskMapper(tasks: DocumentData[]): Promise<Task[]> {
     const users = await this.userService.getUsers();
     return tasks.map<Task>((task) => {
       const category = this.categoryService.categories.value
