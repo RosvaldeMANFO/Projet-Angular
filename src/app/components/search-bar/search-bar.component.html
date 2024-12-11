@@ -11,13 +11,13 @@
       </span>
       <span mat-button [matMenuTriggerFor]="menu" class="
       text-gray-400 text-center text-ellipsis select-none cursor-pointer whitespace-nowrap">
-        {{currentState}}</span>
+        {{ translatedState }}</span>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="switchSate('ALL')">
-          {{'ALL'}}</button>
+          {{ languageService.translate('status.ALL') }}</button>
         <div *ngFor="let state of TaskState | keyvalue" class="py-2">
           <button mat-menu-item (click)="switchSate(state.key)">
-            {{state.value}}</button>
+            {{ languageService.translate('status.' + state.value) }}</button>
         </div>
       </mat-menu>
     </div>

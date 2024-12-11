@@ -3,11 +3,15 @@
     <mat-card-header class="flex flex-col mb-7">
         <div class="flex justify-between items-center w-full">
             <p class="flex items-center gap-2">
-                <span
-                    class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
-                    {{ (task.reporterName).charAt(0) }}
-                </span>
-                {{ task.reporterName }}
+                <a [routerLink]="['/profile', task.reporterId]" class="flex items-center">
+                    <span
+                        class="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center text-white text-xl font-bold">
+                        {{ (task.reporterName).charAt(0) }}
+                    </span>
+                </a>
+                <a [routerLink]="['/profile', task.reporterId]" class="text-blue-500 hover:underline">
+                    {{ task.reporterName }}
+                </a>
             </p>
             <div class="flex">
                 <button mat-icon-button (click)="deleteTask($event)">
@@ -20,10 +24,10 @@
         </div>
         <div class="flex items-center gap-3 w-full mt-3 select-none">
             <span [appApplyColor]="task.category.color" class="rounded-md px-2">
-                {{ task.category.name }}
+                {{ languageService.translate('categories.' + task.category.name.toLowerCase()) }}
             </span>
             <span class="rounded-md border px-2 border-gray-400 text-primary-500">
-                {{ task.state }}
+                {{ languageService.translate('status.' + task.state) }}
             </span>
         </div>
     </mat-card-header>
@@ -34,7 +38,9 @@
             <p class="text-sm">{{ task.startDate | date: 'mediumDate' }} - {{ task.endDate | date: 'mediumDate' }}</p>
             <div class="flex items-center gap-2">
                 <mat-icon>person</mat-icon>
-                <p>{{ task.assigneeName }}</p>
+                <p><a [routerLink]="['/profile', task.assigneeId]" class="text-blue-500 hover:underline">
+                    {{ task.assigneeName }}
+                </a></p>
             </div>
         </div>
     </mat-card-content>

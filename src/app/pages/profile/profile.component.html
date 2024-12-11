@@ -44,7 +44,7 @@
                 <i class="material-icons" *ngIf="task.state === 'DONE'">check_circle</i>
                 <i class="material-icons" *ngIf="task.state !== 'DONE'">radio_button_unchecked</i>
               </span>
-              {{ task.state }}
+              {{ languageService.translate('status.' + task.state) }}
             </span>
           </div>
         </li>

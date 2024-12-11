@@ -21,7 +21,7 @@
           </a>
           <div *ngIf="currentUserRole === 'admin'" class="relative">
             <button mat-button [matMenuTriggerFor]="roleMenu" [attr.aria-controls]="'roleMenu-' + member.id">
-              {{ member.userRole | capitalize  }}
+              {{ translateUserRole(member.userRole || 'unknown') }}
               <mat-icon>arrow_drop_down</mat-icon>
             </button>
             <mat-menu #roleMenu="matMenu" [id]="'roleMenu-' + member.id">

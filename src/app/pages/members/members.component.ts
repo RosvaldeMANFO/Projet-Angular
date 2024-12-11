@@ -56,4 +56,7 @@ export class MembersComponent implements OnInit {
   goToProfile(id: string): void {
     this.router.navigate([`/profile/${id}`]);
   }
+  translateUserRole(userRole: string): string {
+    return this.languageService.translate(`members.${userRole}`);
+  }
 }
