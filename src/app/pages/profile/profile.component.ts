@@ -35,6 +35,7 @@ export class ProfileComponent implements OnInit {
       }
     });
     this.route.paramMap.subscribe(async params => {
+      this.currentUserId = this.auth.currentUser?.uid || '';
       const uidFromRoute = params.get('uid');
       if (uidFromRoute) {
         console.log(uidFromRoute);

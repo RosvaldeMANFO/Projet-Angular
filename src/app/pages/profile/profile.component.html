@@ -28,9 +28,9 @@
     
 
     <div class="mt-4" *ngIf="isCurrentUserProfile()">
-      <a routerLink="/edit-profile" class="inline-block bg-primary-500 text-white py-2 px-4 rounded-md hover:bg-primary-600 items-center gap-3">
+      <a routerLink="/edit-profile"
+        class="inline-block bg-primary-500 text-white py-2 px-4 rounded-md hover:bg-primary-600 items-center">
         {{ languageService.translate('profile.editProfile') }}
-        <mat-icon class="inline-block" style="padding-top: 0.15rem; padding-left: 0.15rem; font-size: 1.25rem; width: 1.25rem; height: 1.25rem;">edit</mat-icon>
       </a>
     </div>
   </div>
@@ -62,7 +62,6 @@
       </ng-template>
     </div>
   </div>
-
   <div class="mt-6 w-full max-w-4xl text-center">
     <a routerLink="/" class="inline-block px-6 py-3 text-white bg-primary-500 rounded-md hover:bg-primary-600">
       {{ languageService.translate('profile.viewAllTasks') }}

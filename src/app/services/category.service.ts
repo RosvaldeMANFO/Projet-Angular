@@ -1,5 +1,5 @@
-import { Injectable, OnInit } from "@angular/core";
-import { Task, TaskCategory, TaskState } from "../model/task.model";
+import { Injectable } from "@angular/core";
+import { TaskCategory } from "../model/task.model";
 import { fakeTaskCategories } from "../model/fake-data";
 
 import {
@@ -11,15 +11,17 @@ import {
   query,
   where,
 } from "@angular/fire/firestore";
-import { BehaviorSubject, firstValueFrom, Subscription, take } from "rxjs";
+import { BehaviorSubject, firstValueFrom, take } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
 export class CategoryService {
   categories = new BehaviorSubject<TaskCategory[]>([]);
+
   constructor(private readonly firestore: Firestore) {
     this.init();
   }
+
   init(): void {
     fakeTaskCategories.forEach((category: TaskCategory) => {
       this.addCategory(category);
