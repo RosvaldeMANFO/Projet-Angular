@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { getStateColor, Period, Task, TasksByKey, TaskState } from '../model/task.model';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subscription } from 'rxjs';
 import { Firestore, collection, collectionData, addDoc, orderBy, query, doc, setDoc, writeBatch, getDocs, deleteDoc } from '@angular/fire/firestore';
 import { CategoryService } from './category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from './user.service';
 import { User } from '../model/user.model';
 import { fakeTasks2 } from '../model/fake-data';
+import { where } from 'firebase/firestore';
 
 @Injectable({
   providedIn: "root",
@@ -16,7 +17,6 @@ export class TaskService {
   task = new BehaviorSubject<Task[]>([])
   taskListSubscription?: Subscription;
   cachedTask: Task[] = [];
-  users: User[] = [];
   currentState = 'ALL';
 
   constructor(
@@ -26,10 +26,31 @@ export class TaskService {
     private readonly userService: UserService,
   ) {
     this.getTasks();
-    this.userService.getUsers().then(users => {
-      this.users = users;
+  }
+
+  
+  private async taskMapper(tasks: (import("@angular/fire/firestore").DocumentData | (import("@angular/fire/firestore").DocumentData & { id: string; }))[]): Promise<Task[]> {
+    const users = await this.userService.getUsers();
+    return tasks.map<Task>((task) => {
+      const category = this.categoryService.categories.value
+        .find(category => category.id === task['categoryId']);
+      return {
+        id: task['id'],
+        title: task['title'],
+        reporterId: task['reporterId'],
+        reporterName: task['reporterName'],
+        assigneeId: task['assigneeId'],
+        assigneeName: users.find(user => user.id === task['assigneeId'])?.nickname,
+        description: task['description'],
+        state: task['state'] as TaskState,
+        category: category!!,
+        startDate: task['startDate'].toDate(),
+        endDate: task['endDate'].toDate(),
+        createdAt: task['createdAt'].toDate(),
+      };
     });
   }
+
 
   getTasks() {
     if (this.taskListSubscription) {
@@ -37,25 +58,8 @@ export class TaskService {
     }
     const tasksCollection = collection(this.firestore, 'tasks');
     const tasksQuery = query(tasksCollection, orderBy('title'));
-    collectionData(tasksQuery, { idField: 'id' }).subscribe((tasks) => {
-      const mappedTasks = tasks.map<Task>((task) => {
-        const category = this.categoryService.categories.value
-          .find(category => category.id === task['categoryId']);
-        return {
-          id: task['id'],
-          title: task['title'],
-          reporterId: task['reporterId'],
-          reporterName: task['reporterName'],
-          assigneeId: task['assigneeId'],
-          assigneeName: this.users.find(user => user.id === task['assigneeId'])?.nickname,
-          description: task['description'],
-          state: task['state'] as TaskState,
-          category: category!!,
-          startDate: task['startDate'].toDate(),
-          endDate: task['endDate'].toDate(),
-          createdAt: task['createdAt'].toDate(),
-        }
-      });
+    collectionData(tasksQuery, { idField: 'id' }).subscribe(async (tasks) => {
+      const mappedTasks = await this.taskMapper(tasks);
       this.cachedTask = mappedTasks;
       this.task.next(mappedTasks);
     });
@@ -160,8 +164,13 @@ export class TaskService {
     });
   }
 
-  getTaskByUserId(userId: string): Task[] {
-    return this.cachedTask.filter(task => task.reporterId === userId);
+  getTaskByUserId(userId: string): Observable<Promise<Task[]>> {
+    const tasksCollection = collection(this.firestore, 'tasks');
+    const tasksQuery = query(tasksCollection, where('reporterId', '==', userId));
+    const tasksSnapshot = collectionData(tasksQuery, { idField: 'id' });
+    return tasksSnapshot.pipe(
+      map(tasks => this.taskMapper(tasks))
+    );
   }
 
   countTasksByStatusAndDate(period?: Period): TasksByKey {

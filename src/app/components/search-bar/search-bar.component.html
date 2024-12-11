@@ -1,10 +1,10 @@
 <mat-card class="max-w-3xl mx-auto mt-7">
-  <mat-card-content class="flex flex-row justify-between gap-3 items-center h-full">
+  <mat-card-content class="flex flex-row justify-between gap-3 items-center">
     <div class="relative flex gap-3 items-center w-full">
       <span class="text-gray-400 hover:cursor-pointer" (click)="submitSearch()">
         <mat-icon>search</mat-icon>
       </span>
-      <input class="focus:outline-none pl-10 pr-10 w-full h-full" [placeholder]="this.languageService.translate('home.search')" [(ngModel)]="searchTerm"
+      <input class="focus:outline-none pl-10 pr-10 w-full" [placeholder]="this.languageService.translate('home.search')" [(ngModel)]="searchTerm"
         (keyup)="submitSearch()">
       <span class="text-gray-400 hover:cursor-pointer" (click)="addNewTask()">
         <mat-icon>add</mat-icon>
@@ -20,9 +20,6 @@
             {{state.value}}</button>
         </div>
       </mat-menu>
-      <span *ngIf="showDeleteIcon" class="text-gray-400 hover:cursor-pointer" (click)="delete.emit()">
-        <mat-icon>delete</mat-icon>
-      </span>
     </div>
   </mat-card-content>
 </mat-card>

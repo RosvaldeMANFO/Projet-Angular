@@ -26,19 +26,15 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     public readonly languageService: LanguageService,
     private router: Router,
-  ) {}
+  ) { }
 
-  async ngOnInit(): Promise<void> {
-    const uidFromRoute = this.route.snapshot.paramMap.get('uid');
-    onAuthStateChanged(this.auth, async (currentUser) => {
-      if (currentUser) {
-        this.currentUserId = currentUser.uid;
-        if (uidFromRoute) {
-          await this.loadUserProfile(uidFromRoute);
-        } else {
-          await this.loadUserProfile(currentUser.uid);
-        }
-        this.loadTasks(this.user.id || this.currentUserId);
+  ngOnInit() {
+    this.route.paramMap.subscribe(async params => {
+      const uidFromRoute = params.get('uid');
+      if (uidFromRoute) {
+        console.log(uidFromRoute);
+        await this.loadUserProfile(uidFromRoute);
+        await this.loadTasks(uidFromRoute);
       }
     });
   }
@@ -60,8 +56,10 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  private loadTasks(userId: string): void {
-    this.tasks = this.taskService.getTaskByUserId(userId);
+  private async loadTasks(userId: string): Promise<void> {
+    this.taskService.getTaskByUserId(userId).subscribe(async tasks => {
+      this.tasks = await tasks;
+    });
   }
 
   isCurrentUserProfile(): boolean {

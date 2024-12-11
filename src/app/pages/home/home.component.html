@@ -1,15 +1,14 @@
-<mat-drawer-container [autosize]="true" class="min-h-full max-w-5xl mx-auto">
+<mat-drawer-container [autosize]="true" class="h-full max-w-8xl mx-auto">
 
-    <mat-drawer mode="side" position="end" [appToggleDrawer]="selectedTask !== undefined" class="p-7 w-1/3">
+    <mat-drawer mode="side" position="end" [appToggleDrawer]="selectedTask !== undefined" class="p-7 w-1/4">
         <ng-container *ngTemplateOutlet="taskDetails"></ng-container>
     </mat-drawer>
 
-    <mat-drawer-content class="bg-white overflow-hidden">
-        <div class="flex flex-col gap-7 w-full p-3 overflow-hidden">
-            <app-search-bar (search)="searchTasks($event)" (add)="addNewTask()" (delete)="deleteTask(undefined)"
-                (state)="filterTasks($event)">
+    <mat-drawer-content class="bg-white">
+        <div class="flex flex-col gap-7 px-3 h-full overflow-hidden">
+            <app-search-bar (search)="searchTasks($event)" (add)="addNewTask()" (state)="filterTasks($event)">
             </app-search-bar>
-            <div class="flex flex-wrap gap-4 items-center justify-center w-full max-w-6xl mx-auto">
+            <div class="py-3 flex flex-wrap gap-4 items-start justify-center w-full max-w-full m-auto overflow-y-auto">
                 <div *ngIf="fakeTasks.length === 0" class="w-full text-center text-2xl text-gray-500">
                     {{ languageService.translate('home.noTasks') }}
                 </div>
@@ -21,7 +20,7 @@
 </mat-drawer-container>
 
 <ng-template #taskDetails>
-    <div *ngIf="selectedTask" class="text-gray-700 flex flex-col gap-7 h-full overflow-y-hidden fixed">
+    <div *ngIf="selectedTask" class="text-gray-700 flex flex-col gap-7 h-full overflow-y-auto">
         <div class="flex justify-end">
             <button mat-icon-button (click)="selectedTask = undefined">
                 <mat-icon class="text-gray-500">close</mat-icon>
