@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
-import { Auth } from '@angular/fire/auth';
+import { Auth, onAuthStateChanged } from '@angular/fire/auth';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 
@@ -9,7 +9,9 @@ export const roleGuard: CanActivateFn = async (route, state) => {
   const userService = inject(UserService);
   const router = inject(Router);
 
-  const user = auth.currentUser;
+  const user = await new Promise<{ uid: string } | null>((resolve) => {
+    onAuthStateChanged(auth, (authUser) => resolve(authUser ? { uid: authUser.uid } : null));
+  });
 
   if (!user) {
     router.navigate(['/login']);
