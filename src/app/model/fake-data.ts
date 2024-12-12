@@ -3,66 +3,80 @@ import { User } from "./user.model";
 
 export const fakeUsers: User[] = [
   {
-    id: "U001",
-    name: "Alice Johnson",
-    password: "password123",
-    email: "alice.johnson@example.com",
+      "id": "0RY0r4XrlubHaBV0PTFo6FDXrKI2",
+      "role": "Product Manager | UX Advocate",
+      "userRole": "user",
+      "bio": "Experienced product manager with a strong focus on user experience and delivering products that customers love. Passionate about driving business growth through innovation.",
+      "email": "sarahsmith@example.com",
+      "nickname": "Sarah Smith"
   },
   {
-    id: "U002",
-    name: "Bob Smith",
-    password: "securePass456",
-    email: "bob.smith@example.com",
+      "id": "8O9neIbuUZUHVGn882tpwjYaI7w1",
+      "nickname": "James Wilson",
+      "bio": "Expert in cloud infrastructure and backend development. Passionate about creating robust and scalable APIs and services using cloud platforms like AWS and Google Cloud.",
+      "email": "jamesw@example.com",
+      "role": "Backend Developer | Cloud Computing Enthusiast",
   },
   {
-    id: "U003",
-    name: "Charlie Taylor",
-    password: "charlie789",
-    email: "charlie.taylor@example.com",
+      "id": "OBSXIzSP1lONHK8a9DApje0cmaX2",
+      "email": "michaelb@example.com",
+      "role": "Quality Assurance Engineer | Detail-Oriented",
+      "bio": "Focused on delivering bug-free software by meticulously testing every feature. Passionate about finding issues before they reach the user. Always striving for perfection in every release.",
+      "nickname": "Michael Brown",
+      "userRole": "user"
   },
   {
-    id: "U004",
-    name: "Diana Green",
-    password: "diana2024",
-    email: "diana.green@example.com",
+      "id": "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2",
+      "email": "olivialee@example.com",
+      "bio": "Specializing in test automation to streamline software quality assurance processes. Constantly seeking ways to improve test coverage, efficiency, and the overall testing strategy.",
+      "nickname": "Olivia Lee",
+      "userRole": "user",
+      "role": "Test Automation Engineer | Continuous Improvement"
   },
   {
-    id: "U005",
-    name: "Emma Davis",
-    password: "emma@321",
-    email: "emma.davis@example.com",
+      "id": "VLcytYIROvSQxSh1lkCoVtHuF143",
+      "nickname": "John Doe",
+      "userRole": "user",
+      "bio": "Passionate about building scalable web applications. Skilled in Angular, React, Node.js, and Python. Always exploring new technologies and optimizing user experiences.",
+      "email": "johndoe@example.com",
+      "role": "Full-Stack Developer | Tech Enthusiast",
   },
   {
-    id: "U006",
-    name: "Frank Wilson",
-    password: "frank!999",
-    email: "frank.wilson@example.com",
+      "id": "errWpgAOsKaQoUp0OfmfwlygUS92",
+      "email": "emmawhite@example.com",
+      "role": "UI/UX Designer | Creative Thinker",
+      "nickname": "Emma White",
+      "bio": "Designing user-centric interfaces and seamless experiences. I combine creativity with research to make products both beautiful and functional. Always striving to bring the user’s vision to life.",
+      "userRole": "user"
   },
   {
-    id: "U007",
-    name: "Grace White",
-    password: "grace#abc",
-    email: "grace.white@example.com",
+      "id": "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
+      "email": "test2@test.com",
+      "linkedin": "https://test2.linkedin.com",
+      "facebook": "https://test2.facebook.com",
+      "userRole": "admin",
+      "nickname": "Testor",
+      "twitter": "https://test2.twitter.com",
+      "role": "Testeur | Quality Assurance Specialist | Bug Hunter Extraordinaire",
+      "bio": "Passionate about ensuring software quality, I specialize in identifying bugs, improving user experiences, and making sure every feature works as intended. "
   },
   {
-    id: "U008",
-    name: "Henry Moore",
-    password: "henry2000",
-    email: "henry.moore@example.com",
+      "id": "jBKn4PXLKESC1ktcYPV6Y0FkD7u1",
+      "userRole": "admin",
+      "nickname": "Testo",
+      "role": "Testeur | Quality Assurance Specialist | Bug Hunter Extraordinaire",
+      "email": "test@test.com",
+      "bio": "Passionate about ensuring software quality, I specialize in identifying bugs, improving user experiences, and making sure every feature works as intended. With a keen eye for detail and a strong understanding of testing methodologies, I work to ensure that applications are reliable, functional, and user-friendly. Whether manual or automated, I thrive on the challenge of finding issues before they reach users, helping teams deliver flawless products."
   },
   {
-    id: "U009",
-    name: "Ivy Brown",
-    password: "ivy-secure",
-    email: "ivy.brown@example.com",
-  },
-  {
-    id: "U010",
-    name: "Jack Clark",
-    password: "jack@777",
-    email: "jack.clark@example.com",
-  },
-];
+      "id": "mV2KtjaaXjTvdQL0Hwqrg7byU623",
+      "email": "danielc@example.com",
+      "nickname": "Daniel Clark",
+      "bio": "Passionate about creating dynamic, interactive web applications using JavaScript and modern frameworks like Angular, React, and Vue.js. Always learning and experimenting with new web technologies.",
+      "userRole": "user",
+      "role": "Frontend Developer | JavaScript Pro"
+  }
+]
 
 export const fakeTaskCategories: TaskCategory[] = [
   { name: "Bug", color: "#E57373" },
@@ -236,202 +250,82 @@ export const fakeTasks2 = [
     }
   ];
 
-// export const fakeTasks: Task[] = [
-//   {
-//     id: "1",
-//     reporterName: "Alice Johnson",
-//     reporterId: "U001",
-//     assigneeId: "U002",
-//     assigneeName: "Bob Smith",
-//     title: "Fix login bug",
-//     description:
-//       "Resolve the issue causing login failures for users with special characters in passwords.",
-//     state: TaskState.DOING,
-//     category: fakeTaskCategories[0], // BUG
-//     startDate: new Date("2024-11-20"),
-//     endDate: new Date("2024-11-30"),
-//     createdAt: new Date("2024-11-15"),
-//   },
-//   {
-//     id: "2",
-//     reporterName: "Charlie Taylor",
-//     reporterId: "U003",
-//     assigneeId: "U004",
-//     assigneeName: "Diana Green",
-//     title: "Implement dark mode",
-//     description: "Add support for a dark theme throughout the application.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[1], // FEATURE
-//     startDate: new Date("2024-11-25"),
-//     endDate: new Date("2024-12-10"),
-//     createdAt: new Date("2024-11-20"),
-//   },
-//   {
-//     id: "3",
-//     reporterName: "Emma Davis",
-//     reporterId: "U003",
-//     assigneeId: "U004",
-//     assigneeName: "Diana Green",
-//     title: "Optimize database queries",
-//     description: "Refactor and optimize slow-performing SQL queries.",
-//     state: TaskState.DONE,
-//     category: fakeTaskCategories[2], // IMPROVEMENT
-//     startDate: new Date("2024-10-15"),
-//     endDate: new Date("2024-10-30"),
-//     createdAt: new Date("2024-10-10"),
-//   },
-//   {
-//     id: "4",
-//     reporterName: "Frank Wilson",
-//     reporterId: "U006",
-//     assigneeId: "U007",
-//     assigneeName: "Grace White",
-//     title: "Add password reset functionality",
-//     description:
-//       "Enable users to reset their passwords via email verification.",
-//     state: TaskState.CANCELLED,
-//     category: fakeTaskCategories[3], // FEATURE
-//     startDate: new Date("2024-09-10"),
-//     endDate: new Date("2024-09-20"),
-//     createdAt: new Date("2024-09-05"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[2], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-// ];
-
+  export const fakeComments2 = [
+    // Task 1: Enhance login security features (2 comments)
+    { taskName: "Enhance login security features", authorName: "Sarah Smith", content: "Great progress on this task!" },
+    { taskName: "Enhance login security features", authorName: "Michael Brown", content: "Have you considered adding two-factor authentication?" },
+  
+    // Task 2: Deploy latest backend update (7 comments)
+    { taskName: "Deploy latest backend update", authorName: "James Wilson", content: "Deployment went smoothly. Excellent work!" },
+    { taskName: "Deploy latest backend update", authorName: "Olivia Lee", content: "Let's monitor the logs for any errors post-deployment." },
+    { taskName: "Deploy latest backend update", authorName: "Daniel Clark", content: "The release notes are detailed. Great job!" },
+    { taskName: "Deploy latest backend update", authorName: "Emma White", content: "Have we checked the roll-back plan just in case?" },
+    { taskName: "Deploy latest backend update", authorName: "Michael Brown", content: "I noticed a minor issue in staging. Will fix it ASAP." },
+    { taskName: "Deploy latest backend update", authorName: "Sarah Smith", content: "Do we have any logs for performance metrics?" },
+    { taskName: "Deploy latest backend update", authorName: "John Doe", content: "Fantastic coordination during deployment!" },
+  
+    // Task 3: Design new user dashboard UI (0 comments)
+    // (No comments for this task)
+  
+    // Task 4: Update API documentation for v2 (12 comments)
+    { taskName: "Update API documentation for v2", authorName: "Testor", content: "Ensure all new endpoints are covered comprehensively." },
+    { taskName: "Update API documentation for v2", authorName: "John Doe", content: "Can we add more examples for the complex APIs?" },
+    { taskName: "Update API documentation for v2", authorName: "Sarah Smith", content: "Great details on endpoint descriptions!" },
+    { taskName: "Update API documentation for v2", authorName: "Michael Brown", content: "We should include common use cases too." },
+    { taskName: "Update API documentation for v2", authorName: "Emma White", content: "Let's add error response codes to the documentation." },
+    { taskName: "Update API documentation for v2", authorName: "James Wilson", content: "Fantastic work. Documentation looks very clear." },
+    { taskName: "Update API documentation for v2", authorName: "Daniel Clark", content: "Could we include a changelog for this version?" },
+    { taskName: "Update API documentation for v2", authorName: "Olivia Lee", content: "I spotted a typo in the authentication section." },
+    { taskName: "Update API documentation for v2", authorName: "Sarah Smith", content: "I've pushed edits for the query examples." },
+    { taskName: "Update API documentation for v2", authorName: "Michael Brown", content: "Can we format the examples in a consistent style?" },
+    { taskName: "Update API documentation for v2", authorName: "Emma White", content: "The updated flowchart is a helpful addition." },
+    { taskName: "Update API documentation for v2", authorName: "James Wilson", content: "Double-checked and all endpoints are listed. Great job!" },
+  
+    // Task 5: Implement search feature for users (1 comment)
+    { taskName: "Implement search feature for users", authorName: "Sarah Smith", content: "The search function is very intuitive. Great job!" },
+  
+    // Task 6: Improve mobile responsiveness for homepage (4 comments)
+    { taskName: "Improve mobile responsiveness for homepage", authorName: "Emma White", content: "Responsive design is spot on! Well done." },
+    { taskName: "Improve mobile responsiveness for homepage", authorName: "Daniel Clark", content: "Could we test this on more devices?" },
+    { taskName: "Improve mobile responsiveness for homepage", authorName: "Michael Brown", content: "Looks great on most devices but breaks on iPhone SE." },
+    { taskName: "Improve mobile responsiveness for homepage", authorName: "James Wilson", content: "Have you tried testing with lower network speeds?" },
+  
+    // Task 7: Fix performance issues in the login screen (5 comments)
+    { taskName: "Fix performance issues in the login screen", authorName: "Olivia Lee", content: "Identified a query that's slowing down the page load." },
+    { taskName: "Fix performance issues in the login screen", authorName: "John Doe", content: "Have we tested this fix on the staging environment?" },
+    { taskName: "Fix performance issues in the login screen", authorName: "Emma White", content: "The page feels faster. Great optimization!" },
+    { taskName: "Fix performance issues in the login screen", authorName: "Daniel Clark", content: "Could caching be causing this delay?" },
+    { taskName: "Fix performance issues in the login screen", authorName: "James Wilson", content: "I've added logs to pinpoint the exact slowdown." },
+  
+    // Task 8: Conduct user research for new feature (2 comments)
+    { taskName: "Conduct user research for new feature", authorName: "Sarah Smith", content: "Collected valuable insights from the recent user interviews." },
+    { taskName: "Conduct user research for new feature", authorName: "Michael Brown", content: "We should analyze these insights further before implementing." },
+  
+    // Task 9: Provide technical support for integration issues (0 comments)
+    // (No comments for this task)
+  
+    // Task 10: Redesign the landing page (9 comments)
+    { taskName: "Redesign the landing page", authorName: "Emma White", content: "Love the new color scheme. It looks vibrant and modern!" },
+    { taskName: "Redesign the landing page", authorName: "Michael Brown", content: "Let's A/B test this design before finalizing." },
+    { taskName: "Redesign the landing page", authorName: "Sarah Smith", content: "The typography is much improved!" },
+    { taskName: "Redesign the landing page", authorName: "James Wilson", content: "The new layout is more intuitive. Great job!" },
+    { taskName: "Redesign the landing page", authorName: "Daniel Clark", content: "Could we add a feedback form for visitors?" },
+    { taskName: "Redesign the landing page", authorName: "Olivia Lee", content: "Looks great! Could we optimize images for faster load times?" },
+    { taskName: "Redesign the landing page", authorName: "Emma White", content: "The hero section really grabs attention. Nicely done!" },
+    { taskName: "Redesign the landing page", authorName: "Michael Brown", content: "Let's run a final browser compatibility test." },
+    { taskName: "Redesign the landing page", authorName: "Sarah Smith", content: "The new call-to-action is very effective!" },
+  
+    // Task 11: Update API documentation (3 comments)
+    { taskName: "Update API documentation", authorName: "John Doe", content: "I've added examples for the most used endpoints." },
+    { taskName: "Update API documentation", authorName: "Sarah Smith", content: "Let's include common error responses as well." },
+    { taskName: "Update API documentation", authorName: "Michael Brown", content: "Added a section for legacy API details." },
+  
+    // Task 12: Optimize database performance (1 comment)
+    { taskName: "Optimize database performance", authorName: "James Wilson", content: "Indexed the most queried fields. Performance is better now." },
+  
+    // Task 13: (No comments)
+  ];
+  
 export const fakeComments: { taskName: string; commentCount: number }[] = [
   { taskName: "Task 1", commentCount: 10 },
   { taskName: "Task 2", commentCount: 20 },

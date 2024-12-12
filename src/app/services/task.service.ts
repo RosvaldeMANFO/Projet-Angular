@@ -29,7 +29,7 @@ import { CategoryService } from "./category.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { UserService } from "./user.service";
 import { User } from "../model/user.model";
-import { fakeTasks2 } from "../model/fake-data";
+import { fakeTasks2, fakeComments2 } from "../model/fake-data";
 import { Comment } from "../model/comment.model";
 import { DocumentData, where } from "firebase/firestore";
 import { Auth } from "@angular/fire/auth";
@@ -193,37 +193,62 @@ export class TaskService {
       );
     }
   }
-
   async addMockTasks() {
     const taskCollection = collection(this.firestore, "tasks");
     const categories = this.categoryService.categories.value;
     const users = await this.userService.getUsers();
-
+  
     const fakeTasks = fakeTasks2.map((task) => {
       const category = categories.find(
         (category) => category.name === task.categoryName
       );
       const assignee = users[Math.floor(Math.random() * users.length)];
-
+  
       return {
         ...task,
         categoryId: category?.id,
         assigneeId: assignee?.id,
       };
     });
-
+  
     const batch = writeBatch(this.firestore);
     fakeTasks.forEach((task) => {
       const docRef = doc(taskCollection);
       batch.set(docRef, task);
     });
-
+  
     await batch.commit();
-
-    this.snackBar.open("Mock tasks added successfully", "Close", {
+  
+    // Add comments to tasks
+    await this.mockComments(fakeTasks, users);
+  
+    this.snackBar.open("Mock tasks and comments added successfully", "Close", {
       duration: 2000,
     });
   }
+  
+  async mockComments(tasks: any[], users: User[]) {
+    const commentsCollection = collection(this.firestore, "comments");
+    const batch = writeBatch(this.firestore);
+  
+    fakeComments2.forEach((comment) => {
+      const task = tasks.find((task) => task.title === comment.taskName);
+      const author = users.find((user) => user.nickname === comment.authorName);
+  
+      if (task && author) {
+        const docRef = doc(commentsCollection);
+        batch.set(docRef, {
+          taskId: task.id,
+          authorId: author.id,
+          content: comment.content,
+          createdAt: new Date(),
+        });
+      }
+    });
+  
+    await batch.commit();
+  }
+  
 
   getTaskByUserId(userId: string): Observable<Promise<Task[]>> {
     const tasksCollection = collection(this.firestore, 'tasks');
