@@ -93,6 +93,7 @@ export const fakeTaskCategories: TaskCategory[] = [
 
 export const fakeTasks2 = [
     {
+      id: "5LzYk2TmhObthua2rQ9c",
       assigneeId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", 
       categoryName: "Bug",
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2", 
@@ -105,6 +106,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-01T07:45:00Z')
     },
     {
+      id: "6rPkcDSIfy7WzQ7xXbK1",
       assigneeId: "8O9neIbuUZUHVGn882tpwjYaI7w1", 
       categoryName: "Deployment",
       reporterId: "VLcytYIROvSQxSh1lkCoVtHuF143", 
@@ -117,6 +119,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-02T08:30:00Z')
     },
     {
+      id: "9v17mV6jf4aARAR7lbza",
       assigneeId: "OBSXIzSP1lONHK8a9DApje0cmaX2", 
       categoryName: "Design",
       reporterId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", 
@@ -129,6 +132,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-03T09:50:00Z')
     },
     {
+      id: "AHgLLOGQySZGlKe7JUX6",
       assigneeId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", 
       categoryName: "Documentation",
       reporterId: "errWpgAOsKaQoUp0OfmfwlygUS92", 
@@ -141,6 +145,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-04T08:00:00Z')
     },
     {
+      id: "EuzUypPgigy5vE9JqbNj",
       assigneeId: "VLcytYIROvSQxSh1lkCoVtHuF143", 
       categoryName: "Feature",
       reporterId: "jBKn4PXLKESC1ktcYPV6Y0FkD7u1", 
@@ -153,6 +158,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-05T09:45:00Z')
     },
     {
+      id: "FQcbdNOKYWGjwIIOx9tp",
       assigneeId: "errWpgAOsKaQoUp0OfmfwlygUS92", 
       categoryName: "Improvement", 
       reporterId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", 
@@ -165,6 +171,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-06T08:45:00Z')
     },
     {
+      id: "IOXYle4ZubYhWy2xuSLH",
       assigneeId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2", 
       categoryName: "Maintenance", 
       reporterId: "8O9neIbuUZUHVGn882tpwjYaI7w1", 
@@ -177,6 +184,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-07T10:45:00Z')
     },
     {
+      id: "MNnqClrVzBW4Nxk9Tvzh",
       assigneeId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", 
       categoryName: "Research", 
       reporterId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", 
@@ -189,6 +197,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-08T12:30:00Z')
     },
     {
+      id: "PuWrpuLQdmpxNHhMBx26",
       assigneeId: "8O9neIbuUZUHVGn882tpwjYaI7w1", 
       categoryName: "Support", 
       reporterId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", 
@@ -201,6 +210,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-09T08:45:00Z')
     },
     {
+      id: "RDmZBbajd5ColFdiioVr",
       assigneeId: "8O9neIbuUZUHVGn882tpwjYaI7w1",
       categoryName: "Bug", 
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
@@ -213,6 +223,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-03T14:00:00Z')
     },
     {
+      id: "RtIV4ngHqFFNsp247xsF",
       assigneeId: "errWpgAOsKaQoUp0OfmfwlygUS92",
       categoryName: "Design", 
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
@@ -225,6 +236,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-06T12:00:00Z')
     },
     {
+      id: "TRZSbaAs0lxnoMFOyE1O",
       assigneeId: "VLcytYIROvSQxSh1lkCoVtHuF143",
       categoryName: "Documentation", 
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
@@ -237,6 +249,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-09T10:00:00Z')
     },
     {
+      id: "YNTfjSpGs0seBYvIil0b",
       assigneeId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2",
       categoryName: "Maintenance", 
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
@@ -251,79 +264,52 @@ export const fakeTasks2 = [
   ];
 
   export const fakeComments2 = [
-    // Task 1: Enhance login security features (2 comments)
-    { taskName: "Enhance login security features", authorName: "Sarah Smith", content: "Great progress on this task!" },
-    { taskName: "Enhance login security features", authorName: "Michael Brown", content: "Have you considered adding two-factor authentication?" },
-  
-    // Task 2: Deploy latest backend update (7 comments)
-    { taskName: "Deploy latest backend update", authorName: "James Wilson", content: "Deployment went smoothly. Excellent work!" },
-    { taskName: "Deploy latest backend update", authorName: "Olivia Lee", content: "Let's monitor the logs for any errors post-deployment." },
-    { taskName: "Deploy latest backend update", authorName: "Daniel Clark", content: "The release notes are detailed. Great job!" },
-    { taskName: "Deploy latest backend update", authorName: "Emma White", content: "Have we checked the roll-back plan just in case?" },
-    { taskName: "Deploy latest backend update", authorName: "Michael Brown", content: "I noticed a minor issue in staging. Will fix it ASAP." },
-    { taskName: "Deploy latest backend update", authorName: "Sarah Smith", content: "Do we have any logs for performance metrics?" },
-    { taskName: "Deploy latest backend update", authorName: "John Doe", content: "Fantastic coordination during deployment!" },
-  
-    // Task 3: Design new user dashboard UI (0 comments)
-    // (No comments for this task)
-  
-    // Task 4: Update API documentation for v2 (12 comments)
-    { taskName: "Update API documentation for v2", authorName: "Testor", content: "Ensure all new endpoints are covered comprehensively." },
-    { taskName: "Update API documentation for v2", authorName: "John Doe", content: "Can we add more examples for the complex APIs?" },
-    { taskName: "Update API documentation for v2", authorName: "Sarah Smith", content: "Great details on endpoint descriptions!" },
-    { taskName: "Update API documentation for v2", authorName: "Michael Brown", content: "We should include common use cases too." },
-    { taskName: "Update API documentation for v2", authorName: "Emma White", content: "Let's add error response codes to the documentation." },
-    { taskName: "Update API documentation for v2", authorName: "James Wilson", content: "Fantastic work. Documentation looks very clear." },
-    { taskName: "Update API documentation for v2", authorName: "Daniel Clark", content: "Could we include a changelog for this version?" },
-    { taskName: "Update API documentation for v2", authorName: "Olivia Lee", content: "I spotted a typo in the authentication section." },
-    { taskName: "Update API documentation for v2", authorName: "Sarah Smith", content: "I've pushed edits for the query examples." },
-    { taskName: "Update API documentation for v2", authorName: "Michael Brown", content: "Can we format the examples in a consistent style?" },
-    { taskName: "Update API documentation for v2", authorName: "Emma White", content: "The updated flowchart is a helpful addition." },
-    { taskName: "Update API documentation for v2", authorName: "James Wilson", content: "Double-checked and all endpoints are listed. Great job!" },
-  
-    // Task 5: Implement search feature for users (1 comment)
-    { taskName: "Implement search feature for users", authorName: "Sarah Smith", content: "The search function is very intuitive. Great job!" },
-  
-    // Task 6: Improve mobile responsiveness for homepage (4 comments)
-    { taskName: "Improve mobile responsiveness for homepage", authorName: "Emma White", content: "Responsive design is spot on! Well done." },
-    { taskName: "Improve mobile responsiveness for homepage", authorName: "Daniel Clark", content: "Could we test this on more devices?" },
-    { taskName: "Improve mobile responsiveness for homepage", authorName: "Michael Brown", content: "Looks great on most devices but breaks on iPhone SE." },
-    { taskName: "Improve mobile responsiveness for homepage", authorName: "James Wilson", content: "Have you tried testing with lower network speeds?" },
-  
-    // Task 7: Fix performance issues in the login screen (5 comments)
-    { taskName: "Fix performance issues in the login screen", authorName: "Olivia Lee", content: "Identified a query that's slowing down the page load." },
-    { taskName: "Fix performance issues in the login screen", authorName: "John Doe", content: "Have we tested this fix on the staging environment?" },
-    { taskName: "Fix performance issues in the login screen", authorName: "Emma White", content: "The page feels faster. Great optimization!" },
-    { taskName: "Fix performance issues in the login screen", authorName: "Daniel Clark", content: "Could caching be causing this delay?" },
-    { taskName: "Fix performance issues in the login screen", authorName: "James Wilson", content: "I've added logs to pinpoint the exact slowdown." },
-  
-    // Task 8: Conduct user research for new feature (2 comments)
-    { taskName: "Conduct user research for new feature", authorName: "Sarah Smith", content: "Collected valuable insights from the recent user interviews." },
-    { taskName: "Conduct user research for new feature", authorName: "Michael Brown", content: "We should analyze these insights further before implementing." },
-  
-    // Task 9: Provide technical support for integration issues (0 comments)
-    // (No comments for this task)
-  
-    // Task 10: Redesign the landing page (9 comments)
-    { taskName: "Redesign the landing page", authorName: "Emma White", content: "Love the new color scheme. It looks vibrant and modern!" },
-    { taskName: "Redesign the landing page", authorName: "Michael Brown", content: "Let's A/B test this design before finalizing." },
-    { taskName: "Redesign the landing page", authorName: "Sarah Smith", content: "The typography is much improved!" },
-    { taskName: "Redesign the landing page", authorName: "James Wilson", content: "The new layout is more intuitive. Great job!" },
-    { taskName: "Redesign the landing page", authorName: "Daniel Clark", content: "Could we add a feedback form for visitors?" },
-    { taskName: "Redesign the landing page", authorName: "Olivia Lee", content: "Looks great! Could we optimize images for faster load times?" },
-    { taskName: "Redesign the landing page", authorName: "Emma White", content: "The hero section really grabs attention. Nicely done!" },
-    { taskName: "Redesign the landing page", authorName: "Michael Brown", content: "Let's run a final browser compatibility test." },
-    { taskName: "Redesign the landing page", authorName: "Sarah Smith", content: "The new call-to-action is very effective!" },
-  
-    // Task 11: Update API documentation (3 comments)
-    { taskName: "Update API documentation", authorName: "John Doe", content: "I've added examples for the most used endpoints." },
-    { taskName: "Update API documentation", authorName: "Sarah Smith", content: "Let's include common error responses as well." },
-    { taskName: "Update API documentation", authorName: "Michael Brown", content: "Added a section for legacy API details." },
-  
-    // Task 12: Optimize database performance (1 comment)
-    { taskName: "Optimize database performance", authorName: "James Wilson", content: "Indexed the most queried fields. Performance is better now." },
-  
-    // Task 13: (No comments)
+    { taskId: "5LzYk2TmhObthua2rQ9c", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "Great progress on this task!" },
+    { taskId: "5LzYk2TmhObthua2rQ9c", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "Have you considered adding two-factor authentication?" },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "Deployment went smoothly. Excellent work!" },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", content: "Let's monitor the logs for any errors post-deployment." },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", content: "The release notes are detailed. Great job!" },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "Have we checked the roll-back plan just in case?" },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "I noticed a minor issue in staging. Will fix it ASAP." },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "Do we have any logs for performance metrics?" },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "VLcytYIROvSQxSh1lkCoVtHuF143", content: "Fantastic coordination during deployment!" },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2", content: "Ensure all new endpoints are covered comprehensively." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "VLcytYIROvSQxSh1lkCoVtHuF143", content: "Can we add more examples for the complex APIs?" },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "Great details on endpoint descriptions!" },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "We should include common use cases too." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "Let's add error response codes to the documentation." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "Fantastic work. Documentation looks very clear." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", content: "Could we include a changelog for this version?" },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", content: "I spotted a typo in the authentication section." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "I've pushed edits for the query examples." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "Can we format the examples in a consistent style?" },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "The updated flowchart is a helpful addition." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "Double-checked and all endpoints are listed. Great job!" },
+    { taskId: "EuzUypPgigy5vE9JqbNj", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "The search function is very intuitive. Great job!" },
+    { taskId: "FQcbdNOKYWGjwIIOx9tp", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "Responsive design is spot on! Well done." },
+    { taskId: "FQcbdNOKYWGjwIIOx9tp", authorId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", content: "Could we test this on more devices?" },
+    { taskId: "FQcbdNOKYWGjwIIOx9tp", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "Looks great on most devices but breaks on iPhone SE." },
+    { taskId: "FQcbdNOKYWGjwIIOx9tp", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "Have you tried testing with lower network speeds?" },
+    { taskId: "IOXYle4ZubYhWy2xuSLH", authorId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", content: "Identified a query that's slowing down the page load." },
+    { taskId: "IOXYle4ZubYhWy2xuSLH", authorId: "VLcytYIROvSQxSh1lkCoVtHuF143", content: "Have we tested this fix on the staging environment?" },
+    { taskId: "IOXYle4ZubYhWy2xuSLH", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "The page feels faster. Great optimization!" },
+    { taskId: "IOXYle4ZubYhWy2xuSLH", authorId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", content: "Could caching be causing this delay?" },
+    { taskId: "IOXYle4ZubYhWy2xuSLH", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "I've added logs to pinpoint the exact slowdown." },
+    { taskId: "MNnqClrVzBW4Nxk9Tvzh", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "Collected valuable insights from the recent user interviews." },
+    { taskId: "MNnqClrVzBW4Nxk9Tvzh", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "We should analyze these insights further before implementing." },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "Love the new color scheme. It looks vibrant and modern!" },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "Let's A/B test this design before finalizing." },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "The typography is much improved!" },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "The new layout is more intuitive. Great job!" },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", content: "Could we add a feedback form for visitors?" },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", content: "Looks great! Could we optimize images for faster load times?" },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "The hero section really grabs attention. Nicely done!" },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "Let's run a final browser compatibility test." },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "The new call-to-action is very effective!" },
+    { taskId: "TRZSbaAs0lxnoMFOyE1O", authorId: "VLcytYIROvSQxSh1lkCoVtHuF143", content: "I've added examples for the most used endpoints." },
+    { taskId: "TRZSbaAs0lxnoMFOyE1O", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "Let's include common error responses as well." },
+    { taskId: "TRZSbaAs0lxnoMFOyE1O", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "Added a section for legacy API details." },
+    { taskId: "YNTfjSpGs0seBYvIil0b", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "Indexed the most queried fields. Performance is better now." },
   ];
   
 export const fakeComments: { taskName: string; commentCount: number }[] = [
