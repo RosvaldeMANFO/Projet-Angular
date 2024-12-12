@@ -27,6 +27,8 @@ export const translations: Translations  = {
         save: 'Save',
         selectAssignee: 'Select Assignee',
         noComments: 'No comments available.',
+        deleteComment: 'Delete Comment',
+        confirmDeleteComment: 'Are you sure you want to delete this comment?',
       },
       auth: {
         login: {
@@ -143,6 +145,8 @@ export const translations: Translations  = {
         save: 'Enregistrer',
         selectAssignee: 'Sélectionner un assigné',
         noComments: 'Aucun commentaire disponible.',
+        deleteComment: 'Supprimer le commentaire',
+        confirmDeleteComment: 'Êtes-vous sûr de vouloir supprimer ce commentaire ?',
       },
       auth: {
         login: {
@@ -259,6 +263,8 @@ export const translations: Translations  = {
         save: 'Guardar',
         selectAssignee: 'Seleccionar asignado',
         noComments: 'No hay comentarios disponibles.',
+        deleteComment: 'Eliminar comentario',
+        confirmDeleteComment: '¿Estás seguro de que deseas eliminar este comentario?',
       },
       auth: {
         login: {
@@ -375,6 +381,8 @@ export const translations: Translations  = {
         save: 'Salvar',
         selectAssignee: 'Selecionar Responsável',
         noComments: 'Nenhum comentário disponível.',
+        deleteComment: 'Excluir Comentário',
+        confirmDeleteComment: 'Tem certeza de que deseja excluir este comentário?',
       },
       auth: {
         login: {
@@ -491,6 +499,8 @@ export const translations: Translations  = {
         save: 'Speichern',
         selectAssignee: 'Zuständigen auswählen',
         noComments: 'Keine Kommentare verfügbar.',
+        deleteComment: 'Kommentar Löschen',
+        confirmDeleteComment: 'Sind Sie sicher, dass Sie diesen Kommentar löschen möchten?',
       },
       auth: {
         login: {
@@ -607,6 +617,8 @@ export const translations: Translations  = {
         save: 'Сохранить',
         selectAssignee: 'Выбрать исполнителя',
         noComments: 'Нет доступных комментариев.',
+        deleteComment: 'Удалить комментарий',
+        confirmDeleteComment: 'Вы уверены, что хотите удалить этот комментарий?',
       },
       auth: {
         login: {
@@ -723,6 +735,8 @@ export const translations: Translations  = {
         save: '保存',
         selectAssignee: '担当者を選択',
         noComments: '利用可能なコメントはありません。',
+        deleteComment: 'コメントを削除',
+        confirmDeleteComment: 'このコメントを削除してもよろしいですか？',
       },
       auth: {
         login: {
@@ -839,6 +853,8 @@ export const translations: Translations  = {
         save: '저장',
         selectAssignee: '담당자 선택',
         noComments: '댓글이 없습니다.',
+        deleteComment: '댓글 삭제',
+        confirmDeleteComment: '이 댓글을 삭제하시겠습니까?',
       },
       auth: {
         login: {

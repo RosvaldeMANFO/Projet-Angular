@@ -72,6 +72,9 @@
                               </span>
                               <span>{{ comment.authorName }}</span>
                             </a>
+                            <button (click)="deleteComment(comment.id)" class="text-red-500 hover:text-red-700 ">
+                                <mat-icon>delete</mat-icon>
+                            </button>
                         </div>
                         <p class="flex flex-col gap-1 w-full">
                             {{ comment.content }}

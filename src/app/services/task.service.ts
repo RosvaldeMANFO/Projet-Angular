@@ -8,15 +8,9 @@ import {
 } from "../model/task.model";
 import {
   BehaviorSubject,
-  firstValueFrom,
-  lastValueFrom,
   map,
   Observable,
-  OperatorFunction,
-  Subscription,
-  take,
-  tap,
-  toArray,
+  Subscription
 } from "rxjs";
 import {
   Firestore,
@@ -67,12 +61,6 @@ export class TaskService {
     return tasks.map<Task>((task) => {
       const category = this.categoryService.categories.value
         .find(category => category.id === task['categoryId']);
-        // let comments: Comment[] = [];
-    // this.getComments(task["id"], users)
-    //   .pipe(take(1))
-    //   .subscribe((receivedComments) => {
-    //     comments = receivedComments;
-    //   });
       return {
         id: task['id'],
         title: task['title'],
@@ -82,7 +70,6 @@ export class TaskService {
         assigneeName: users.find(user => user.id === task['assigneeId'])?.nickname,
         description: task['description'],
         state: task['state'] as TaskState,
-        // comments: comments,
         category: category!!,
         startDate: task['startDate'].toDate(),
         endDate: task['endDate'].toDate(),
@@ -90,7 +77,6 @@ export class TaskService {
       };
     });
   }
-
 
   getTasks() {
     if (this.taskListSubscription) {

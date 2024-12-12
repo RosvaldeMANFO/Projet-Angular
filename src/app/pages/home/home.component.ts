@@ -47,9 +47,7 @@ export class HomeComponent implements OnInit {
       this.fakeTasks = tasks;
       tasks.forEach(async (task) => {
         await firstValueFrom(
-          this.taskService
-            .countTaskComments(task.id)
-            .pipe(take(1))
+          this.taskService.countTaskComments(task.id).pipe(take(1))
         ).then((comments) => {
           task.commentCount = comments;
         });
@@ -126,7 +124,7 @@ export class HomeComponent implements OnInit {
 
   getTaskComments = async () => {
     if (this.selectedTask) {
-       await firstValueFrom(
+      await firstValueFrom(
         this.taskService
           .getComments(this.selectedTask.id, this.users)
           .pipe(take(1))
@@ -158,5 +156,22 @@ export class HomeComponent implements OnInit {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  deleteComment = (commentId: string) => {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: this.languageService.translate("home.deleteComment"),
+        message: this.languageService.translate("home.confirmDeleteComment"),
+      },
+    });
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.taskService.deleteComment(commentId);
+        this.selectedTaskComments = this.selectedTaskComments.filter(
+          (comment) => comment.id !== commentId
+        );
+      }
+    });
   };
 }
