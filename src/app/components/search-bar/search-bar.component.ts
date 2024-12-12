@@ -9,11 +9,10 @@ import { LanguageService } from 'src/app/services/language.service';
 export class SearchBarComponent {
   TaskState = TaskState;
   searchTerm = '';
-  currentState = 'ALL';
+  currentState = 'ALL' ;
   @Input() showDeleteIcon = false;
   @Output() search = new EventEmitter<string | undefined>();
   @Output() add = new EventEmitter<void>();
-  @Output() delete = new EventEmitter<void>();
   @Output() state = new EventEmitter<string>();
   
   constructor(public readonly languageService: LanguageService) {}
@@ -29,5 +28,9 @@ export class SearchBarComponent {
 
   addNewTask = () => {
     this.add.emit();
+  }
+
+  get translatedState(): string {
+    return this.languageService.translate('status.' + this.currentState);
   }
 }

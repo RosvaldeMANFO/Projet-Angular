@@ -25,6 +25,10 @@ export const translations: Translations  = {
         comments: 'Comments',
         add: 'Add',
         save: 'Save',
+        selectAssignee: 'Select Assignee',
+        noComments: 'No comments available.',
+        deleteComment: 'Delete Comment',
+        confirmDeleteComment: 'Are you sure you want to delete this comment?',
       },
       auth: {
         login: {
@@ -63,6 +67,9 @@ export const translations: Translations  = {
         role: 'Role',
         save: 'Save Changes',
         bio: 'Bio',
+        twitter: 'Twitter',
+        facebook: 'Facebook',
+        linkedin: 'LinkedIn',
       },
       dashboard: {
         title: 'Dashboard',
@@ -136,6 +143,10 @@ export const translations: Translations  = {
         comments: 'Commentaires',
         add: 'Ajouter',
         save: 'Enregistrer',
+        selectAssignee: 'Sélectionner un assigné',
+        noComments: 'Aucun commentaire disponible.',
+        deleteComment: 'Supprimer le commentaire',
+        confirmDeleteComment: 'Êtes-vous sûr de vouloir supprimer ce commentaire ?',
       },
       auth: {
         login: {
@@ -174,6 +185,9 @@ export const translations: Translations  = {
         role: 'Rôle',
         save: 'Enregistrer les modifications',
         bio: 'Bio',
+        twitter: 'Twitter',
+        facebook: 'Facebook',
+        linkedin: 'LinkedIn',
       },
       dashboard: {
         title: 'Tableau de bord',
@@ -247,6 +261,10 @@ export const translations: Translations  = {
         comments: 'Comentarios',
         add: 'Añadir',
         save: 'Guardar',
+        selectAssignee: 'Seleccionar asignado',
+        noComments: 'No hay comentarios disponibles.',
+        deleteComment: 'Eliminar comentario',
+        confirmDeleteComment: '¿Estás seguro de que deseas eliminar este comentario?',
       },
       auth: {
         login: {
@@ -285,6 +303,9 @@ export const translations: Translations  = {
         role: 'Rol',
         save: 'Guardar camtalkAboutYourselfs',
         bio: 'Biografía',
+        twitter: 'Twitter',
+        facebook: 'Facebook',
+        linkedin: 'LinkedIn',
       },
       dashboard: {
         title: 'Panel de control',
@@ -358,6 +379,10 @@ export const translations: Translations  = {
         comments: 'Comentários',
         add: 'Adicionar',
         save: 'Salvar',
+        selectAssignee: 'Selecionar Responsável',
+        noComments: 'Nenhum comentário disponível.',
+        deleteComment: 'Excluir Comentário',
+        confirmDeleteComment: 'Tem certeza de que deseja excluir este comentário?',
       },
       auth: {
         login: {
@@ -396,6 +421,9 @@ export const translations: Translations  = {
         role: 'Função',
         save: 'Salvar Alterações',
         bio: 'Biografia',
+        twitter: 'Twitter',
+        facebook: 'Facebook',
+        linkedin: 'LinkedIn',
       },
       dashboard: {
         title: 'Painel',
@@ -469,6 +497,10 @@ export const translations: Translations  = {
         comments: 'Kommentare',
         add: 'Hinzufügen',
         save: 'Speichern',
+        selectAssignee: 'Zuständigen auswählen',
+        noComments: 'Keine Kommentare verfügbar.',
+        deleteComment: 'Kommentar Löschen',
+        confirmDeleteComment: 'Sind Sie sicher, dass Sie diesen Kommentar löschen möchten?',
       },
       auth: {
         login: {
@@ -507,6 +539,9 @@ export const translations: Translations  = {
         role: 'Rolle',
         save: 'Änderungen Speichern',
         bio: 'Biografie',
+        twitter: 'Twitter',
+        facebook: 'Facebook',
+        linkedin: 'LinkedIn',
       },
       dashboard: {
         title: 'Dashboard',
@@ -580,6 +615,10 @@ export const translations: Translations  = {
         comments: 'Комментарии',
         add: 'Добавить',
         save: 'Сохранить',
+        selectAssignee: 'Выбрать исполнителя',
+        noComments: 'Нет доступных комментариев.',
+        deleteComment: 'Удалить комментарий',
+        confirmDeleteComment: 'Вы уверены, что хотите удалить этот комментарий?',
       },
       auth: {
         login: {
@@ -618,6 +657,9 @@ export const translations: Translations  = {
         role: 'Роль',
         save: 'Сохранить изменения',
         bio: 'Биография',
+        twitter: 'Твиттер',
+        facebook: 'Фейсбук',
+        linkedin: 'Линкедин',
       },
       dashboard: {
         title: 'Панель управления',
@@ -691,6 +733,10 @@ export const translations: Translations  = {
         comments: 'コメント',
         add: '追加',
         save: '保存',
+        selectAssignee: '担当者を選択',
+        noComments: '利用可能なコメントはありません。',
+        deleteComment: 'コメントを削除',
+        confirmDeleteComment: 'このコメントを削除してもよろしいですか？',
       },
       auth: {
         login: {
@@ -729,6 +775,9 @@ export const translations: Translations  = {
         role: '役割',
         save: '変更を保存',
         bio: '自己紹介',
+        twitter: 'Twitter',
+        facebook: 'Facebook',
+        linkedin: 'LinkedIn',
       },
       dashboard: {
         title: 'ダッシュボード',
@@ -802,6 +851,10 @@ export const translations: Translations  = {
         comments: '댓글',
         add: '추가',
         save: '저장',
+        selectAssignee: '담당자 선택',
+        noComments: '댓글이 없습니다.',
+        deleteComment: '댓글 삭제',
+        confirmDeleteComment: '이 댓글을 삭제하시겠습니까?',
       },
       auth: {
         login: {
@@ -840,6 +893,9 @@ export const translations: Translations  = {
         role: '역할',
         save: '변경사항 저장',
         bio: '소개',
+        twitter: '트위터',
+        facebook: '페이스북',
+        linkedin: '링크드인',
       },
       dashboard: {
         title: '대시보드',

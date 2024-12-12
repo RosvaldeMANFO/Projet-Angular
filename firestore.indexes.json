@@ -1,0 +1,12 @@
+{
+    "indexes": [
+      {
+        "collectionGroup": "comments", 
+        "queryScope": "COLLECTION", 
+        "fields": [
+          { "fieldPath": "taskId", "order": "ASCENDING" },
+          { "fieldPath": "createdAt", "order": "ASCENDING" }
+        ]
+      }
+    ]
+  }

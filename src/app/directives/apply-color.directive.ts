@@ -1,18 +1,25 @@
-import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit, Renderer2, SimpleChanges } from '@angular/core';
 
 @Directive({
   selector: '[appApplyColor]'
 })
-export class ApplyColorDirective implements OnInit {
+export class ApplyColorDirective implements OnInit, OnChanges {
 
-  @Input() appApplyColor!: string;
+  @Input('appApplyColor') color!: string;
 
   constructor(private el: ElementRef, private renderer: Renderer2) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.applyColor();
+  }
 
   ngOnInit() {
-    this.renderer.setStyle(this.el.nativeElement, 'color', this.appApplyColor);
-    this.renderer.setStyle(this.el.nativeElement, 'background-color', this.hexToRgba(this.appApplyColor, 0.2));
-    this.renderer.setStyle(this.el.nativeElement, 'border-color', this.appApplyColor);
+    this.applyColor();
+  }
+
+  applyColor() {
+    this.renderer.setStyle(this.el.nativeElement, 'color', this.color);
+    this.renderer.setStyle(this.el.nativeElement, 'background-color', this.hexToRgba(this.color, 0.2));
+    this.renderer.setStyle(this.el.nativeElement, 'border-color', this.color);
     this.renderer.setStyle(this.el.nativeElement, 'border-width', '1px');
   }
 
