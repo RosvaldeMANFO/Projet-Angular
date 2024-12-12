@@ -44,10 +44,10 @@
             </div>
         </div>
         <mat-form-field appearance="outline">
-            <textarea matInput formControlName="description" [placeholder]="languageService.translate('home.description')" rows="5"></textarea>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-select formControlName="assigneeId">
+            <mat-select formControlName="assigneeId" placeholder="{{ languageService.translate('home.selectAssignee') }}">
+                <mat-option disabled selected value="">
+                    {{ languageService.translate('home.selectAssignee') }}
+                </mat-option>
                 <mat-option *ngFor="let user of users" [value]="user.id">
                     {{ user.nickname }}
                 </mat-option>

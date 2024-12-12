@@ -26,19 +26,21 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     public readonly languageService: LanguageService,
     private router: Router,
-  ) {}
+  ) { }
 
-  async ngOnInit(): Promise<void> {
-    const uidFromRoute = this.route.snapshot.paramMap.get('uid');
-    onAuthStateChanged(this.auth, async (currentUser) => {
-      if (currentUser) {
-        this.currentUserId = currentUser.uid;
-        if (uidFromRoute) {
-          await this.loadUserProfile(uidFromRoute);
-        } else {
-          await this.loadUserProfile(currentUser.uid);
-        }
-        this.loadTasks(this.user.id || this.currentUserId);
+  ngOnInit() {
+    onAuthStateChanged(this.auth, user => {
+      if (user) {
+        this.currentUserId = user.uid;
+      }
+    });
+    this.route.paramMap.subscribe(async params => {
+      this.currentUserId = this.auth.currentUser?.uid || '';
+      const uidFromRoute = params.get('uid');
+      if (uidFromRoute) {
+        console.log(uidFromRoute);
+        await this.loadUserProfile(uidFromRoute);
+        await this.loadTasks(uidFromRoute);
       }
     });
   }
@@ -55,13 +57,19 @@ export class ProfileComponent implements OnInit {
           ? userProfile.createdAt.toDate()
           : undefined,
         role: userProfile.role || 'N/A',
+        twitter: userProfile.twitter || '',
+        facebook: userProfile.facebook || '',
+        linkedin: userProfile.linkedin || '',
         id: uid,
       };
     }
   }
+  
 
-  private loadTasks(userId: string): void {
-    this.tasks = this.taskService.getTaskByUserId(userId);
+  private async loadTasks(userId: string): Promise<void> {
+    this.taskService.getTaskByUserId(userId).subscribe(async tasks => {
+      this.tasks = await tasks;
+    });
   }
 
   isCurrentUserProfile(): boolean {

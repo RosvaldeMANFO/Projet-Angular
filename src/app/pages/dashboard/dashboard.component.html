@@ -1,26 +1,28 @@
-<div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
-  <div class="flex items-center justify-between gap-4">
-    <h1 class="text-3xl font-bold">{{ languageService.translate('dashboard.title') }}</h1>
-    <mat-form-field appearance="outline" class="flex-grow max-w-sm">
-      <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRangeForm">
-        <input 
-          matStartDate 
-          formControlName="startDate"
-          [placeholder]="'Début'"
-        >
-        <input 
-          matEndDate 
-          formControlName="endDate"
-          [placeholder]="'Fin'"
-        >
-      </mat-date-range-input>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-date-range-picker #picker></mat-date-range-picker>
-    </mat-form-field>
+<div class="h-full max-w-8xl mx-auto overflow-y-auto">
+  <div class="mx-auto max-w-screen-xl px-4 2xl:px-0 pt-3 h-full">
+    <div class="flex items-center justify-between gap-4">
+      <h1 class="text-3xl font-bold">{{ languageService.translate('dashboard.title') }}</h1>
+      <mat-form-field appearance="outline" class="flex-grow max-w-sm">
+        <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRangeForm">
+          <input 
+            matStartDate 
+            formControlName="startDate"
+            [placeholder]="'Début'"
+          >
+          <input 
+            matEndDate 
+            formControlName="endDate"
+            [placeholder]="'Fin'"
+          >
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+    <app-overview-stats [nbrUsers]="nbrUsers" [nbrTasks]="nbrTasks" [nbrCategories]="nbrCategories" [nbrComments]="nbrComments"></app-overview-stats>
+    <app-task-stats [tasksByStatus]="tasksByStatus" [tasksByCategory]="tasksByCategory" [period]="dateRangeForm.value"></app-task-stats>
+    <app-comment-stats [period]="dateRangeForm.value" [commentData]="topFiveTasks"></app-comment-stats>
+    <br>
+    <br>
   </div>
-  <app-overview-stats [nbrUsers]="nbrUsers" [nbrTasks]="nbrTasks" [nbrCategories]="nbrCategories" [nbrComments]="nbrComments"></app-overview-stats>
-  <app-task-stats [tasksByStatus]="tasksByStatus" [tasksByCategory]="tasksByCategory" [period]="dateRangeForm.value"></app-task-stats>
-  <app-comment-stats [period]="dateRangeForm.value" [commentData]="topFiveTasks"></app-comment-stats>
-  <br>
-  <br>
 </div>

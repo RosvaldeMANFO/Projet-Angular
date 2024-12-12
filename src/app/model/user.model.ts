@@ -8,4 +8,7 @@ export type User = {
     role?: string;
     createdAt?: Date;
     userRole?: 'admin' | 'user';
+    twitter?: string;
+    facebook?: string;
+    linkedin?: string;
 }

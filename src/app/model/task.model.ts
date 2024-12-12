@@ -1,3 +1,5 @@
+import { Comment } from "./comment.model";
+
 export type Task = {
   id: string;
   reporterName: String;
@@ -8,8 +10,10 @@ export type Task = {
   description: string;
   state: TaskState;
   category: TaskCategory;
+  commentCount?: number;
   startDate: Date;
   endDate: Date;
+  comments?: Comment[];
   createdAt: Date;
 };
 

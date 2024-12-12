@@ -3,12 +3,17 @@ import { Injectable } from '@angular/core';
 import { Firestore, doc, getDoc, setDoc, collection, getDocs, updateDoc } from '@angular/fire/firestore';
 import { Auth, user } from '@angular/fire/auth';
 import { User } from '../model/user.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private firestore: Firestore, private auth: Auth) {}
+  constructor(
+    private readonly snackBar: MatSnackBar,
+    private firestore: Firestore, 
+    private auth: Auth
+  ) {}
 
   async createOrUpdateUserProfile(uid: string, data: Partial<User>): Promise<void> {
     const userRef = doc(this.firestore, `users/${uid}`);
@@ -22,6 +27,9 @@ export class UserService {
         updatedAt: new Date(),
       };
       await setDoc(userRef, updatedData);
+      this.snackBar.open('Profile updated successfully!', 'Close', {
+        duration: 2000,
+      });
     } else {
       const newData = {
         ...data,
