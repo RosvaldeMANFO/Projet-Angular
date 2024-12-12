@@ -26,6 +26,7 @@ export const translations: Translations  = {
         add: 'Add',
         save: 'Save',
         selectAssignee: 'Select Assignee',
+        noComments: 'No comments available.',
       },
       auth: {
         login: {
@@ -141,6 +142,7 @@ export const translations: Translations  = {
         add: 'Ajouter',
         save: 'Enregistrer',
         selectAssignee: 'Sélectionner un assigné',
+        noComments: 'Aucun commentaire disponible.',
       },
       auth: {
         login: {
@@ -256,6 +258,7 @@ export const translations: Translations  = {
         add: 'Añadir',
         save: 'Guardar',
         selectAssignee: 'Seleccionar asignado',
+        noComments: 'No hay comentarios disponibles.',
       },
       auth: {
         login: {
@@ -371,6 +374,7 @@ export const translations: Translations  = {
         add: 'Adicionar',
         save: 'Salvar',
         selectAssignee: 'Selecionar Responsável',
+        noComments: 'Nenhum comentário disponível.',
       },
       auth: {
         login: {
@@ -486,6 +490,7 @@ export const translations: Translations  = {
         add: 'Hinzufügen',
         save: 'Speichern',
         selectAssignee: 'Zuständigen auswählen',
+        noComments: 'Keine Kommentare verfügbar.',
       },
       auth: {
         login: {
@@ -601,6 +606,7 @@ export const translations: Translations  = {
         add: 'Добавить',
         save: 'Сохранить',
         selectAssignee: 'Выбрать исполнителя',
+        noComments: 'Нет доступных комментариев.',
       },
       auth: {
         login: {
@@ -716,6 +722,7 @@ export const translations: Translations  = {
         add: '追加',
         save: '保存',
         selectAssignee: '担当者を選択',
+        noComments: '利用可能なコメントはありません。',
       },
       auth: {
         login: {
@@ -831,6 +838,7 @@ export const translations: Translations  = {
         add: '추가',
         save: '저장',
         selectAssignee: '담당자 선택',
+        noComments: '댓글이 없습니다.',
       },
       auth: {
         login: {

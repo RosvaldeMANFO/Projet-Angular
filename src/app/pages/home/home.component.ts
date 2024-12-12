@@ -10,48 +10,66 @@ import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/model/user.model';
 import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 import { LanguageService } from 'src/app/services/language.service';
+import { firstValueFrom, take } from "rxjs";
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
 })
 export class HomeComponent implements OnInit {
+  categories!: TaskCategory[];
+  currentUser!: User;
+  openDrawer!: boolean;
+  newComment!: string;
+  selectedTask?: Task;
+  users!: User[];
+  fakeTasks!: Task[];
+  selectedTaskComments!: Comment[];
+
   constructor(
     private readonly dialog: MatDialog,
     private readonly categoryService: CategoryService,
     private readonly taskService: TaskService,
     private readonly userService: UserService,
     private auth: Auth,
-    public readonly languageService: LanguageService,
-  ) { }
+    public readonly languageService: LanguageService
+  ) {}
 
   ngOnInit(): void {
-    this.categoryService.categories.subscribe(categories => {
+    this.newComment = "";
+    this.openDrawer = false;
+    this.selectedTaskComments = [];
+
+    this.categoryService.categories.subscribe((categories) => {
       this.categories = categories;
     });
-    this.taskService.task.subscribe(tasks => {
+    this.taskService.task.subscribe((tasks) => {
       this.fakeTasks = tasks;
+      tasks.forEach(async (task) => {
+        await firstValueFrom(
+          this.taskService
+            .countTaskComments(task.id)
+            .pipe(take(1))
+        ).then((comments) => {
+          task.commentCount = comments;
+        });
+      });
     });
-    this.userService.getUsers().then(users => {
+    this.userService.getUsers().then((users) => {
       this.users = users;
     });
-    this.userService.getUserProfile(this.auth.currentUser?.uid ?? '').then(user => {
-      this.currentUser = user ?? this.currentUser;
-    });
+    this.userService
+      .getUserProfile(this.auth.currentUser?.uid ?? "")
+      .then((user) => {
+        this.currentUser = user ?? this.currentUser;
+      });
   }
-
-  categories: TaskCategory[] = [];
-  currentUser = { id: "1", name: "John Doe" };
-  openDrawer = false;
-  newComment = "";
-  selectedTask?: Task;
-  selectedTaskComments: Comment[] = [];
-
-  fakeTasks: Task[] = [];
-  users: User[] = [];
 
   selectTask = (task: Task) => {
     this.selectedTask = task;
+    if (this.selectedTask) {
+      this.getTaskComments();
+    }
   };
 
   closeDrawer = () => {
@@ -60,7 +78,7 @@ export class HomeComponent implements OnInit {
 
   openDialog = (task: Task | undefined) => {
     const dialogRef = this.dialog.open(EditTaskDialogComponent, {
-      width: '500px',
+      width: "500px",
       data: {
         task: task,
         users: this.users,
@@ -91,13 +109,13 @@ export class HomeComponent implements OnInit {
   deleteTask = (task: Task | undefined) => {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
-        title: this.languageService.translate('home.deleteTask'),
-        message: this.languageService.translate('home.confirmDelete'),
+        title: this.languageService.translate("home.deleteTask"),
+        message: this.languageService.translate("home.confirmDelete"),
       },
     });
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
-        this.taskService.deleteTask(task?.id ?? '');
+        this.taskService.deleteTask(task?.id ?? "");
       }
     });
   };
@@ -106,7 +124,39 @@ export class HomeComponent implements OnInit {
     this.openDialog(task);
   };
 
+  getTaskComments = async () => {
+    if (this.selectedTask) {
+       await firstValueFrom(
+        this.taskService
+          .getComments(this.selectedTask.id, this.users)
+          .pipe(take(1))
+      ).then((comments) => {
+        this.selectedTaskComments = comments;
+      });
+    }
+  };
+
   addComment = () => {
-    this.newComment = "";
+    try {
+      if (this.selectedTask && this.newComment) {
+        const newComment = {
+          authorId: this.currentUser.id,
+          authorName: this.currentUser.nickname,
+          content: this.newComment,
+          createdAt: new Date(),
+          taskId: this.selectedTask?.id ?? "",
+        };
+        this.selectedTaskComments = [
+          ...this.selectedTaskComments,
+          newComment as Comment,
+        ];
+        console.log(newComment, this.selectedTaskComments);
+        console.log(this.currentUser);
+        this.taskService.addComment(newComment as Comment);
+        this.newComment = "";
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 }

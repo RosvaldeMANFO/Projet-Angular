@@ -1,14 +1,44 @@
-import { Injectable } from '@angular/core';
-import { getStateColor, Period, Task, TasksByKey, TaskState } from '../model/task.model';
-import { BehaviorSubject, map, Observable, Subscription } from 'rxjs';
-import { Firestore, collection, collectionData, addDoc, orderBy, query, doc, setDoc, writeBatch, getDocs, deleteDoc } from '@angular/fire/firestore';
-import { CategoryService } from './category.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserService } from './user.service';
-import { User } from '../model/user.model';
-import { fakeTasks2 } from '../model/fake-data';
-import { DocumentData, where } from 'firebase/firestore';
-
+import { Inject, Injectable } from "@angular/core";
+import {
+  getStateColor,
+  Period,
+  Task,
+  TasksByKey,
+  TaskState,
+} from "../model/task.model";
+import {
+  BehaviorSubject,
+  firstValueFrom,
+  lastValueFrom,
+  map,
+  Observable,
+  OperatorFunction,
+  Subscription,
+  take,
+  tap,
+  toArray,
+} from "rxjs";
+import {
+  Firestore,
+  collection,
+  collectionData,
+  addDoc,
+  orderBy,
+  query,
+  doc,
+  setDoc,
+  writeBatch,
+  getDocs,
+  deleteDoc,
+} from "@angular/fire/firestore";
+import { CategoryService } from "./category.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { UserService } from "./user.service";
+import { User } from "../model/user.model";
+import { fakeTasks2 } from "../model/fake-data";
+import { Comment } from "../model/comment.model";
+import { DocumentData, where } from "firebase/firestore";
+import { Auth } from "@angular/fire/auth";
 
 @Injectable({
   providedIn: "root",
@@ -23,17 +53,26 @@ export class TaskService {
     private readonly snackBar: MatSnackBar,
     private readonly firestore: Firestore,
     private readonly categoryService: CategoryService,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    @Inject(Auth) private readonly auth: Auth
   ) {
     this.getTasks();
   }
 
   
   private async taskMapper(tasks: DocumentData[]): Promise<Task[]> {
+
     const users = await this.userService.getUsers();
+    
     return tasks.map<Task>((task) => {
       const category = this.categoryService.categories.value
         .find(category => category.id === task['categoryId']);
+        // let comments: Comment[] = [];
+    // this.getComments(task["id"], users)
+    //   .pipe(take(1))
+    //   .subscribe((receivedComments) => {
+    //     comments = receivedComments;
+    //   });
       return {
         id: task['id'],
         title: task['title'],
@@ -43,6 +82,7 @@ export class TaskService {
         assigneeName: users.find(user => user.id === task['assigneeId'])?.nickname,
         description: task['description'],
         state: task['state'] as TaskState,
+        // comments: comments,
         category: category!!,
         startDate: task['startDate'].toDate(),
         endDate: task['endDate'].toDate(),
@@ -65,32 +105,39 @@ export class TaskService {
     });
   }
 
-  async getComents(taskId: string): Promise<Comment[]> {
-    const currentComments: Comment[] = [];
+   getComments(taskId: string, users: User[]): Observable<Comment[]> {
     const commentsCollection = collection(this.firestore, "comments");
     const commentsQuery = query(
       commentsCollection,
       where("taskId", "==", taskId),
       orderBy("createdAt")
     );
-    collectionData(commentsQuery, { idField: "id" }).subscribe((comments) => {
-      const mappedComments = comments.map<Comment>((comment) => {
-        const author = this.users.find(
-          (user) => user.id === comment["authorId"]
-        );
-        return {
-          id: comment["id"],
-          taskId: taskId,
-          authorId: comment["authorId"],
-          authorName: author?.nickname ?? "",
-          content: comment["content"],
-          createdAt: comment["createdAt"].toDate(),
-        };
-      });
-      currentComments.push(...mappedComments);
-    });
 
-    return currentComments;
+    return collectionData(commentsQuery, { idField: "id" }).pipe(
+      map((comments) => {
+        return comments.map((comment) => {
+          const author = users.find(
+            (user) => user.id === comment["authorId"]
+          );
+          return {
+            id: comment["id"],
+            taskId: taskId,
+            authorId: comment["authorId"],
+            authorName: author?.nickname ?? "",
+            content: comment["content"],
+            createdAt: comment["createdAt"].toDate(),
+          };
+        });
+      })
+    );
+  }
+
+  countTaskComments(taskId: string): Observable<number> {
+    const commentsCollection = collection(this.firestore, "comments");
+    const commentsQuery = query(commentsCollection, where("taskId", "==", taskId));
+    return collectionData(commentsQuery, { idField: "id" }).pipe(
+      map((comments) => comments.length)
+    );
   }
 
   setTask(task: Task) {
@@ -200,6 +247,35 @@ export class TaskService {
       map(tasks => this.taskMapper(tasks))
     );
   }
+  async addComment(comment: Comment) {
+    const commentsCollection = collection(this.firestore, "comments");
+
+    try {
+      await addDoc(commentsCollection, {
+        taskId: comment.taskId,
+        authorId: this.auth.currentUser?.uid,
+        content: comment.content,
+        createdAt: comment.createdAt,
+      });
+      this.snackBar.open("Comment added successfully", "Close", {
+        duration: 2000,
+      });
+    } catch (error) {
+      this.snackBar.open("Error adding comment", "Close", {
+        duration: 2000,
+      });
+      console.error("Error adding comment:", error);
+    }
+  }
+
+  async deleteComment(commentId: string) {
+    const commentRef = doc(this.firestore, "comments", commentId);
+    await deleteDoc(commentRef);
+    this.snackBar.open("Comment deleted successfully", "Close", {
+      duration: 2000,
+    });
+  }
+
 
   countTasksByStatusAndDate(period?: Period): TasksByKey {
     return this.cachedTask.reduce((acc: TasksByKey, task) => {

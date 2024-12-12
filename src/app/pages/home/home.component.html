@@ -57,24 +57,33 @@
                 this.languageService.translate('home.add') }}</button>
         </div>
         <div class="max-h-96 overflow-y-auto">
-            <div *ngFor="let comment of selectedTaskComments">
-                <div class="flex flex-col items-start gap-3 text-md">
-                    <p class="flex gap-3 items-center">
-                        <a [routerLink]="['/profile', comment.authorId]" class="text-primary-500 hover:underline">
-                            <span
-                                class="w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center text-white">
+            <div *ngIf="selectedTaskComments.length > 0">
+                <div *ngFor="let comment of selectedTaskComments.reverse()">
+                    <div class="flex flex-col items-start gap-3 text-md bg-gray-100 p-2 rounded-md mb-1">
+                        <div class="flex items-start gap-3 text-md">
+                            <a [routerLink]="['/profile', comment.authorId]" class="text-primary-500 hover:underline flex items-center gap-2">
+                              <span
+                                *ngIf="comment.authorName.length > 0"
+                                class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center text-white">
                                 {{ (comment.authorName).charAt(0) }}
+                              </span>
+                              <span *ngIf="comment.authorName.length === 0" class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center text-white">
+                                {{ "U" }}
+                              </span>
+                              <span>{{ comment.authorName }}</span>
+                            </a>
+                        </div>
+                        <p class="flex flex-col gap-1 w-full">
+                            {{ comment.content }}
+                            <span class="text-end text-gray-500 text-sm w-full">
+                                {{ comment.createdAt | date: 'mediumDate' }}
                             </span>
-                            {{ comment.authorName }}
-                        </a>
-                    </p>
-                    <p class="flex flex-col gap-3 w-full">
-                        {{ comment.content }}
-                        <span class="text-end text-gray-500 text-sm w-full">
-                            {{ comment.createdAt | date: 'mediumDate' }}
-                        </span>
-                    </p>
+                        </p>
+                    </div>
                 </div>
+            </div>
+            <div *ngIf="selectedTaskComments.length === 0" class="text-center my-12 text-gray-500">
+                {{ this.languageService.translate('home.noComments') }}
             </div>
         </div>
     </div>
