@@ -9,7 +9,6 @@ import {
   collectionData,
   orderBy,
   query,
-  where,
 } from "@angular/fire/firestore";
 import { BehaviorSubject } from "rxjs";
 @Injectable({
@@ -50,6 +49,13 @@ export class CategoryService {
           color: category["color"],
         };
       });
+      if (mappedCategories.length === 0 || mappedCategories.length !== fakeTaskCategories.length) {
+        const missingCategories = fakeTaskCategories.filter(fakeCategory => !mappedCategories.some(category => category.name === fakeCategory.name));
+        missingCategories.forEach(async (category: TaskCategory) => {
+          await this.addCategory(category);
+        });
+        this.getCategories()
+      }
       this.categories.next(mappedCategories);
     });
   }
