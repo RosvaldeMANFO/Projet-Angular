@@ -1,6 +1,7 @@
 <div mat-dialog-title>
     <div class="flex w-full justify-between items-center">
-        <h2 class="font-bold">{{taskID ? languageService.translate('home.edit'):languageService.translate('home.create')}}</h2>
+        <h2 class="font-bold">{{taskID ?
+            languageService.translate('home.edit'):languageService.translate('home.create')}}</h2>
         <button mat-dialog-close mat-icon-button>
             <mat-icon class="text-gray-500">close</mat-icon>
         </button>
@@ -9,9 +10,7 @@
 
 <mat-dialog-content>
     <form [formGroup]="form" class="flex flex-col gap-3 w-full">
-        <mat-form-field appearance="outline">
-            <input matInput formControlName="title" [placeholder]="languageService.translate('home.taskTitle')">
-        </mat-form-field>
+
         <div class="w-full flex flex-col justify-between items-start mb-3 gap-3">
             <p class="flex items-center gap-2">
                 <span
@@ -44,7 +43,16 @@
             </div>
         </div>
         <mat-form-field appearance="outline">
-            <mat-select formControlName="assigneeId" placeholder="{{ languageService.translate('home.selectAssignee') }}">
+            <input matInput formControlName="title" [placeholder]="languageService.translate('home.taskTitle')">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <textarea formControlName="description" name="bio" matInput
+                [placeholder]="languageService.translate('home.description')" rows="5"></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="assigneeId"
+                placeholder="{{ languageService.translate('home.selectAssignee') }}">
                 <mat-option disabled selected value="">
                     {{ languageService.translate('home.selectAssignee') }}
                 </mat-option>
@@ -66,5 +74,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
-    <button class="w-[75%]" mat-raised-button [disabled]="!form.valid" color="primary" [mat-dialog-close]="form.value">{{ this.languageService.translate('home.save') }}</button>
+    <button class="w-[75%]" mat-raised-button [disabled]="!form.valid" color="primary"
+        [mat-dialog-close]="form.value">{{ this.languageService.translate('home.save') }}</button>
 </mat-dialog-actions>

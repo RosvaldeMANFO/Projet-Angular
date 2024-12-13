@@ -29,7 +29,7 @@ import { CategoryService } from "./category.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { UserService } from "./user.service";
 import { User } from "../model/user.model";
-import { fakeTasks2 } from "../model/fake-data";
+import { fakeTasks2, fakeComments2 } from "../model/fake-data";
 import { Comment } from "../model/comment.model";
 import { DocumentData, where } from "firebase/firestore";
 import { Auth } from "@angular/fire/auth";
@@ -42,6 +42,8 @@ export class TaskService {
   taskListSubscription?: Subscription;
   cachedTask: Task[] = [];
   currentState = 'ALL';
+  commentsSubject = new BehaviorSubject<any[]>([]);
+  comments$ = this.commentsSubject.asObservable();
 
   constructor(
     private readonly snackBar: MatSnackBar,
@@ -118,6 +120,14 @@ export class TaskService {
     );
   }
 
+  loadComments(): void {
+    const commentsCollection = collection(this.firestore, "comments");
+    const queryObservable = collectionData(commentsCollection, { idField: "id" });
+
+    queryObservable.subscribe((comments) => {
+      this.commentsSubject.next(comments);
+    });
+  }
   countTaskComments(taskId: string): Observable<number> {
     const commentsCollection = collection(this.firestore, "comments");
     const commentsQuery = query(commentsCollection, where("taskId", "==", taskId));
@@ -156,6 +166,7 @@ export class TaskService {
   }
 
   async deleteTask(taskId: string) {
+    await this.deleteAllComments(taskId);
     const taskRef = doc(this.firestore, "tasks", taskId);
     await deleteDoc(taskRef);
     this.getTasks();
@@ -193,37 +204,58 @@ export class TaskService {
       );
     }
   }
-
   async addMockTasks() {
     const taskCollection = collection(this.firestore, "tasks");
     const categories = this.categoryService.categories.value;
     const users = await this.userService.getUsers();
-
+  
     const fakeTasks = fakeTasks2.map((task) => {
       const category = categories.find(
         (category) => category.name === task.categoryName
       );
       const assignee = users[Math.floor(Math.random() * users.length)];
-
+  
       return {
         ...task,
         categoryId: category?.id,
         assigneeId: assignee?.id,
       };
     });
-
+  
     const batch = writeBatch(this.firestore);
+  
     fakeTasks.forEach((task) => {
-      const docRef = doc(taskCollection);
+      const docRef = doc(taskCollection, task.id);
       batch.set(docRef, task);
     });
-
+  
     await batch.commit();
-
+    await this.mockComments();
+  
     this.snackBar.open("Mock tasks added successfully", "Close", {
       duration: 2000,
     });
   }
+  
+  async mockComments() {
+    const commentsCollection = collection(this.firestore, "comments");
+    const batch = writeBatch(this.firestore);
+  
+    fakeComments2.forEach((comment) => {
+  
+      const docRef = doc(commentsCollection);
+      batch.set(docRef, {
+        taskId: comment.taskId,
+        authorId: comment.authorId,
+        content: comment.content,
+        createdAt: new Date(),
+      });
+   
+    });
+  
+    await batch.commit();
+  }
+  
 
   getTaskByUserId(userId: string): Observable<Promise<Task[]>> {
     const tasksCollection = collection(this.firestore, 'tasks');
@@ -254,14 +286,28 @@ export class TaskService {
     }
   }
 
-  async deleteComment(commentId: string) {
-    const commentRef = doc(this.firestore, "comments", commentId);
-    await deleteDoc(commentRef);
-    this.snackBar.open("Comment deleted successfully", "Close", {
-      duration: 2000,
-    });
-  }
+  async deleteComment(commentId: string): Promise<void> {
+    try {
+      const commentRef = doc(this.firestore, "comments", commentId);
+      await deleteDoc(commentRef);
 
+      const updatedComments = this.commentsSubject
+      .getValue()
+      .filter((comment) => comment.id !== commentId);
+
+      this.commentsSubject.next(updatedComments);
+      
+      this.snackBar.open("Comment deleted successfully", "Close", {
+      duration: 2000,
+      });
+
+    } catch (error) {
+      this.snackBar.open("Error deleting comment", "Close", {
+      duration: 2000,
+      });
+      console.error("Error deleting comment:", error);
+    }
+  }
 
   countTasksByStatusAndDate(period?: Period): TasksByKey {
     return this.cachedTask.reduce((acc: TasksByKey, task) => {
@@ -330,14 +376,15 @@ export class TaskService {
     try {
       const tasksCollection = collection(this.firestore, "tasks");
       const querySnapshot = await getDocs(tasksCollection);
-
       const batch = writeBatch(this.firestore);
-      querySnapshot.forEach((docSnapshot) => {
-        batch.delete(doc(this.firestore, `tasks/${docSnapshot.id}`));
-      });
+  
+      for (const docSnapshot of querySnapshot.docs) {
+        const taskId = docSnapshot.id;
+        await this.deleteAllComments(taskId);
+        batch.delete(doc(this.firestore, `tasks/${taskId}`));
+      }
 
       await batch.commit();
-
       this.snackBar.open("All tasks deleted successfully", "Close", {
         duration: 2000,
       });
@@ -349,4 +396,27 @@ export class TaskService {
       console.error("Error deleting tasks:", error);
     }
   }
+  
+  async deleteAllComments(taskId: string) {
+    try {
+      const commentsCollection = collection(this.firestore, "comments");
+      const querySnapshot = await getDocs(commentsCollection);
+  
+      const batch = writeBatch(this.firestore);
+  
+      querySnapshot.forEach((docSnapshot) => {
+        const commentData = docSnapshot.data();
+        if (commentData['taskId'] === taskId) {
+          batch.delete(doc(this.firestore, `comments/${docSnapshot.id}`));
+        }
+      });
+  
+      await batch.commit();
+  
+      console.log(`All comments for task ${taskId} deleted successfully`);
+    } catch (error) {
+      console.error(`Error deleting comments for task ${taskId}:`, error);
+    }
+  }
+  
 }

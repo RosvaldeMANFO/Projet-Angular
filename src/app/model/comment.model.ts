@@ -5,4 +5,5 @@ export type Comment = {
     authorName: string;
     content: string;
     createdAt: Date;
+    taskName?: string;
 };

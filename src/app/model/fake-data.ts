@@ -3,66 +3,80 @@ import { User } from "./user.model";
 
 export const fakeUsers: User[] = [
   {
-    id: "U001",
-    name: "Alice Johnson",
-    password: "password123",
-    email: "alice.johnson@example.com",
+      "id": "0RY0r4XrlubHaBV0PTFo6FDXrKI2",
+      "role": "Product Manager | UX Advocate",
+      "userRole": "user",
+      "bio": "Experienced product manager with a strong focus on user experience and delivering products that customers love. Passionate about driving business growth through innovation.",
+      "email": "sarahsmith@example.com",
+      "nickname": "Sarah Smith"
   },
   {
-    id: "U002",
-    name: "Bob Smith",
-    password: "securePass456",
-    email: "bob.smith@example.com",
+      "id": "8O9neIbuUZUHVGn882tpwjYaI7w1",
+      "nickname": "James Wilson",
+      "bio": "Expert in cloud infrastructure and backend development. Passionate about creating robust and scalable APIs and services using cloud platforms like AWS and Google Cloud.",
+      "email": "jamesw@example.com",
+      "role": "Backend Developer | Cloud Computing Enthusiast",
   },
   {
-    id: "U003",
-    name: "Charlie Taylor",
-    password: "charlie789",
-    email: "charlie.taylor@example.com",
+      "id": "OBSXIzSP1lONHK8a9DApje0cmaX2",
+      "email": "michaelb@example.com",
+      "role": "Quality Assurance Engineer | Detail-Oriented",
+      "bio": "Focused on delivering bug-free software by meticulously testing every feature. Passionate about finding issues before they reach the user. Always striving for perfection in every release.",
+      "nickname": "Michael Brown",
+      "userRole": "user"
   },
   {
-    id: "U004",
-    name: "Diana Green",
-    password: "diana2024",
-    email: "diana.green@example.com",
+      "id": "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2",
+      "email": "olivialee@example.com",
+      "bio": "Specializing in test automation to streamline software quality assurance processes. Constantly seeking ways to improve test coverage, efficiency, and the overall testing strategy.",
+      "nickname": "Olivia Lee",
+      "userRole": "user",
+      "role": "Test Automation Engineer | Continuous Improvement"
   },
   {
-    id: "U005",
-    name: "Emma Davis",
-    password: "emma@321",
-    email: "emma.davis@example.com",
+      "id": "VLcytYIROvSQxSh1lkCoVtHuF143",
+      "nickname": "John Doe",
+      "userRole": "user",
+      "bio": "Passionate about building scalable web applications. Skilled in Angular, React, Node.js, and Python. Always exploring new technologies and optimizing user experiences.",
+      "email": "johndoe@example.com",
+      "role": "Full-Stack Developer | Tech Enthusiast",
   },
   {
-    id: "U006",
-    name: "Frank Wilson",
-    password: "frank!999",
-    email: "frank.wilson@example.com",
+      "id": "errWpgAOsKaQoUp0OfmfwlygUS92",
+      "email": "emmawhite@example.com",
+      "role": "UI/UX Designer | Creative Thinker",
+      "nickname": "Emma White",
+      "bio": "Designing user-centric interfaces and seamless experiences. I combine creativity with research to make products both beautiful and functional. Always striving to bring the user’s vision to life.",
+      "userRole": "user"
   },
   {
-    id: "U007",
-    name: "Grace White",
-    password: "grace#abc",
-    email: "grace.white@example.com",
+      "id": "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
+      "email": "test2@test.com",
+      "linkedin": "https://test2.linkedin.com",
+      "facebook": "https://test2.facebook.com",
+      "userRole": "admin",
+      "nickname": "Testor",
+      "twitter": "https://test2.twitter.com",
+      "role": "Testeur | Quality Assurance Specialist | Bug Hunter Extraordinaire",
+      "bio": "Passionate about ensuring software quality, I specialize in identifying bugs, improving user experiences, and making sure every feature works as intended. "
   },
   {
-    id: "U008",
-    name: "Henry Moore",
-    password: "henry2000",
-    email: "henry.moore@example.com",
+      "id": "jBKn4PXLKESC1ktcYPV6Y0FkD7u1",
+      "userRole": "admin",
+      "nickname": "Testo",
+      "role": "Testeur | Quality Assurance Specialist | Bug Hunter Extraordinaire",
+      "email": "test@test.com",
+      "bio": "Passionate about ensuring software quality, I specialize in identifying bugs, improving user experiences, and making sure every feature works as intended. With a keen eye for detail and a strong understanding of testing methodologies, I work to ensure that applications are reliable, functional, and user-friendly. Whether manual or automated, I thrive on the challenge of finding issues before they reach users, helping teams deliver flawless products."
   },
   {
-    id: "U009",
-    name: "Ivy Brown",
-    password: "ivy-secure",
-    email: "ivy.brown@example.com",
-  },
-  {
-    id: "U010",
-    name: "Jack Clark",
-    password: "jack@777",
-    email: "jack.clark@example.com",
-  },
-];
+      "id": "mV2KtjaaXjTvdQL0Hwqrg7byU623",
+      "email": "danielc@example.com",
+      "nickname": "Daniel Clark",
+      "bio": "Passionate about creating dynamic, interactive web applications using JavaScript and modern frameworks like Angular, React, and Vue.js. Always learning and experimenting with new web technologies.",
+      "userRole": "user",
+      "role": "Frontend Developer | JavaScript Pro"
+  }
+]
 
 export const fakeTaskCategories: TaskCategory[] = [
   { name: "Bug", color: "#E57373" },
@@ -79,6 +93,7 @@ export const fakeTaskCategories: TaskCategory[] = [
 
 export const fakeTasks2 = [
     {
+      id: "5LzYk2TmhObthua2rQ9c",
       assigneeId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", 
       categoryName: "Bug",
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2", 
@@ -91,6 +106,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-01T07:45:00Z')
     },
     {
+      id: "6rPkcDSIfy7WzQ7xXbK1",
       assigneeId: "8O9neIbuUZUHVGn882tpwjYaI7w1", 
       categoryName: "Deployment",
       reporterId: "VLcytYIROvSQxSh1lkCoVtHuF143", 
@@ -103,6 +119,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-02T08:30:00Z')
     },
     {
+      id: "9v17mV6jf4aARAR7lbza",
       assigneeId: "OBSXIzSP1lONHK8a9DApje0cmaX2", 
       categoryName: "Design",
       reporterId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", 
@@ -115,6 +132,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-03T09:50:00Z')
     },
     {
+      id: "AHgLLOGQySZGlKe7JUX6",
       assigneeId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", 
       categoryName: "Documentation",
       reporterId: "errWpgAOsKaQoUp0OfmfwlygUS92", 
@@ -127,6 +145,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-04T08:00:00Z')
     },
     {
+      id: "EuzUypPgigy5vE9JqbNj",
       assigneeId: "VLcytYIROvSQxSh1lkCoVtHuF143", 
       categoryName: "Feature",
       reporterId: "jBKn4PXLKESC1ktcYPV6Y0FkD7u1", 
@@ -139,6 +158,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-05T09:45:00Z')
     },
     {
+      id: "FQcbdNOKYWGjwIIOx9tp",
       assigneeId: "errWpgAOsKaQoUp0OfmfwlygUS92", 
       categoryName: "Improvement", 
       reporterId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", 
@@ -151,6 +171,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-06T08:45:00Z')
     },
     {
+      id: "IOXYle4ZubYhWy2xuSLH",
       assigneeId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2", 
       categoryName: "Maintenance", 
       reporterId: "8O9neIbuUZUHVGn882tpwjYaI7w1", 
@@ -163,6 +184,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-07T10:45:00Z')
     },
     {
+      id: "MNnqClrVzBW4Nxk9Tvzh",
       assigneeId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", 
       categoryName: "Research", 
       reporterId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", 
@@ -175,6 +197,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-08T12:30:00Z')
     },
     {
+      id: "PuWrpuLQdmpxNHhMBx26",
       assigneeId: "8O9neIbuUZUHVGn882tpwjYaI7w1", 
       categoryName: "Support", 
       reporterId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", 
@@ -187,6 +210,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-09T08:45:00Z')
     },
     {
+      id: "RDmZBbajd5ColFdiioVr",
       assigneeId: "8O9neIbuUZUHVGn882tpwjYaI7w1",
       categoryName: "Bug", 
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
@@ -199,6 +223,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-03T14:00:00Z')
     },
     {
+      id: "RtIV4ngHqFFNsp247xsF",
       assigneeId: "errWpgAOsKaQoUp0OfmfwlygUS92",
       categoryName: "Design", 
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
@@ -211,6 +236,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-06T12:00:00Z')
     },
     {
+      id: "TRZSbaAs0lxnoMFOyE1O",
       assigneeId: "VLcytYIROvSQxSh1lkCoVtHuF143",
       categoryName: "Documentation", 
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
@@ -223,6 +249,7 @@ export const fakeTasks2 = [
       createdAt: new Date('2024-12-09T10:00:00Z')
     },
     {
+      id: "YNTfjSpGs0seBYvIil0b",
       assigneeId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2",
       categoryName: "Maintenance", 
       reporterId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2",
@@ -236,202 +263,55 @@ export const fakeTasks2 = [
     }
   ];
 
-// export const fakeTasks: Task[] = [
-//   {
-//     id: "1",
-//     reporterName: "Alice Johnson",
-//     reporterId: "U001",
-//     assigneeId: "U002",
-//     assigneeName: "Bob Smith",
-//     title: "Fix login bug",
-//     description:
-//       "Resolve the issue causing login failures for users with special characters in passwords.",
-//     state: TaskState.DOING,
-//     category: fakeTaskCategories[0], // BUG
-//     startDate: new Date("2024-11-20"),
-//     endDate: new Date("2024-11-30"),
-//     createdAt: new Date("2024-11-15"),
-//   },
-//   {
-//     id: "2",
-//     reporterName: "Charlie Taylor",
-//     reporterId: "U003",
-//     assigneeId: "U004",
-//     assigneeName: "Diana Green",
-//     title: "Implement dark mode",
-//     description: "Add support for a dark theme throughout the application.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[1], // FEATURE
-//     startDate: new Date("2024-11-25"),
-//     endDate: new Date("2024-12-10"),
-//     createdAt: new Date("2024-11-20"),
-//   },
-//   {
-//     id: "3",
-//     reporterName: "Emma Davis",
-//     reporterId: "U003",
-//     assigneeId: "U004",
-//     assigneeName: "Diana Green",
-//     title: "Optimize database queries",
-//     description: "Refactor and optimize slow-performing SQL queries.",
-//     state: TaskState.DONE,
-//     category: fakeTaskCategories[2], // IMPROVEMENT
-//     startDate: new Date("2024-10-15"),
-//     endDate: new Date("2024-10-30"),
-//     createdAt: new Date("2024-10-10"),
-//   },
-//   {
-//     id: "4",
-//     reporterName: "Frank Wilson",
-//     reporterId: "U006",
-//     assigneeId: "U007",
-//     assigneeName: "Grace White",
-//     title: "Add password reset functionality",
-//     description:
-//       "Enable users to reset their passwords via email verification.",
-//     state: TaskState.CANCELLED,
-//     category: fakeTaskCategories[3], // FEATURE
-//     startDate: new Date("2024-09-10"),
-//     endDate: new Date("2024-09-20"),
-//     createdAt: new Date("2024-09-05"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[2], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-//   {
-//     id: "5",
-//     reporterName: "Hannah Lee",
-//     reporterId: "U001",
-//     assigneeId: "U009",
-//     assigneeName: "Ivy Brown",
-//     title: "Fix notification bug",
-//     description:
-//       "Resolve issues where push notifications are sent multiple times.",
-//     state: TaskState.TODO,
-//     category: fakeTaskCategories[4], // BUG
-//     startDate: new Date("2024-12-01"),
-//     endDate: new Date("2024-12-15"),
-//     createdAt: new Date("2024-12-01"),
-//   },
-// ];
-
+  export const fakeComments2 = [
+    { taskId: "5LzYk2TmhObthua2rQ9c", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "Great progress on this task!" },
+    { taskId: "5LzYk2TmhObthua2rQ9c", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "Have you considered adding two-factor authentication?" },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "Deployment went smoothly. Excellent work!" },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", content: "Let's monitor the logs for any errors post-deployment." },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", content: "The release notes are detailed. Great job!" },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "Have we checked the roll-back plan just in case?" },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "I noticed a minor issue in staging. Will fix it ASAP." },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "Do we have any logs for performance metrics?" },
+    { taskId: "6rPkcDSIfy7WzQ7xXbK1", authorId: "VLcytYIROvSQxSh1lkCoVtHuF143", content: "Fantastic coordination during deployment!" },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "iXrykZX7Q9dAusSUTCJYUoBKfBY2", content: "Ensure all new endpoints are covered comprehensively." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "VLcytYIROvSQxSh1lkCoVtHuF143", content: "Can we add more examples for the complex APIs?" },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "Great details on endpoint descriptions!" },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "We should include common use cases too." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "Let's add error response codes to the documentation." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "Fantastic work. Documentation looks very clear." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", content: "Could we include a changelog for this version?" },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", content: "I spotted a typo in the authentication section." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "I've pushed edits for the query examples." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "Can we format the examples in a consistent style?" },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "The updated flowchart is a helpful addition." },
+    { taskId: "AHgLLOGQySZGlKe7JUX6", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "Double-checked and all endpoints are listed. Great job!" },
+    { taskId: "EuzUypPgigy5vE9JqbNj", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "The search function is very intuitive. Great job!" },
+    { taskId: "FQcbdNOKYWGjwIIOx9tp", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "Responsive design is spot on! Well done." },
+    { taskId: "FQcbdNOKYWGjwIIOx9tp", authorId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", content: "Could we test this on more devices?" },
+    { taskId: "FQcbdNOKYWGjwIIOx9tp", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "Looks great on most devices but breaks on iPhone SE." },
+    { taskId: "FQcbdNOKYWGjwIIOx9tp", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "Have you tried testing with lower network speeds?" },
+    { taskId: "IOXYle4ZubYhWy2xuSLH", authorId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", content: "Identified a query that's slowing down the page load." },
+    { taskId: "IOXYle4ZubYhWy2xuSLH", authorId: "VLcytYIROvSQxSh1lkCoVtHuF143", content: "Have we tested this fix on the staging environment?" },
+    { taskId: "IOXYle4ZubYhWy2xuSLH", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "The page feels faster. Great optimization!" },
+    { taskId: "IOXYle4ZubYhWy2xuSLH", authorId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", content: "Could caching be causing this delay?" },
+    { taskId: "IOXYle4ZubYhWy2xuSLH", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "I've added logs to pinpoint the exact slowdown." },
+    { taskId: "MNnqClrVzBW4Nxk9Tvzh", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "Collected valuable insights from the recent user interviews." },
+    { taskId: "MNnqClrVzBW4Nxk9Tvzh", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "We should analyze these insights further before implementing." },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "Love the new color scheme. It looks vibrant and modern!" },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "Let's A/B test this design before finalizing." },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "The typography is much improved!" },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "The new layout is more intuitive. Great job!" },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "mV2KtjaaXjTvdQL0Hwqrg7byU623", content: "Could we add a feedback form for visitors?" },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "UXbIFs3xS8XJaZ9ECtuJ2Xje1Ys2", content: "Looks great! Could we optimize images for faster load times?" },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "errWpgAOsKaQoUp0OfmfwlygUS92", content: "The hero section really grabs attention. Nicely done!" },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "Let's run a final browser compatibility test." },
+    { taskId: "RtIV4ngHqFFNsp247xsF", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "The new call-to-action is very effective!" },
+    { taskId: "TRZSbaAs0lxnoMFOyE1O", authorId: "VLcytYIROvSQxSh1lkCoVtHuF143", content: "I've added examples for the most used endpoints." },
+    { taskId: "TRZSbaAs0lxnoMFOyE1O", authorId: "0RY0r4XrlubHaBV0PTFo6FDXrKI2", content: "Let's include common error responses as well." },
+    { taskId: "TRZSbaAs0lxnoMFOyE1O", authorId: "OBSXIzSP1lONHK8a9DApje0cmaX2", content: "Added a section for legacy API details." },
+    { taskId: "YNTfjSpGs0seBYvIil0b", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "Indexed the most queried fields. Performance is better now." },
+  ];
+  
 export const fakeComments: { taskName: string; commentCount: number }[] = [
   { taskName: "Task 1", commentCount: 10 },
   { taskName: "Task 2", commentCount: 20 },

@@ -15,6 +15,7 @@ export type Task = {
   endDate: Date;
   comments?: Comment[];
   createdAt: Date;
+  categoryId?: string;
 };
 
 export enum TaskState {
