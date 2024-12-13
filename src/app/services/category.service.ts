@@ -9,9 +9,11 @@ import {
   collectionData,
   orderBy,
   query,
-  where,
+  doc,
+  getDocs,
+  writeBatch,
 } from "@angular/fire/firestore";
-import { BehaviorSubject, firstValueFrom, take } from "rxjs";
+import { BehaviorSubject, firstValueFrom, map } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
@@ -19,45 +21,57 @@ export class CategoryService {
   categories = new BehaviorSubject<TaskCategory[]>([]);
 
   constructor(private readonly firestore: Firestore) {
-    this.init();
-  }
-
-  init(): void {
-    fakeTaskCategories.forEach((category: TaskCategory) => {
-      this.addCategory(category);
-    });
     this.getCategories();
+    //this.deleteAllCategories();
   }
 
   async addCategory(category: TaskCategory): Promise<void> {
     const categoriesCollectionRef = collection(this.firestore, "categories");
-
-    const existingCategories = await firstValueFrom(
-      collectionData(
-        query(categoriesCollectionRef, where("name", "==", category.name))
-      ).pipe(take(1))
-    );
-
-    if (existingCategories.length === 0) {
-      await addDoc(categoriesCollectionRef, {
-        name: category.name,
-        color: category.color,
-      });
-    }
+    await addDoc(categoriesCollectionRef, {
+      name: category.name,
+      color: category.color,
+    });
   }
 
-  getCategories(): void {
+  async getCategories(): Promise<void> {
     const categoryCollectionRef = collection(this.firestore, "categories");
     const categoryQuery = query(categoryCollectionRef, orderBy("name"));
-    collectionData(categoryQuery, { idField: "id" }).subscribe((categories) => {
-      const mappedCategories = categories.map<TaskCategory>((category) => {
-        return {
-          id: category["id"],
-          name: category["name"],
-          color: category["color"],
-        };
-      });
-      this.categories.next(mappedCategories);
+    const categories = await firstValueFrom(collectionData(categoryQuery, { idField: "id" }));
+    const mappedCategories = categories.map<TaskCategory>((category) => {
+      return {
+        id: category["id"],
+        name: category["name"],
+        color: category["color"],
+      };
     });
+    const missingCategories = fakeTaskCategories.filter(
+      (fakeCategory) =>
+        mappedCategories.findIndex((category) => category.name === fakeCategory.name) === -1
+    );
+    if (missingCategories.length > 0) {
+      for (const category of missingCategories) {
+        await this.addCategory(category);
+      }
+      this.getCategories();
+    }
+    this.categories.next(mappedCategories);
+  }
+
+  async deleteAllCategories() {
+    try {
+      const categoriesCollection = collection(this.firestore, "categories");
+      const querySnapshot = await getDocs(categoriesCollection);
+      const batch = writeBatch(this.firestore);
+  
+      for (const docSnapshot of querySnapshot.docs) {
+        const categoryId = docSnapshot.id;
+        batch.delete(doc(this.firestore, `categories/${categoryId}`));
+      }
+
+      await batch.commit();
+      console.log("All tasks deleted");
+    } catch (error) {
+      console.error("Error deleting tasks:", error);
+    }
   }
 }
