@@ -11,7 +11,7 @@ import {
   query,
   where,
 } from "@angular/fire/firestore";
-import { BehaviorSubject, firstValueFrom, take } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
@@ -23,27 +23,20 @@ export class CategoryService {
   }
 
   init(): void {
-    fakeTaskCategories.forEach((category: TaskCategory) => {
-      this.addCategory(category);
+    this.getCategories();
+    fakeTaskCategories.forEach(async (category: TaskCategory) => {
+      this.categories.value.map(existingCategory => existingCategory.name).includes(category.name) ? null :
+        await this.addCategory(category);
     });
     this.getCategories();
   }
 
   async addCategory(category: TaskCategory): Promise<void> {
     const categoriesCollectionRef = collection(this.firestore, "categories");
-
-    const existingCategories = await firstValueFrom(
-      collectionData(
-        query(categoriesCollectionRef, where("name", "==", category.name))
-      ).pipe(take(1))
-    );
-
-    if (existingCategories.length === 0) {
-      await addDoc(categoriesCollectionRef, {
-        name: category.name,
-        color: category.color,
-      });
-    }
+    await addDoc(categoriesCollectionRef, {
+      name: category.name,
+      color: category.color,
+    });
   }
 
   getCategories(): void {
