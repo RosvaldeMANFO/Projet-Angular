@@ -9,9 +9,8 @@ import {
   collectionData,
   orderBy,
   query,
-  where,
 } from "@angular/fire/firestore";
-import { BehaviorSubject, firstValueFrom, take } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
@@ -19,31 +18,15 @@ export class CategoryService {
   categories = new BehaviorSubject<TaskCategory[]>([]);
 
   constructor(private readonly firestore: Firestore) {
-    this.init();
-  }
-
-  init(): void {
-    fakeTaskCategories.forEach((category: TaskCategory) => {
-      this.addCategory(category);
-    });
-    this.getCategories();
+    this.getCategories()
   }
 
   async addCategory(category: TaskCategory): Promise<void> {
     const categoriesCollectionRef = collection(this.firestore, "categories");
-
-    const existingCategories = await firstValueFrom(
-      collectionData(
-        query(categoriesCollectionRef, where("name", "==", category.name))
-      ).pipe(take(1))
-    );
-
-    if (existingCategories.length === 0) {
-      await addDoc(categoriesCollectionRef, {
-        name: category.name,
-        color: category.color,
-      });
-    }
+    await addDoc(categoriesCollectionRef, {
+      name: category.name,
+      color: category.color,
+    });
   }
 
   getCategories(): void {
@@ -57,6 +40,13 @@ export class CategoryService {
           color: category["color"],
         };
       });
+      if (mappedCategories.length === 0 || mappedCategories.length !== fakeTaskCategories.length) {
+        const missingCategories = fakeTaskCategories.filter(fakeCategory => !mappedCategories.some(category => category.name === fakeCategory.name));
+        missingCategories.forEach(async (category: TaskCategory) => {
+          await this.addCategory(category);
+        });
+        this.getCategories()
+      }
       this.categories.next(mappedCategories);
     });
   }
