@@ -20,59 +20,59 @@
 </mat-drawer-container>
 
 <ng-template #taskDetails>
-    <div *ngIf="selectedTask" class="text-gray-700 flex flex-col gap-7 h-full overflow-y-auto">
+    <div *ngIf="selectedTask" class="text-gray-700 flex flex-col gap-7 h-full overflow-hidden">
         <div class="flex justify-end">
             <button mat-icon-button (click)="selectedTask = undefined">
                 <mat-icon class="text-gray-500">close</mat-icon>
             </button>
         </div>
-        <div>
-            <h1 class="text-3xl font-bold">{{ selectedTask.title }}</h1>
-            <div class="flex items-center gap-3 w-full mt-3 select-none">
-                <span [appApplyColor]="selectedTask.category.color" class="rounded-md px-2 text-primary-500">
-                    {{ languageService.translate('categories.' + selectedTask.category.name.toLowerCase()) }}
-                  </span>
-                  
-                <span class="rounded-md border px-2 border-gray-400 text-primary-500">
-                    {{ languageService.translate('status.' + selectedTask.state) }}
-                </span>
+        <div class="overflow-y-auto h-full w-full flex flex-col gap-5">
+            <div>
+                <h1 class="text-3xl font-bold">{{ selectedTask.title }}</h1>
+                <div class="flex items-center gap-3 w-full mt-3 select-none">
+                    <span [appApplyColor]="selectedTask.category.color" class="rounded-md px-2 text-primary-500">
+                        {{ languageService.translate('categories.' + selectedTask.category.name.toLowerCase()) }}
+                    </span>
+
+                    <span class="rounded-md border px-2 border-gray-400 text-primary-500">
+                        {{ languageService.translate('status.' + selectedTask.state) }}
+                    </span>
+                </div>
             </div>
-        </div>
-        <p class="text-justify">{{ selectedTask.description }}</p>
-        <p class="text-sm text-gray-500 text-end">{{ selectedTask.startDate | date: 'mediumDate' }} - {{
-            selectedTask.endDate | date:
-            'mediumDate' }}</p>
-        <p class="flex items-center">
-            <mat-icon>person</mat-icon>
-            <a [routerLink]="['/profile', selectedTask.assigneeId]" class="text-blue-500 hover:underline">
-                {{ selectedTask.assigneeName }}
-            </a>
-        </p>
-        <h3 class="text-lg font-bold">{{ this.languageService.translate('home.comments') }}</h3>
-        <div>
-            <mat-form-field class="w-full" appearance="outline">
-                <input matInput [(ngModel)]="newComment">
-            </mat-form-field>
-            <button mat-raised-button color="primary" (click)="addComment()">{{
-                this.languageService.translate('home.add') }}</button>
-        </div>
-        <div class="max-h-96 overflow-y-auto">
+            <p class="text-justify">{{ selectedTask.description }}</p>
+            <p class="text-sm text-gray-500 text-end">{{ selectedTask.startDate | date: 'mediumDate' }} - {{
+                selectedTask.endDate | date:
+                'mediumDate' }}</p>
+            <p class="flex items-center">
+                <mat-icon>person</mat-icon>
+                <a [routerLink]="['/profile', selectedTask.assigneeId]" class="text-blue-500 hover:underline">
+                    {{ selectedTask.assigneeName }}
+                </a>
+            </p>
+            <div class="sticky top-0 bg-white z-10">
+                <h3 class="text-lg font-bold">{{ this.languageService.translate('home.comments') }}</h3>
+                <mat-form-field class="w-full" appearance="outline">
+                    <input matInput [(ngModel)]="newComment">
+                    <mat-icon matSuffix color="primary" class="rounded" (click)="addComment()">send</mat-icon>
+                </mat-form-field>
+            </div>
             <div *ngIf="selectedTaskComments.length > 0">
                 <div *ngFor="let comment of selectedTaskComments.reverse()">
                     <div class="flex flex-col items-start gap-3 text-md bg-gray-100 p-2 rounded-md mb-1">
-                        <div class="flex items-start gap-3 text-md">
-                            <a [routerLink]="['/profile', comment.authorId]" class="text-primary-500 hover:underline flex items-center gap-2">
-                              <span
-                                *ngIf="comment.authorName.length > 0"
-                                class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center text-white">
-                                {{ (comment.authorName).charAt(0) }}
-                              </span>
-                              <span *ngIf="comment.authorName.length === 0" class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center text-white">
-                                {{ "U" }}
-                              </span>
-                              <span>{{ comment.authorName }}</span>
+                        <div class="flex items-center gap-3 text-md w-full justify-between">
+                            <a [routerLink]="['/profile', comment.authorId]"
+                                class="text-primary-500 hover:underline flex items-center gap-2">
+                                <span *ngIf="comment.authorName.length > 0"
+                                    class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center text-white">
+                                    {{ (comment.authorName).charAt(0) }}
+                                </span>
+                                <span *ngIf="comment.authorName.length === 0"
+                                    class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center text-white">
+                                    {{ "U" }}
+                                </span>
+                                <span>{{ comment.authorName }}</span>
                             </a>
-                            <button (click)="deleteComment(comment.id)" class="text-red-500 hover:text-red-700 ">
+                            <button (click)="deleteComment(comment.id)" class="text-red-300 hover:text-red-400 ">
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </div>
