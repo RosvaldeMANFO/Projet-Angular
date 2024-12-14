@@ -22,12 +22,6 @@ export class CategoryService {
   }
 
   init(): void {
-    this.getCategories();
-    fakeTaskCategories.forEach(async (category: TaskCategory) => {
-      this.categories.value.map(existingCategory => existingCategory.name).includes(category.name) ? null :
-        await this.addCategory(category);
-    });
-    this.getCategories();
   }
 
   async addCategory(category: TaskCategory): Promise<void> {
