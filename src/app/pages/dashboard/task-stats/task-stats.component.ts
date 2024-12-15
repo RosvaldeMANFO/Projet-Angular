@@ -4,6 +4,7 @@ import {
   OnChanges,
   SimpleChanges,
   Input,
+  OnInit,
 } from "@angular/core";
 import { BaseChartDirective } from "ng2-charts";
 import { Period, TasksByKey } from "src/app/model/task.model";
@@ -15,7 +16,7 @@ import { LanguageService } from "src/app/services/language.service";
   templateUrl: "./task-stats.component.html",
   styles: [],
 })
-export class TaskStatsComponent implements OnChanges {
+export class TaskStatsComponent implements OnChanges, OnInit {
   @Input() period!: Period;
   @Input() tasksByStatus: TasksByKey = {};
   @Input() tasksByCategory: TasksByKey = {};
@@ -94,6 +95,13 @@ export class TaskStatsComponent implements OnChanges {
     },
   };
 
+  ngOnInit(): void {
+    this.languageService.setLanguage = (language: string) => {
+      localStorage.setItem("language", language);
+      this.languageService.currentLanguage = language;
+      this.updateCharts();
+    };
+  }
   ngOnChanges(changes: SimpleChanges): void {
     if (
       changes["tasksByStatus"] ||
@@ -118,7 +126,9 @@ export class TaskStatsComponent implements OnChanges {
 
     this.statusChartData = {
       ...this.statusChartData,
-      labels: Object.keys(statusData),
+      labels: Object.keys(statusData).map((statusKey) =>
+        this.languageService.translate(`status.${statusKey}`)
+      ),
       datasets: [
         {
           ...this.statusChartData.datasets[0],
@@ -141,7 +151,9 @@ export class TaskStatsComponent implements OnChanges {
 
     this.categoryChartData = {
       ...this.categoryChartData,
-      labels: Object.keys(categoryData),
+      labels: Object.keys(categoryData).map((categoryKey) =>
+        this.languageService.translate(`categories.${categoryKey.toLowerCase()}`)
+      ),
       datasets: [
         {
           ...this.categoryChartData.datasets[0],
@@ -156,7 +168,16 @@ export class TaskStatsComponent implements OnChanges {
         },
       ],
     };
+  
+    if (
+      this.categoryChartOptions?.plugins?.legend?.title
+    ) {
+      this.categoryChartOptions.plugins.legend.title.text = this.languageService.translate(
+        'dashboard.byCategories'
+      );
+    }
   }
+  
 
   private labelFromPeriod(): string {
     return this.period?.startDate && this.period?.endDate

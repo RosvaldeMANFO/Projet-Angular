@@ -22,4 +22,16 @@ export class TaskCardComponent {
     event.stopPropagation();
     this.edit.emit();
   }
+
+  formatDate(date: Date): string {
+    var language = this.languageService.getLanguage();
+    if(language === 'kr') {
+      language = 'ko';
+    }
+    return new Intl.DateTimeFormat(language, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }).format(new Date(date));
+  }
 }

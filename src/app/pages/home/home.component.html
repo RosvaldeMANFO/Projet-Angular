@@ -8,12 +8,12 @@
         <div class="flex flex-col gap-7 px-3 h-full overflow-hidden">
             <app-search-bar (search)="searchTasks($event)" (add)="addNewTask()" (state)="filterTasks($event)">
             </app-search-bar>
-            <div class="py-3 flex flex-wrap gap-4 items-start justify-center w-full max-w-full m-auto overflow-y-auto">
-                <div *ngIf="fakeTasks.length === 0" class="w-full text-center text-2xl text-gray-500">
+            <div class="h-full py-3 flex flex-wrap gap-4 items-start justify-center w-full max-w-full m-auto overflow-y-auto">
+                <div *ngIf="tasks.length === 0" class="w-full text-center text-2xl text-gray-500">
                     {{ languageService.translate('home.noTasks') }}
                 </div>
                 <app-task-card class="cursor-pointer" (delete)="deleteTask(task)" (edit)="editTask(task)"
-                    (click)="selectTask(task)" *ngFor="let task of fakeTasks" [task]="task"></app-task-card>
+                    (click)="selectTask(task)" *ngFor="let task of tasks" [task]="task"></app-task-card>
             </div>
         </div>
     </mat-drawer-content>
@@ -22,7 +22,7 @@
 <ng-template #taskDetails>
     <div *ngIf="selectedTask" class="text-gray-700 flex flex-col gap-7 h-full overflow-hidden">
         <div class="flex justify-end">
-            <button mat-icon-button (click)="selectedTask = undefined">
+            <button mat-icon-button (click)="clearTaskDetails()">
                 <mat-icon class="text-gray-500">close</mat-icon>
             </button>
         </div>
@@ -40,9 +40,7 @@
                 </div>
             </div>
             <p class="text-justify">{{ selectedTask.description }}</p>
-            <p class="text-sm text-gray-500 text-end">{{ selectedTask.startDate | date: 'mediumDate' }} - {{
-                selectedTask.endDate | date:
-                'mediumDate' }}</p>
+            <p class="text-sm text-gray-500 text-end">{{ formatDate(selectedTask.startDate) }} - {{ formatDate(selectedTask.endDate) }}</p>
             <p class="flex items-center">
                 <mat-icon>person</mat-icon>
                 <a [routerLink]="['/profile', selectedTask.assigneeId]" class="text-blue-500 hover:underline">
@@ -56,8 +54,8 @@
                     <mat-icon matSuffix color="primary" class="rounded" (click)="addComment()">send</mat-icon>
                 </mat-form-field>
             </div>
-            <div *ngIf="selectedTaskComments.length > 0">
-                <div *ngFor="let comment of selectedTaskComments.reverse()">
+            <div *ngIf="selectedTask.comments.length > 0">
+                <div *ngFor="let comment of selectedTask.comments.reverse()">
                     <div class="flex flex-col items-start gap-3 text-md bg-gray-100 p-2 rounded-md mb-1">
                         <div class="flex items-center gap-3 text-md w-full justify-between">
                             <a [routerLink]="['/profile', comment.authorId]"
@@ -79,13 +77,13 @@
                         <p class="flex flex-col gap-1 w-full">
                             {{ comment.content }}
                             <span class="text-end text-gray-500 text-sm w-full">
-                                {{ comment.createdAt | date: 'mediumDate' }}
+                                {{ formatDate(comment.createdAt) }}
                             </span>
                         </p>
                     </div>
                 </div>
             </div>
-            <div *ngIf="selectedTaskComments.length === 0" class="text-center my-12 text-gray-500">
+            <div *ngIf="selectedTask.comments.length === 0" class="text-center my-12 text-gray-500">
                 {{ this.languageService.translate('home.noComments') }}
             </div>
         </div>

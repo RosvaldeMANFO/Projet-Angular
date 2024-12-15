@@ -25,8 +25,6 @@
         <i class="fab fa-linkedin" style="font-size: 1.5rem;"></i>
       </a>
     </div>
-    
-
     <div class="mt-4" *ngIf="isCurrentUserProfile()">
       <a routerLink="/edit-profile"
         class="inline-block bg-primary-500 text-white py-2 px-4 rounded-md hover:bg-primary-600 items-center">
@@ -34,20 +32,46 @@
       </a>
     </div>
   </div>
-
+  <div class="mt-4 flex justify-center space-x-4">
+    <button
+      class="px-4 py-2 rounded-md text-white"
+      [class.bg-primary-500]="viewMode === 'madeByMe'"
+      [class.bg-gray-300]="viewMode !== 'madeByMe'"
+      (click)="toggleViewMode('madeByMe')">
+      {{ languageService.translate('profile.madeByMe') }}
+    </button>
+    <button
+      class="px-4 py-2 rounded-md text-white"
+      [class.bg-primary-500]="viewMode === 'forMe'"
+      [class.bg-gray-300]="viewMode !== 'forMe'"
+      (click)="toggleViewMode('forMe')">
+      {{ languageService.translate('profile.forMe') }}
+    </button>
+  </div>
   <div class="mt-8 w-full max-w-4xl">
-    <h2 class="text-lg font-bold mb-4">Tasks</h2>
+    <h2 class="text-lg font-bold mb-4">
+      {{ viewMode === 'madeByMe' ? 
+      languageService.translate('dashboard.tasks')+" "+languageService.translate('profile.madeByMe').toLowerCase()
+       : 
+       languageService.translate('dashboard.tasks')+" "+languageService.translate('profile.forMe').toLowerCase()
+      }}
+    </h2>
     <div class="bg-white shadow-xl rounded-lg">
       <ul *ngIf="tasks.length > 0; else noTasks">
-        <li *ngFor="let task of tasks" class="flex items-center justify-between p-4 border-b last:border-none hover:bg-gray-50" (click)="onTaskClick(task)">
+        <li
+          *ngFor="let task of tasks"
+          class="flex items-center justify-between p-4 border-b last:border-none hover:bg-gray-50"
+          (click)="onTaskClick(task)">
           <div>
             <p class="font-medium">{{ task.title }}</p>
             <p class="text-gray-500 text-sm">{{ task.description }}</p>
           </div>
           <div>
             <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
-              [class.bg-green-100]="task.state === 'DONE'" [class.text-green-800]="task.state === 'DONE'"
-              [class.bg-gray-200]="task.state !== 'DONE'" [class.text-gray-800]="task.state !== 'DONE'">
+              [class.bg-green-100]="task.state === 'DONE'"
+              [class.text-green-800]="task.state === 'DONE'"
+              [class.bg-gray-200]="task.state !== 'DONE'"
+              [class.text-gray-800]="task.state !== 'DONE'">
               <span class="mr-2">
                 <i class="material-icons" *ngIf="task.state === 'DONE'">check_circle</i>
                 <i class="material-icons" *ngIf="task.state !== 'DONE'">radio_button_unchecked</i>

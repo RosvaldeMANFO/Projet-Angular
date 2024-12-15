@@ -5,7 +5,7 @@ import { translations } from 'src/assets/i18n/translations';
   providedIn: 'root',
 })
 export class LanguageService {
-  private currentLanguage: string = 'fr';
+  public currentLanguage: string = 'fr';
 
   setLanguage(language: string): void {
     localStorage.setItem('language', language);

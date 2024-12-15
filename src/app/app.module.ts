@@ -45,6 +45,8 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { MembersComponent } from './pages/members/members.component';
 import { ManagementComponent } from './pages/management/management.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { MatBadgeModule } from "@angular/material/badge";
 
 
 @NgModule({
@@ -69,8 +71,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     MembersComponent,
     CapitalizePipe,
     ManagementComponent,
-    ConfirmDialogComponent
-  
+    ConfirmDialogComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,6 +101,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     MatNativeDateModule,
     MatInputModule,
     MatDialogModule,
+    MatBadgeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

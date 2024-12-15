@@ -23,8 +23,9 @@ export class HomeComponent implements OnInit {
   newComment!: string;
   selectedTask?: Task;
   users!: User[];
-  fakeTasks!: Task[];
+  tasks!: Task[];
   selectedTaskComments!: Comment[];
+  task?: Task;
 
   constructor(
     private readonly dialog: MatDialog,
@@ -44,14 +45,7 @@ export class HomeComponent implements OnInit {
       this.categories = categories;
     });
     this.taskService.task.subscribe((tasks) => {
-      this.fakeTasks = tasks;
-      tasks.forEach(async (task) => {
-        await firstValueFrom(
-          this.taskService.countTaskComments(task.id).pipe(take(1))
-        ).then((comments) => {
-          task.commentCount = comments;
-        });
-      });
+      this.tasks = tasks;
     });
     this.userService.getUsers().then((users) => {
       this.users = users;
@@ -61,13 +55,17 @@ export class HomeComponent implements OnInit {
       .then((user) => {
         this.currentUser = user ?? this.currentUser;
       });
+
+    const navigationState = history.state;
+    if (navigationState && navigationState['task']) {
+      if(this.tasks.filter((t) => t.id === navigationState['task'].id).length > 0) {
+        this.selectedTask = navigationState['task'];
+      }
+    }
   }
 
   selectTask = (task: Task) => {
     this.selectedTask = task;
-    if (this.selectedTask) {
-      this.getTaskComments();
-    }
   };
 
   closeDrawer = () => {
@@ -122,18 +120,6 @@ export class HomeComponent implements OnInit {
     this.openDialog(task);
   };
 
-  getTaskComments = async () => {
-    if (this.selectedTask) {
-      await firstValueFrom(
-        this.taskService
-          .getComments(this.selectedTask.id, this.users)
-          .pipe(take(1))
-      ).then((comments) => {
-        this.selectedTaskComments = comments;
-      });
-    }
-  };
-
   addComment = () => {
     try {
       if (this.selectedTask && this.newComment) {
@@ -148,8 +134,6 @@ export class HomeComponent implements OnInit {
           ...this.selectedTaskComments,
           newComment as Comment,
         ];
-        console.log(newComment, this.selectedTaskComments);
-        console.log(this.currentUser);
         this.taskService.addComment(newComment as Comment);
         this.newComment = "";
       }
@@ -174,4 +158,21 @@ export class HomeComponent implements OnInit {
       }
     });
   };
+
+  clearTaskDetails(): void {
+    history.replaceState({}, "", location.pathname);
+    this.selectedTask = undefined;
+  }
+
+  formatDate(date: Date): string {
+    var language = this.languageService.getLanguage();
+    if (language === "kr") {
+      language = "ko";
+    }
+    return new Intl.DateTimeFormat(language, {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    }).format(new Date(date));
+  }
 }

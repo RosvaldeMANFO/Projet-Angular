@@ -8,7 +8,7 @@ import { Task } from '../../model/task.model';
 import { onAuthStateChanged } from '@angular/fire/auth';
 import { Timestamp } from 'firebase/firestore';
 import { LanguageService } from '../../services/language.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -18,6 +18,8 @@ export class ProfileComponent implements OnInit {
   user: Partial<User> = {};
   currentUserId: string = '';
   tasks: Task[] = [];
+  viewMode: 'madeByMe' | 'forMe' = 'madeByMe';
+  selectedTask: Task | null = null;
 
   constructor(
     private auth: Auth,
@@ -38,7 +40,6 @@ export class ProfileComponent implements OnInit {
       this.currentUserId = this.auth.currentUser?.uid || '';
       const uidFromRoute = params.get('uid');
       if (uidFromRoute) {
-        console.log(uidFromRoute);
         await this.loadUserProfile(uidFromRoute);
         await this.loadTasks(uidFromRoute);
       }
@@ -63,19 +64,36 @@ export class ProfileComponent implements OnInit {
       };
     }
   }
-  
 
   private async loadTasks(userId: string): Promise<void> {
-    this.taskService.getTaskByUserId(userId).subscribe(async tasks => {
-      this.tasks = await tasks;
-    });
+    if (this.viewMode === 'madeByMe') {
+      this.taskService.getTaskByUserId(userId).subscribe(async tasks => {
+        this.tasks = await tasks;
+      });
+    } else {
+      this.taskService.getAssignedTaskByUserId(userId).subscribe(async tasks => {
+        this.tasks = await tasks;
+      });
+    }
+  }
+
+  toggleViewMode(mode: 'madeByMe' | 'forMe'): void {
+    this.viewMode = mode;
+    if (this.user.id) {
+      this.loadTasks(this.user.id);
+    } else {
+      this.loadTasks(this.currentUserId);
+    }
   }
 
   isCurrentUserProfile(): boolean {
     return this.user.id === this.currentUserId;
   }
 
-  onTaskClick(task: any): void {
-    this.router.navigate(['/']);
+  onTaskClick(task: Task): void {
+    const navigationExtras: NavigationExtras = {
+      state: { task: task }
+    };
+    this.router.navigate(['/'], navigationExtras);
   }
 }

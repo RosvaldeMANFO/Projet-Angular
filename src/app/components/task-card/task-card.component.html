@@ -1,4 +1,4 @@
-<mat-card *ngIf="task" class="text-gray-500 min-w-[300px] max-w-[300px] text-wrap">
+<mat-card *ngIf="task" class="text-gray-500 min-w-[300px] max-w-[300px] text-wrap h-[390px]">
 
     <mat-card-header class="flex flex-col mb-7">
         <div class="flex justify-between items-center w-full">
@@ -14,28 +14,28 @@
                 </a>
             </p>
             <div class="flex">
-                <button mat-icon-button (click)="deleteTask($event)">
-                    <mat-icon>delete</mat-icon>
-                </button>
                 <button mat-icon-button (click)="editTask($event)">
                     <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteTask($event)">
+                    <mat-icon>delete</mat-icon>
                 </button>
             </div>
         </div>
         <div class="flex items-center gap-3 w-full mt-3 select-none">
-            <span [appApplyColor]="task.category.color" class="rounded-md px-2">
+            <span [appApplyColor]="task.category.color" class="rounded-md px-2 truncate max-w-xs">
                 {{ languageService.translate('categories.' + task.category.name.toLowerCase()) }}
             </span>
-            <span class="rounded-md border px-2 border-gray-400 text-primary-500">
+            <span class="rounded-md border px-2 border-gray-400 text-primary-500 truncate max-w-xs">
                 {{ languageService.translate('status.' + task.state) }}
             </span>
         </div>
     </mat-card-header>
     <mat-card-content>
         <div class="flex flex-col gap-5 w-full">
-            <p class="text-xl font-bold text-gray-600">{{ task.title }}</p>
-            <p class="text-justify break-words">{{ task.description }}</p>
-            <p class="text-sm">{{ task.startDate | date: 'mediumDate' }} - {{ task.endDate | date: 'mediumDate' }}</p>
+            <p class="text-xl font-bold text-gray-600 truncate">{{ task.title }}</p>
+            <p class="text-justify break-words text-ellipsis line-clamp-3">{{ task.description }}</p>
+            <p class="text-sm">{{ formatDate(task.startDate) }} - {{ formatDate(task.endDate) }}</p>
             <div class="flex items-center gap-2">
                 <mat-icon>person</mat-icon>
                 <p><a [routerLink]="['/profile', task.assigneeId]" class="text-blue-500 hover:underline">
@@ -44,10 +44,9 @@
             </div>
         </div>
     </mat-card-content>
-    <mat-card-actions align="end" class="mt-3 flex items-center gap-2">
+    <mat-card-actions align="end" class="mt-3 flex items-center gap-2 p-3">
         <button mat-icon-button color="primary">
-            <mat-icon>comment</mat-icon>
+            <mat-icon [matBadge]="task.comments.length">comment</mat-icon>
         </button>
-        <span>{{ task.commentCount ?? 0 }}</span>
     </mat-card-actions>
 </mat-card>

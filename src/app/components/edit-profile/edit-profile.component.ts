@@ -29,7 +29,6 @@ export class EditProfileComponent implements OnInit {
     const user = this.auth.currentUser;
     if (user) {
       const profile = await this.userService.getUserProfile(user.uid);
-      console.log(profile);
       this.nickname = profile?.nickname || '';
       this.bio = profile?.bio || '';
       this.role = profile?.role || '';
