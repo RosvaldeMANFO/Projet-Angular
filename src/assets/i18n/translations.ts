@@ -190,7 +190,7 @@ export const translations: Translations  = {
         twitter: 'Twitter',
         facebook: 'Facebook',
         linkedin: 'LinkedIn',
-        madeByMe: 'Crées par moi',
+        madeByMe: 'Créées par moi',
         forMe: 'Pour moi',
       },
       dashboard: {
