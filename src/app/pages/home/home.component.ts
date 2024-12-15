@@ -186,4 +186,16 @@ export class HomeComponent implements OnInit {
     history.replaceState({}, '', location.pathname);
     this.selectedTask = undefined;
   }
+
+  formatDate(date: Date): string {
+    var language = this.languageService.getLanguage();
+    if(language === 'kr') {
+      language = 'ko';
+    }
+    return new Intl.DateTimeFormat(language, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }).format(new Date(date));
+  }
 }

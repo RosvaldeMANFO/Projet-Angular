@@ -35,7 +35,7 @@
         <div class="flex flex-col gap-5 w-full">
             <p class="text-xl font-bold text-gray-600">{{ task.title }}</p>
             <p class="text-justify break-words">{{ task.description }}</p>
-            <p class="text-sm">{{ task.startDate | date: 'mediumDate' }} - {{ task.endDate | date: 'mediumDate' }}</p>
+            <p class="text-sm">{{ formatDate(task.startDate) }} - {{ formatDate(task.endDate) }}</p>
             <div class="flex items-center gap-2">
                 <mat-icon>person</mat-icon>
                 <p><a [routerLink]="['/profile', task.assigneeId]" class="text-blue-500 hover:underline">

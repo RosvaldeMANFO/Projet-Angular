@@ -40,9 +40,7 @@
                 </div>
             </div>
             <p class="text-justify">{{ selectedTask.description }}</p>
-            <p class="text-sm text-gray-500 text-end">{{ selectedTask.startDate | date: 'mediumDate' }} - {{
-                selectedTask.endDate | date:
-                'mediumDate' }}</p>
+            <p class="text-sm text-gray-500 text-end">{{ formatDate(selectedTask.startDate) }} - {{ formatDate(selectedTask.endDate) }}</p>
             <p class="flex items-center">
                 <mat-icon>person</mat-icon>
                 <a [routerLink]="['/profile', selectedTask.assigneeId]" class="text-blue-500 hover:underline">
@@ -79,7 +77,7 @@
                         <p class="flex flex-col gap-1 w-full">
                             {{ comment.content }}
                             <span class="text-end text-gray-500 text-sm w-full">
-                                {{ comment.createdAt | date: 'mediumDate' }}
+                                {{ formatDate(comment.createdAt) }}
                             </span>
                         </p>
                     </div>
