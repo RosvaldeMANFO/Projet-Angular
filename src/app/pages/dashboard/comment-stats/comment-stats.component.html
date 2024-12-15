@@ -2,11 +2,15 @@
   <p class="mb-2 text-xl font-bold tracking-tight text-gray-900">{{ this.languageService.translate('dashboard.top5') }}</p>
   <hr/>
   <div class="flex justify-center items-center">
-      <canvas 
+      <canvas *ngIf="commentChartData.datasets[0].data.length > 0"
           baseChart
           [data]="commentChartData"
           [type]="'bar'"
           [options]="commentChartOptions">
       </canvas>
+
+      <div *ngIf="commentChartData.datasets[0].data.length == 0" class="flex flex-col items-center justify-center">
+          <p class="text-gray-500">{{ 'Aucune données disponibles sur la période selectionnée !' }}</p>
+      </div>
   </div>
 </div>

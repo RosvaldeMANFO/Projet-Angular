@@ -75,6 +75,7 @@ export class TaskService {
         description: task['description'],
         state: task['state'] as TaskState,
         category: category!!,
+        commentCount: task['commentCount'],
         startDate: task['startDate'].toDate(),
         endDate: task['endDate'].toDate(),
         createdAt: task['createdAt'].toDate(),
@@ -133,6 +134,7 @@ export class TaskService {
       this.commentsSubject.next(comments);
     });
   }
+  
   countTaskComments(taskId: string): Observable<number> {
     const commentsCollection = collection(this.firestore, "comments");
     const commentsQuery = query(commentsCollection, where("taskId", "==", taskId));

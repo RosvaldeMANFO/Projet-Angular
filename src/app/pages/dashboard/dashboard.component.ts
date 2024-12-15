@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { fakeComments } from "src/app/model/fake-data";
-import { Period, TasksByKey } from "src/app/model/task.model";
+import { Task, TaskCategory, TasksByKey } from "src/app/model/task.model";
 import { CategoryService } from "src/app/services/category.service";
 import { TaskService } from "src/app/services/task.service";
 import { UserService } from "src/app/services/user.service";
 import { LanguageService } from "src/app/services/language.service";
+import { User } from "src/app/model/user.model";
 
 @Component({
   selector: "app-dashboard",
@@ -13,47 +13,53 @@ import { LanguageService } from "src/app/services/language.service";
   styles: [],
 })
 export class DashboardComponent implements OnInit {
-  nbrTasks: number = 0;
-  nbrUsers: number = 0;
-  nbrCategories: number = 0;
-  nbrComments: number = 0;
-  tasksByStatus: TasksByKey = {};
-  tasksByCategory: TasksByKey = {};
-  topFiveTasks: { taskName: string; commentCount: number }[] = [];
+  users!: User[];
+  taskList!: Task[];
+  topFiveTasks!: Task[];
+  nbrComments!: number;
   dateRangeForm!: FormGroup;
+  categories!: TaskCategory[];
+  tasksByStatus!: TasksByKey;
+  tasksByCategory!: TasksByKey;
 
   constructor(
+    private fb: FormBuilder,
     private readonly taskService: TaskService,
     private readonly userService: UserService,
     private readonly categoryService: CategoryService,
-    private fb: FormBuilder,
     public readonly languageService: LanguageService
   ) {}
 
-
   async ngOnInit() {
-    this.taskService.task.subscribe((tasks) => {
-      this.nbrTasks = tasks.length;
-  
+    this.topFiveTasks = [];
+    this.tasksByStatus = {};
+    this.tasksByCategory = {};
     this.initializeDateRangeForm();
-    this.loadDashBoardData();
-
-    this.dateRangeForm.valueChanges.subscribe((value) => {
-      if (value.startDate && value.endDate) {
-        this.loadDashBoardData();
-      }
+    this.users = await this.userService.getUsers();
+    this.taskService.task.subscribe((tasks) => {
+      this.taskList = tasks;
+      this.loadDashBoardData();
+      this.dateRangeForm.valueChanges.subscribe((value) => {
+        if (value.startDate && value.endDate) {
+          this.loadDashBoardData();
+        }
+      });
     });
-  });
   }
 
+  // Un mois avant et un mois après la date actuelle
   initializeDateRangeForm(): void {
     const now = new Date();
+    const endDate = new Date(
+      now.getFullYear(),
+      now.getMonth() + 1,
+      now.getDate()
+    );
     const startDate = new Date(
       now.getFullYear(),
       now.getMonth() - 1,
       now.getDate()
     );
-    const endDate = now;
 
     this.dateRangeForm = this.fb.group({
       startDate,
@@ -62,11 +68,8 @@ export class DashboardComponent implements OnInit {
   }
 
   async loadDashBoardData(): Promise<void> {
-    const users = await this.userService.getUsers();
     this.categoryService.categories.subscribe(async (categories) => {
-      this.nbrUsers = (users).length;
-      this.nbrCategories = categories.length;
-      this.nbrComments = 100;
+      this.categories = categories;
     });
 
     const { startDate, endDate } = this.dateRangeForm.value;
@@ -81,8 +84,20 @@ export class DashboardComponent implements OnInit {
       endDate: endDate,
     });
 
-    this.topFiveTasks = fakeComments.sort(
-      (a, b) => b.commentCount - a.commentCount
+    this.topFiveTasks = this.taskList
+      .filter((task) => {
+        const taskDate = new Date(task.createdAt);
+        return (
+          taskDate.getTime() >= startDate.getTime() &&
+          taskDate.getTime() <= endDate.getTime()
+        );
+      })
+      .sort((a, b) => b.commentCount - a.commentCount)
+      .slice(0, 5);
+
+    this.nbrComments = this.taskList.reduce(
+      (acc, task) => acc + task.commentCount,
+      0
     );
   }
 }

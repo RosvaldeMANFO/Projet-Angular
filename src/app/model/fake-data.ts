@@ -315,6 +315,6 @@ export const fakeTasks2 = [
 export const fakeComments: { taskName: string; commentCount: number }[] = [
   { taskName: "Task 1", commentCount: 10 },
   { taskName: "Task 2", commentCount: 20 },
-  { taskName: "Task 3", commentCount: 30 },
+  { taskName: "Task 3", commentCount: 90 },
   { taskName: "Task 4", commentCount: 40 },
 ];
