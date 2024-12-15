@@ -8,12 +8,12 @@
         <div class="flex flex-col gap-7 px-3 h-full overflow-hidden">
             <app-search-bar (search)="searchTasks($event)" (add)="addNewTask()" (state)="filterTasks($event)">
             </app-search-bar>
-            <div class="py-3 flex flex-wrap gap-4 items-start justify-center w-full max-w-full m-auto overflow-y-auto">
-                <div *ngIf="fakeTasks.length === 0" class="w-full text-center text-2xl text-gray-500">
+            <div class="h-full py-3 flex flex-wrap gap-4 items-start justify-center w-full max-w-full m-auto overflow-y-auto">
+                <div *ngIf="tasks.length === 0" class="w-full text-center text-2xl text-gray-500">
                     {{ languageService.translate('home.noTasks') }}
                 </div>
                 <app-task-card class="cursor-pointer" (delete)="deleteTask(task)" (edit)="editTask(task)"
-                    (click)="selectTask(task)" *ngFor="let task of fakeTasks" [task]="task"></app-task-card>
+                    (click)="selectTask(task)" *ngFor="let task of tasks" [task]="task"></app-task-card>
             </div>
         </div>
     </mat-drawer-content>

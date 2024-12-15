@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   newComment!: string;
   selectedTask?: Task;
   users!: User[];
-  fakeTasks!: Task[];
+  tasks!: Task[];
   selectedTaskComments!: Comment[];
   task?: Task;
 
@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
       this.categories = categories;
     });
     this.taskService.task.subscribe((tasks) => {
-      this.fakeTasks = tasks;
+      this.tasks = tasks;
       tasks.forEach(async (task) => {
         await firstValueFrom(
           this.taskService.countTaskComments(task.id).pipe(take(1))
@@ -65,8 +65,10 @@ export class HomeComponent implements OnInit {
     
     const navigationState = history.state;
     if (navigationState && navigationState['task']) {
-      this.selectedTask = navigationState['task'];
-      this.getTaskComments();
+      if(this.tasks.filter((t) => t.id === navigationState['task'].id).length > 0) {
+        this.selectedTask = navigationState['task'];
+        this.getTaskComments();
+      }
     }
   }
 
