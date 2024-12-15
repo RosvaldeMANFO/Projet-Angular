@@ -25,6 +25,12 @@
         <i class="fab fa-linkedin" style="font-size: 1.5rem;"></i>
       </a>
     </div>
+    <div class="mt-4" *ngIf="isCurrentUserProfile()">
+      <a routerLink="/edit-profile"
+        class="inline-block bg-primary-500 text-white py-2 px-4 rounded-md hover:bg-primary-600 items-center">
+        {{ languageService.translate('profile.editProfile') }}
+      </a>
+    </div>
   </div>
   <div class="mt-4 flex justify-center space-x-4">
     <button
@@ -79,5 +85,10 @@
         <p class="p-4 text-gray-500">{{ languageService.translate('profile.noTasks') }}</p>
       </ng-template>
     </div>
+  </div>
+  <div class="mt-6 w-full max-w-4xl text-center">
+    <a routerLink="/" class="inline-block px-6 py-3 text-white bg-primary-500 rounded-md hover:bg-primary-600">
+      {{ languageService.translate('profile.viewAllTasks') }}
+    </a>
   </div>
 </div>
