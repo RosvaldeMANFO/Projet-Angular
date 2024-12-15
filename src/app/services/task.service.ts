@@ -265,6 +265,16 @@ export class TaskService {
       map(tasks => this.taskMapper(tasks))
     );
   }
+  
+  getAssignedTaskByUserId(userId: string): Observable<Promise<Task[]>> {
+    const tasksCollection = collection(this.firestore, 'tasks');
+    const tasksQuery = query(tasksCollection, where('assigneeId', '==', userId));
+    const tasksSnapshot = collectionData(tasksQuery, { idField: 'id' });
+    return tasksSnapshot.pipe(
+      map(tasks => this.taskMapper(tasks))
+    );
+  }
+
   async addComment(comment: Comment) {
     const commentsCollection = collection(this.firestore, "comments");
 

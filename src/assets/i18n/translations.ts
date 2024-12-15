@@ -70,6 +70,8 @@ export const translations: Translations  = {
         twitter: 'Twitter',
         facebook: 'Facebook',
         linkedin: 'LinkedIn',
+        madeByMe: 'Made by me',
+        forMe: 'For me',
       },
       dashboard: {
         title: 'Dashboard',
@@ -188,6 +190,8 @@ export const translations: Translations  = {
         twitter: 'Twitter',
         facebook: 'Facebook',
         linkedin: 'LinkedIn',
+        madeByMe: 'Crées par moi',
+        forMe: 'Pour moi',
       },
       dashboard: {
         title: 'Tableau de bord',
@@ -306,6 +310,8 @@ export const translations: Translations  = {
         twitter: 'Twitter',
         facebook: 'Facebook',
         linkedin: 'LinkedIn',
+        madeByMe: 'Hecho por mí',
+        forMe: 'Para mí',
       },
       dashboard: {
         title: 'Panel de control',
@@ -424,6 +430,8 @@ export const translations: Translations  = {
         twitter: 'Twitter',
         facebook: 'Facebook',
         linkedin: 'LinkedIn',
+        madeByMe: 'Feito por mim',
+        forMe: 'Para mim',
       },
       dashboard: {
         title: 'Painel',
@@ -542,6 +550,8 @@ export const translations: Translations  = {
         twitter: 'Twitter',
         facebook: 'Facebook',
         linkedin: 'LinkedIn',
+        madeByMe: 'Von mir gemacht',
+        forMe: 'Für mich',
       },
       dashboard: {
         title: 'Dashboard',
@@ -660,6 +670,8 @@ export const translations: Translations  = {
         twitter: 'Твиттер',
         facebook: 'Фейсбук',
         linkedin: 'Линкедин',
+        madeByMe: 'Сделано мной',
+        forMe: 'Для меня',
       },
       dashboard: {
         title: 'Панель управления',
@@ -778,6 +790,8 @@ export const translations: Translations  = {
         twitter: 'Twitter',
         facebook: 'Facebook',
         linkedin: 'LinkedIn',
+        madeByMe: '自分宛て',
+        forMe: '自分宛て',
       },
       dashboard: {
         title: 'ダッシュボード',
@@ -896,6 +910,8 @@ export const translations: Translations  = {
         twitter: '트위터',
         facebook: '페이스북',
         linkedin: '링크드인',
+        madeByMe: '내가 만든 것',
+        forMe: '나를 위한 것',
       },
       dashboard: {
         title: '대시보드',

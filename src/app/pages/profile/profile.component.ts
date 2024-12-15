@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   user: Partial<User> = {};
   currentUserId: string = '';
   tasks: Task[] = [];
+  viewMode: 'madeByMe' | 'forMe' = 'madeByMe';
 
   constructor(
     private auth: Auth,
@@ -38,7 +39,6 @@ export class ProfileComponent implements OnInit {
       this.currentUserId = this.auth.currentUser?.uid || '';
       const uidFromRoute = params.get('uid');
       if (uidFromRoute) {
-        console.log(uidFromRoute);
         await this.loadUserProfile(uidFromRoute);
         await this.loadTasks(uidFromRoute);
       }
@@ -63,19 +63,33 @@ export class ProfileComponent implements OnInit {
       };
     }
   }
-  
 
   private async loadTasks(userId: string): Promise<void> {
-    this.taskService.getTaskByUserId(userId).subscribe(async tasks => {
-      this.tasks = await tasks;
-    });
+    if (this.viewMode === 'madeByMe') {
+      this.taskService.getTaskByUserId(userId).subscribe(async tasks => {
+        this.tasks = await tasks;
+      });
+    } else {
+      this.taskService.getAssignedTaskByUserId(userId).subscribe(async tasks => {
+        this.tasks = await tasks;
+      });
+    }
+  }
+
+  toggleViewMode(mode: 'madeByMe' | 'forMe'): void {
+    this.viewMode = mode;
+    if (this.user.id) {
+      this.loadTasks(this.user.id);
+    } else {
+      this.loadTasks(this.currentUserId);
+    }
   }
 
   isCurrentUserProfile(): boolean {
     return this.user.id === this.currentUserId;
   }
 
-  onTaskClick(task: any): void {
+  onTaskClick(task: Task): void {
     this.router.navigate(['/']);
   }
 }
