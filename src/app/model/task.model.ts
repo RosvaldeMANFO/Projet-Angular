@@ -10,10 +10,9 @@ export type Task = {
   description: string;
   state: TaskState;
   category: TaskCategory;
-  commentCount: number;
   startDate: Date;
   endDate: Date;
-  comments?: Comment[];
+  comments: Comment[];
   createdAt: Date;
   categoryId?: string;
 };

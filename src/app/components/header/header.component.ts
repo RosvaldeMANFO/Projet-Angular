@@ -39,7 +39,6 @@ export class HeaderComponent implements OnInit {
     signOut(this.auth)
       .then(() => {
         this.router.navigate(['/login']);
-        console.log('User signed out');
       })
       .catch((error) => {
         console.error('Sign-out error:', error);

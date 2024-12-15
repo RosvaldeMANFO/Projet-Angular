@@ -66,13 +66,12 @@ export class CommentStatsComponent implements OnChanges {
       datasets: [
         {
           ...this.commentChartData.datasets[0],
-          data: this.commentData.map((item) => item.commentCount),
+          data: this.commentData.map((item) => item.comments.length),
           label: this.labelFromPeriod(),
         },
       ],
     };
-
-    // Trigger chart update if chart exists
+    
     if (this.chart) {
       this.chart.update();
     }

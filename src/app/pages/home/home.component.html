@@ -54,8 +54,8 @@
                     <mat-icon matSuffix color="primary" class="rounded" (click)="addComment()">send</mat-icon>
                 </mat-form-field>
             </div>
-            <div *ngIf="selectedTaskComments.length > 0">
-                <div *ngFor="let comment of selectedTaskComments.reverse()">
+            <div *ngIf="selectedTask.comments.length > 0">
+                <div *ngFor="let comment of selectedTask.comments.reverse()">
                     <div class="flex flex-col items-start gap-3 text-md bg-gray-100 p-2 rounded-md mb-1">
                         <div class="flex items-center gap-3 text-md w-full justify-between">
                             <a [routerLink]="['/profile', comment.authorId]"
@@ -83,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="selectedTaskComments.length === 0" class="text-center my-12 text-gray-500">
+            <div *ngIf="selectedTask.comments.length === 0" class="text-center my-12 text-gray-500">
                 {{ this.languageService.translate('home.noComments') }}
             </div>
         </div>

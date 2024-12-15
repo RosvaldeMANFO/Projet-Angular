@@ -32,12 +32,18 @@ export class DashboardComponent implements OnInit {
 
   async ngOnInit() {
     this.topFiveTasks = [];
+    this.users = [];
     this.tasksByStatus = {};
     this.tasksByCategory = {};
     this.initializeDateRangeForm();
-    this.users = await this.userService.getUsers();
     this.taskService.task.subscribe((tasks) => {
       this.taskList = tasks;
+
+      this.nbrComments = tasks.reduce(
+        (acc, task) => acc + task.comments.length,
+        0
+      );
+      
       this.loadDashBoardData();
       this.dateRangeForm.valueChanges.subscribe((value) => {
         if (value.startDate && value.endDate) {
@@ -68,6 +74,7 @@ export class DashboardComponent implements OnInit {
   }
 
   async loadDashBoardData(): Promise<void> {
+    this.users = await this.userService.getUsers();
     this.categoryService.categories.subscribe(async (categories) => {
       this.categories = categories;
     });
@@ -76,7 +83,7 @@ export class DashboardComponent implements OnInit {
 
     this.tasksByStatus = this.taskService.countTasksByStatusAndDate({
       startDate: startDate,
-      endDate: endDate,
+      endDate: endDate
     });
 
     this.tasksByCategory = this.taskService.countTasksByCategoryAndDate({
@@ -92,12 +99,7 @@ export class DashboardComponent implements OnInit {
           taskDate.getTime() <= endDate.getTime()
         );
       })
-      .sort((a, b) => b.commentCount - a.commentCount)
+      .sort((a, b) => b.comments.length - a.comments.length)
       .slice(0, 5);
-
-    this.nbrComments = this.taskList.reduce(
-      (acc, task) => acc + task.commentCount,
-      0
-    );
   }
 }

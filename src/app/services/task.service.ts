@@ -8,9 +8,10 @@ import {
 } from "../model/task.model";
 import {
   BehaviorSubject,
+  firstValueFrom,
   map,
   Observable,
-  Subscription
+  Subscription,
 } from "rxjs";
 import {
   Firestore,
@@ -33,8 +34,8 @@ import { fakeTasks2, fakeComments2 } from "../model/fake-data";
 import { Comment } from "../model/comment.model";
 import { DocumentData, where } from "firebase/firestore";
 import { Auth } from "@angular/fire/auth";
-import { from } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { from } from "rxjs";
+import { switchMap, take } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -43,7 +44,7 @@ export class TaskService {
   task = new BehaviorSubject<Task[]>([]);
   taskListSubscription?: Subscription;
   cachedTask: Task[] = [];
-  currentState = 'ALL';
+  currentState = "ALL";
   commentsSubject = new BehaviorSubject<any[]>([]);
   comments$ = this.commentsSubject.asObservable();
 
@@ -57,44 +58,56 @@ export class TaskService {
     this.getTasks();
   }
 
-  
   private async taskMapper(tasks: DocumentData[]): Promise<Task[]> {
-
     const users = await this.userService.getUsers();
-    
-    return tasks.map<Task>((task) => {
-      const category = this.categoryService.categories.value
-        .find(category => category.id === task['categoryId']);
+
+    const mappedTasks = await Promise.all(tasks.map(async (task) => {
+      const category = this.categoryService.categories.value.find(
+        (category) => category.id === task["categoryId"]
+      );
+      const comments = await this.getTaskComments(task["id"]);
       return {
-        id: task['id'],
-        title: task['title'],
-        reporterId: task['reporterId'],
-        reporterName: task['reporterName'],
-        assigneeId: task['assigneeId'],
-        assigneeName: users.find(user => user.id === task['assigneeId'])?.nickname,
-        description: task['description'],
-        state: task['state'] as TaskState,
+        id: task["id"],
+        title: task["title"],
+        reporterId: task["reporterId"],
+        reporterName: task["reporterName"],
+        assigneeId: task["assigneeId"],
+        assigneeName: users.find((user) => user.id === task["assigneeId"])
+          ?.nickname,
+        description: task["description"],
+        state: task["state"] as TaskState,
         category: category!!,
-        commentCount: task['commentCount'],
-        startDate: task['startDate'].toDate(),
-        endDate: task['endDate'].toDate(),
-        createdAt: task['createdAt'].toDate(),
+        comments: comments,
+        startDate: task["startDate"].toDate(),
+        endDate: task["endDate"].toDate(),
+        createdAt: task["createdAt"].toDate(),
       };
-    });
-  }
+    }));
+
+    return mappedTasks;
+}
 
   getTasks() {
     if (this.taskListSubscription) {
       this.taskListSubscription.unsubscribe();
     }
-    const tasksCollection = collection(this.firestore, 'tasks');
-    const tasksQuery = query(tasksCollection, orderBy('title'));
-    collectionData(tasksQuery, { idField: 'id' }).subscribe(async (tasks) => {
+    const tasksCollection = collection(this.firestore, "tasks");
+    const tasksQuery = query(tasksCollection, orderBy("title"));
+    collectionData(tasksQuery, { idField: "id" }).subscribe(async (tasks) => {
       const mappedTasks = await this.taskMapper(tasks);
       this.cachedTask = mappedTasks;
       this.task.next(mappedTasks);
     });
   }
+
+  getTaskComments = async (taskId: string): Promise<Comment[]> => {
+   return await firstValueFrom(this.getComments(taskId).pipe(take(1))).then(
+      (comments) => {
+        return comments;
+      }
+    );
+  };
+
   getComments(taskId: string): Observable<Comment[]> {
     return from(this.userService.getUsers()).pipe(
       switchMap((users: User[]) => {
@@ -104,7 +117,7 @@ export class TaskService {
           where("taskId", "==", taskId),
           orderBy("createdAt")
         );
-  
+
         return collectionData(commentsQuery, { idField: "id" }).pipe(
           map((comments) => {
             return comments.map((comment) => {
@@ -125,19 +138,24 @@ export class TaskService {
       })
     );
   }
-  
+
   loadComments(): void {
     const commentsCollection = collection(this.firestore, "comments");
-    const queryObservable = collectionData(commentsCollection, { idField: "id" });
+    const queryObservable = collectionData(commentsCollection, {
+      idField: "id",
+    });
 
     queryObservable.subscribe((comments) => {
       this.commentsSubject.next(comments);
     });
   }
-  
+
   countTaskComments(taskId: string): Observable<number> {
     const commentsCollection = collection(this.firestore, "comments");
-    const commentsQuery = query(commentsCollection, where("taskId", "==", taskId));
+    const commentsQuery = query(
+      commentsCollection,
+      where("taskId", "==", taskId)
+    );
     return collectionData(commentsQuery, { idField: "id" }).pipe(
       map((comments) => comments.length)
     );
@@ -215,41 +233,40 @@ export class TaskService {
     const taskCollection = collection(this.firestore, "tasks");
     const categories = this.categoryService.categories.value;
     const users = await this.userService.getUsers();
-  
+
     const fakeTasks = fakeTasks2.map((task) => {
       const category = categories.find(
         (category) => category.name === task.categoryName
       );
       const assignee = users[Math.floor(Math.random() * users.length)];
-  
+
       return {
         ...task,
         categoryId: category?.id,
         assigneeId: assignee?.id,
       };
     });
-  
+
     const batch = writeBatch(this.firestore);
-  
+
     fakeTasks.forEach((task) => {
       const docRef = doc(taskCollection, task.id);
       batch.set(docRef, task);
     });
-  
+
     await batch.commit();
     await this.mockComments();
-  
+
     this.snackBar.open("Mock tasks added successfully", "Close", {
       duration: 2000,
     });
   }
-  
+
   async mockComments() {
     const commentsCollection = collection(this.firestore, "comments");
     const batch = writeBatch(this.firestore);
-  
+
     fakeComments2.forEach((comment) => {
-  
       const docRef = doc(commentsCollection);
       batch.set(docRef, {
         taskId: comment.taskId,
@@ -257,29 +274,29 @@ export class TaskService {
         content: comment.content,
         createdAt: new Date(),
       });
-   
     });
-  
+
     await batch.commit();
   }
-  
 
   getTaskByUserId(userId: string): Observable<Promise<Task[]>> {
-    const tasksCollection = collection(this.firestore, 'tasks');
-    const tasksQuery = query(tasksCollection, where('reporterId', '==', userId));
-    const tasksSnapshot = collectionData(tasksQuery, { idField: 'id' });
-    return tasksSnapshot.pipe(
-      map(tasks => this.taskMapper(tasks))
+    const tasksCollection = collection(this.firestore, "tasks");
+    const tasksQuery = query(
+      tasksCollection,
+      where("reporterId", "==", userId)
     );
+    const tasksSnapshot = collectionData(tasksQuery, { idField: "id" });
+    return tasksSnapshot.pipe(map((tasks) => this.taskMapper(tasks)));
   }
-  
+
   getAssignedTaskByUserId(userId: string): Observable<Promise<Task[]>> {
-    const tasksCollection = collection(this.firestore, 'tasks');
-    const tasksQuery = query(tasksCollection, where('assigneeId', '==', userId));
-    const tasksSnapshot = collectionData(tasksQuery, { idField: 'id' });
-    return tasksSnapshot.pipe(
-      map(tasks => this.taskMapper(tasks))
+    const tasksCollection = collection(this.firestore, "tasks");
+    const tasksQuery = query(
+      tasksCollection,
+      where("assigneeId", "==", userId)
     );
+    const tasksSnapshot = collectionData(tasksQuery, { idField: "id" });
+    return tasksSnapshot.pipe(map((tasks) => this.taskMapper(tasks)));
   }
 
   async addComment(comment: Comment) {
@@ -309,18 +326,17 @@ export class TaskService {
       await deleteDoc(commentRef);
 
       const updatedComments = this.commentsSubject
-      .getValue()
-      .filter((comment) => comment.id !== commentId);
+        .getValue()
+        .filter((comment) => comment.id !== commentId);
 
       this.commentsSubject.next(updatedComments);
-      
-      this.snackBar.open("Comment deleted successfully", "Close", {
-      duration: 2000,
-      });
 
+      this.snackBar.open("Comment deleted successfully", "Close", {
+        duration: 2000,
+      });
     } catch (error) {
       this.snackBar.open("Error deleting comment", "Close", {
-      duration: 2000,
+        duration: 2000,
       });
       console.error("Error deleting comment:", error);
     }
@@ -394,7 +410,7 @@ export class TaskService {
       const tasksCollection = collection(this.firestore, "tasks");
       const querySnapshot = await getDocs(tasksCollection);
       const batch = writeBatch(this.firestore);
-  
+
       for (const docSnapshot of querySnapshot.docs) {
         const taskId = docSnapshot.id;
         await this.deleteAllComments(taskId);
@@ -405,7 +421,6 @@ export class TaskService {
       this.snackBar.open("All tasks deleted successfully", "Close", {
         duration: 2000,
       });
-      console.log("All tasks deleted");
     } catch (error) {
       this.snackBar.open("Error deleting tasks", "Close", {
         duration: 2000,
@@ -413,27 +428,25 @@ export class TaskService {
       console.error("Error deleting tasks:", error);
     }
   }
-  
+
   async deleteAllComments(taskId: string) {
     try {
       const commentsCollection = collection(this.firestore, "comments");
       const querySnapshot = await getDocs(commentsCollection);
-  
+
       const batch = writeBatch(this.firestore);
-  
+
       querySnapshot.forEach((docSnapshot) => {
         const commentData = docSnapshot.data();
-        if (commentData['taskId'] === taskId) {
+        if (commentData["taskId"] === taskId) {
           batch.delete(doc(this.firestore, `comments/${docSnapshot.id}`));
         }
       });
-  
+
       await batch.commit();
-  
-      console.log(`All comments for task ${taskId} deleted successfully`);
+
     } catch (error) {
       console.error(`Error deleting comments for task ${taskId}:`, error);
     }
   }
-  
 }

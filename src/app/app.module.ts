@@ -46,6 +46,7 @@ import { MembersComponent } from './pages/members/members.component';
 import { ManagementComponent } from './pages/management/management.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { MatBadgeModule } from "@angular/material/badge";
 
 
 @NgModule({
@@ -71,8 +72,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     CapitalizePipe,
     ManagementComponent,
     ConfirmDialogComponent,
-    PageNotFoundComponent
-  
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,6 +101,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     MatNativeDateModule,
     MatInputModule,
     MatDialogModule,
+    MatBadgeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
