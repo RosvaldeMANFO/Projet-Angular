@@ -87,6 +87,7 @@ export const translations: Translations  = {
         byCategories: 'By Categories',
         top5: 'Top 5 of most commented tasks',
         noPeriod: 'No period selected',
+        noData: 'No data available for the selected period.',
       },
       categories: {
         research: 'Research',
@@ -207,6 +208,7 @@ export const translations: Translations  = {
         byCategories: 'Par catégories',
         top5: 'Top 5 des tâches les plus commentées',
         noPeriod: 'Aucune période sélectionnée',
+        noData: 'Aucune données disponibles sur la période selectionnée.',
       },
       categories: {
         research: 'Recherche',
@@ -327,6 +329,7 @@ export const translations: Translations  = {
         byCategories: 'Por categorías',
         top5: 'Top 5 de tareas más comentadas',
         noPeriod: 'No se ha seleccionado un período',
+        noData: 'No hay datos disponibles para el período seleccionado.',
       },
       categories: {
         research: 'Investigación',
@@ -447,6 +450,7 @@ export const translations: Translations  = {
         byCategories: 'Por Categorias',
         top5: 'Top 5 tarefas mais comentadas',
         noPeriod: 'Nenhum período selecionado',
+        noData: 'Nenhum dado disponível para o período selecionado.',
       },
       categories: {
         research: 'Pesquisa',
@@ -567,6 +571,7 @@ export const translations: Translations  = {
         byCategories: 'Nach Kategorien',
         top5: 'Top 5 der meistkommentierten Aufgaben',
         noPeriod: 'Kein Zeitraum ausgewählt',
+        noData: 'Keine Daten für den ausgewählten Zeitraum verfügbar.',
       },
       categories: {
         research: 'Forschung',
@@ -687,6 +692,7 @@ export const translations: Translations  = {
         byCategories: 'По категориям',
         top5: 'Топ-5 самых комментируемых задач',
         noPeriod: 'Период не выбран',
+        noData: 'Данные за выбранный период отсутствуют.',
       },
       categories: {
         research: 'Исследование',
@@ -807,6 +813,7 @@ export const translations: Translations  = {
         byCategories: 'カテゴリ別',
         top5: '最もコメントされたタスクトップ5',
         noPeriod: '期間が選択されていません',
+        noData: '選択された期間のデータはありません',
       },
       categories: {
         research: 'リサーチ',
@@ -927,6 +934,7 @@ export const translations: Translations  = {
         byCategories: '카테고리별',
         top5: '가장 댓글이 많은 상위 5개 할 일',
         noPeriod: '기간이 선택되지 않았습니다.',
+        noData: '선택한 기간에 대한 데이터가 없습니다.',
       },
       categories: {
         research: '연구',

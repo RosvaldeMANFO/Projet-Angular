@@ -10,7 +10,7 @@
       </canvas>
 
       <div *ngIf="commentChartData.datasets[0].data.length == 0" class="flex flex-col items-center justify-center">
-          <p class="text-gray-500">{{ 'Aucune données disponibles sur la période selectionnée !' }}</p>
+          <p class="text-gray-500">{{ this.languageService.translate('dashboard.noData') }}</p>
       </div>
   </div>
 </div>

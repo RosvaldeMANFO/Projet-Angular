@@ -10,7 +10,7 @@
                 [options]="statusChartOptions">
             </canvas>
             <div *ngIf="categoryChartData.datasets[0].data.length == 0" class="flex justify-center items-center my-32">
-                <p class="text-gray-500">{{ 'Aucune données disponibles sur la période selectionnée !' }}</p>
+                <p class="text-gray-500">{{ this.languageService.translate('dashboard.noData') }}</p>
             </div>
         </div>
         
@@ -22,7 +22,7 @@
                 [options]="categoryChartOptions">
             </canvas>
             <div *ngIf="categoryChartData.datasets[0].data.length == 0" class="flex justify-center items-center my-32">
-                <p class="text-gray-500">{{ 'Aucune données disponibles sur la période selectionnée !' }}</p>
+                <p class="text-gray-500">{{ this.languageService.translate('dashboard.noData') }}</p>
             </div>
         </div>
     </div>
