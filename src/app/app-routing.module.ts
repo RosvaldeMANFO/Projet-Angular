@@ -11,17 +11,19 @@ import { noAuthGuard } from './guards/no-auth.guard';
 import { roleGuard } from './guards/role.guard';
 import { MembersComponent } from './pages/members/members.component';
 import { ManagementComponent } from './pages/management/management.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] }, 
   { path: 'login', component: LoginComponent, canActivate: [noAuthGuard] }, 
   { path: 'signup', component: SignupComponent, canActivate: [noAuthGuard] }, 
-  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] }, 
   { path: 'dashboard', component: DashboardComponent, canActivate: [roleGuard] }, 
   { path: 'edit-profile', component: EditProfileComponent, canActivate: [authGuard] }, 
   { path: 'profile/:uid', component: ProfileComponent, canActivate: [authGuard] },
   { path: 'members', component: MembersComponent, canActivate: [authGuard] },
-  { path: 'management', component: ManagementComponent, canActivate: [roleGuard] }
+  { path: 'management', component: ManagementComponent, canActivate: [roleGuard] },
+  { path: '**', component: PageNotFoundComponent }, 
+
 ];
 
 
