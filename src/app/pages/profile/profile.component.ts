@@ -8,7 +8,7 @@ import { Task } from '../../model/task.model';
 import { onAuthStateChanged } from '@angular/fire/auth';
 import { Timestamp } from 'firebase/firestore';
 import { LanguageService } from '../../services/language.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   currentUserId: string = '';
   tasks: Task[] = [];
   viewMode: 'madeByMe' | 'forMe' = 'madeByMe';
+  selectedTask: Task | null = null;
 
   constructor(
     private auth: Auth,
@@ -90,6 +91,9 @@ export class ProfileComponent implements OnInit {
   }
 
   onTaskClick(task: Task): void {
-    this.router.navigate(['/']);
+    const navigationExtras: NavigationExtras = {
+      state: { task: task }
+    };
+    this.router.navigate(['/'], navigationExtras);
   }
 }

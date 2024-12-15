@@ -33,6 +33,8 @@ import { fakeTasks2, fakeComments2 } from "../model/fake-data";
 import { Comment } from "../model/comment.model";
 import { DocumentData, where } from "firebase/firestore";
 import { Auth } from "@angular/fire/auth";
+import { from } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root",
@@ -92,34 +94,37 @@ export class TaskService {
       this.task.next(mappedTasks);
     });
   }
-
-   getComments(taskId: string, users: User[]): Observable<Comment[]> {
-    const commentsCollection = collection(this.firestore, "comments");
-    const commentsQuery = query(
-      commentsCollection,
-      where("taskId", "==", taskId),
-      orderBy("createdAt")
-    );
-
-    return collectionData(commentsQuery, { idField: "id" }).pipe(
-      map((comments) => {
-        return comments.map((comment) => {
-          const author = users.find(
-            (user) => user.id === comment["authorId"]
-          );
-          return {
-            id: comment["id"],
-            taskId: taskId,
-            authorId: comment["authorId"],
-            authorName: author?.nickname ?? "",
-            content: comment["content"],
-            createdAt: comment["createdAt"].toDate(),
-          };
-        });
+  getComments(taskId: string): Observable<Comment[]> {
+    return from(this.userService.getUsers()).pipe(
+      switchMap((users: User[]) => {
+        const commentsCollection = collection(this.firestore, "comments");
+        const commentsQuery = query(
+          commentsCollection,
+          where("taskId", "==", taskId),
+          orderBy("createdAt")
+        );
+  
+        return collectionData(commentsQuery, { idField: "id" }).pipe(
+          map((comments) => {
+            return comments.map((comment) => {
+              const author = users.find(
+                (user) => user.id === comment["authorId"]
+              );
+              return {
+                id: comment["id"],
+                taskId: taskId,
+                authorId: comment["authorId"],
+                authorName: author?.nickname ?? "Unknown",
+                content: comment["content"],
+                createdAt: comment["createdAt"].toDate(),
+              };
+            });
+          })
+        );
       })
     );
   }
-
+  
   loadComments(): void {
     const commentsCollection = collection(this.firestore, "comments");
     const queryObservable = collectionData(commentsCollection, { idField: "id" });

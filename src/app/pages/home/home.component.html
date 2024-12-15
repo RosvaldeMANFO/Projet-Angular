@@ -22,7 +22,7 @@
 <ng-template #taskDetails>
     <div *ngIf="selectedTask" class="text-gray-700 flex flex-col gap-7 h-full overflow-hidden">
         <div class="flex justify-end">
-            <button mat-icon-button (click)="selectedTask = undefined">
+            <button mat-icon-button (click)="clearTaskDetails()">
                 <mat-icon class="text-gray-500">close</mat-icon>
             </button>
         </div>

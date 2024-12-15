@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   users!: User[];
   fakeTasks!: Task[];
   selectedTaskComments!: Comment[];
+  task?: Task;
 
   constructor(
     private readonly dialog: MatDialog,
@@ -32,7 +33,7 @@ export class HomeComponent implements OnInit {
     private readonly taskService: TaskService,
     private readonly userService: UserService,
     private auth: Auth,
-    public readonly languageService: LanguageService
+    public readonly languageService: LanguageService,
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +61,13 @@ export class HomeComponent implements OnInit {
       .getUserProfile(this.auth.currentUser?.uid ?? "")
       .then((user) => {
         this.currentUser = user ?? this.currentUser;
-      });
+    });
+    
+    const navigationState = history.state;
+    if (navigationState && navigationState['task']) {
+      this.selectedTask = navigationState['task'];
+      this.getTaskComments();
+    }
   }
 
   selectTask = (task: Task) => {
@@ -126,7 +133,7 @@ export class HomeComponent implements OnInit {
     if (this.selectedTask) {
       await firstValueFrom(
         this.taskService
-          .getComments(this.selectedTask.id, this.users)
+          .getComments(this.selectedTask.id)
           .pipe(take(1))
       ).then((comments) => {
         this.selectedTaskComments = comments;
@@ -174,4 +181,9 @@ export class HomeComponent implements OnInit {
       }
     });
   };
+
+  clearTaskDetails(): void {
+    history.replaceState({}, '', location.pathname);
+    this.selectedTask = undefined;
+  }
 }
