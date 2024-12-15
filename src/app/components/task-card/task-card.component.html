@@ -23,10 +23,10 @@
             </div>
         </div>
         <div class="flex items-center gap-3 w-full mt-3 select-none">
-            <span [appApplyColor]="task.category.color" class="rounded-md px-2">
+            <span [appApplyColor]="task.category.color" class="rounded-md px-2 truncate max-w-xs">
                 {{ languageService.translate('categories.' + task.category.name.toLowerCase()) }}
             </span>
-            <span class="rounded-md border px-2 border-gray-400 text-primary-500">
+            <span class="rounded-md border px-2 border-gray-400 text-primary-500 truncate max-w-xs">
                 {{ languageService.translate('status.' + task.state) }}
             </span>
         </div>
