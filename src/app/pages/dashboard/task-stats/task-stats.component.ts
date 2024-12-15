@@ -118,7 +118,9 @@ export class TaskStatsComponent implements OnChanges {
 
     this.statusChartData = {
       ...this.statusChartData,
-      labels: Object.keys(statusData),
+      labels: Object.keys(statusData).map((statusKey) =>
+        this.languageService.translate(`status.${statusKey}`)
+      ),
       datasets: [
         {
           ...this.statusChartData.datasets[0],
@@ -141,7 +143,9 @@ export class TaskStatsComponent implements OnChanges {
 
     this.categoryChartData = {
       ...this.categoryChartData,
-      labels: Object.keys(categoryData),
+      labels: Object.keys(categoryData).map((categoryKey) =>
+        this.languageService.translate(`categories.${categoryKey.toLowerCase()}`)
+      ),
       datasets: [
         {
           ...this.categoryChartData.datasets[0],
