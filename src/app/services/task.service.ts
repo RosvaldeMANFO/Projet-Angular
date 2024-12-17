@@ -25,6 +25,7 @@ import {
   writeBatch,
   getDocs,
   deleteDoc,
+  docData,
 } from "@angular/fire/firestore";
 import { CategoryService } from "./category.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -131,6 +132,7 @@ export class TaskService {
                 authorName: author?.nickname ?? "Unknown",
                 content: comment["content"],
                 createdAt: comment["createdAt"].toDate(),
+                replyTo: comment["replyTo"] ?? null,
               };
             });
           })
@@ -159,6 +161,32 @@ export class TaskService {
     return collectionData(commentsQuery, { idField: "id" }).pipe(
       map((comments) => comments.length)
     );
+  }
+
+  getCommentById(commentId: string): Observable<Comment> {
+    const commentDoc = doc(this.firestore, "comments", commentId);
+    return docData(commentDoc, { idField: "id" }).pipe(
+      map((comment) => {
+        return {
+          id: commentId,
+          taskId: (comment as DocumentData)?.['taskId'] ?? '',
+          authorId: (comment as DocumentData)?.['authorId'] ?? '',
+          content: (comment as DocumentData)?.['content'] ?? '',
+          createdAt: (comment as DocumentData)?.['createdAt'].toDate() ?? new Date(),
+        };
+      })
+    );
+  }
+
+  updateComment(comment: Comment): void {
+    const commentDoc = doc(this.firestore, "comments", comment.id);
+    setDoc(commentDoc, {
+      taskId: comment.taskId,
+      authorId: comment.authorId,
+      content: comment.content,
+      createdAt: comment.createdAt,
+      replyTo: comment.replyTo || null,
+    });
   }
 
   setTask(task: Task) {
@@ -308,6 +336,7 @@ export class TaskService {
         authorId: this.auth.currentUser?.uid,
         content: comment.content,
         createdAt: comment.createdAt,
+        replyTo: comment.replyTo || null,
       });
       this.snackBar.open("Comment added successfully", "Close", {
         duration: 2000,

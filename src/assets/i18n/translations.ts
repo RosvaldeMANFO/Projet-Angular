@@ -29,6 +29,7 @@ export const translations: Translations  = {
         noComments: 'No comments available.',
         deleteComment: 'Delete Comment',
         confirmDeleteComment: 'Are you sure you want to delete this comment?',
+        reply: 'Reply',
       },
       auth: {
         login: {
@@ -150,6 +151,7 @@ export const translations: Translations  = {
         noComments: 'Aucun commentaire disponible.',
         deleteComment: 'Supprimer le commentaire',
         confirmDeleteComment: 'Êtes-vous sûr de vouloir supprimer ce commentaire ?',
+        reply: 'Répondre',
       },
       auth: {
         login: {
@@ -271,6 +273,7 @@ export const translations: Translations  = {
         noComments: 'No hay comentarios disponibles.',
         deleteComment: 'Eliminar comentario',
         confirmDeleteComment: '¿Estás seguro de que deseas eliminar este comentario?',
+        reply: 'Responder',
       },
       auth: {
         login: {
@@ -392,6 +395,7 @@ export const translations: Translations  = {
         noComments: 'Nenhum comentário disponível.',
         deleteComment: 'Excluir Comentário',
         confirmDeleteComment: 'Tem certeza de que deseja excluir este comentário?',
+        reply: 'Responder',
       },
       auth: {
         login: {
@@ -513,6 +517,7 @@ export const translations: Translations  = {
         noComments: 'Keine Kommentare verfügbar.',
         deleteComment: 'Kommentar Löschen',
         confirmDeleteComment: 'Sind Sie sicher, dass Sie diesen Kommentar löschen möchten?',
+        reply: 'Antworten',
       },
       auth: {
         login: {
@@ -634,6 +639,7 @@ export const translations: Translations  = {
         noComments: 'Нет доступных комментариев.',
         deleteComment: 'Удалить комментарий',
         confirmDeleteComment: 'Вы уверены, что хотите удалить этот комментарий?',
+        reply: 'Ответить',
       },
       auth: {
         login: {
@@ -755,6 +761,7 @@ export const translations: Translations  = {
         noComments: '利用可能なコメントはありません。',
         deleteComment: 'コメントを削除',
         confirmDeleteComment: 'このコメントを削除してもよろしいですか？',
+        reply: '返信',
       },
       auth: {
         login: {
@@ -876,6 +883,7 @@ export const translations: Translations  = {
         noComments: '댓글이 없습니다.',
         deleteComment: '댓글 삭제',
         confirmDeleteComment: '이 댓글을 삭제하시겠습니까?',
+        reply: '답장',
       },
       auth: {
         login: {

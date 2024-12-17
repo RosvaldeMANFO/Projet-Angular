@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
   tasks!: Task[];
   selectedTaskComments!: Comment[];
   task?: Task;
+  actionBoxVisibility: { [commentId: string]: { type: 'edit' | 'reply' | '', isVisible: boolean } } = {};
+  reply: { [commentId: string]: string } = {};
 
   constructor(
     private readonly dialog: MatDialog,
@@ -179,5 +181,81 @@ export class HomeComponent implements OnInit {
       month: "short",
       day: "numeric",
     }).format(new Date(date));
+  }
+  
+  toggleActionBox(commentId: string, actionType: 'edit' | 'reply'): void {
+    const isActive = this.actionBoxVisibility[commentId]?.type === actionType && this.actionBoxVisibility[commentId]?.isVisible;
+    this.actionBoxVisibility[commentId] = { type: actionType, isVisible: !isActive };
+  
+    if (!isActive) {
+      if (actionType === 'edit') {
+        const commentToEdit = this.selectedTaskComments.find(comment => comment.id === commentId);
+        this.reply[commentId] = commentToEdit?.content || '';
+      } else {
+        this.reply[commentId] = '';
+      }
+    } else {
+      delete this.reply[commentId]; 
+    }
+  }
+  
+  addReply(commentId: string): void {
+    const replyContent = this.reply[commentId];
+    if (replyContent) {
+      var comment = this.selectedTaskComments.find((comment) => comment.id === commentId);
+      var newReply: Comment = { 
+        id: '',
+        taskId: comment?.taskId ?? '',
+        authorId: this.currentUser.id,
+        authorName: this.currentUser.nickname,
+        content: replyContent,
+        replyTo: commentId,
+        createdAt: new Date(),
+      };
+      this.selectedTaskComments = [
+        ...this.selectedTaskComments,
+        newReply as Comment,
+      ];
+      console.log(newReply);
+      this.taskService.addComment(newReply);
+      delete this.reply[commentId];
+      this.actionBoxVisibility[commentId] = { type: '', isVisible: false };
+    } else {
+      console.log('No content in reply box');
+    }
+  }
+
+  getParentComment(parentId: string): Comment | undefined {
+    return this.selectedTaskComments.find(comment => comment.id === parentId);
+  }
+
+  editComment(commentId: string): void {
+    const commentToEdit = this.selectedTaskComments.find(comment => comment.id === commentId);
+    this.toggleActionBox(commentId, 'edit');
+    if (this.actionBoxVisibility[commentId]) {
+      if (commentToEdit) {
+        this.reply[commentId] = commentToEdit.content;
+      }
+    }
+  }
+
+  saveEditedComment(commentId: string): void {
+    const editedContent = this.reply[commentId]?.trim();
+    const commentIndex = this.selectedTaskComments.findIndex(comment => comment.id === commentId);
+    if (commentIndex > -1) {
+      const updatedComment = {
+        ...this.selectedTaskComments[commentIndex],
+        content: editedContent,
+        updatedAt: new Date(),
+      };
+      this.selectedTaskComments[commentIndex] = updatedComment;
+      this.taskService.updateComment(updatedComment);
+    }
+    delete this.reply[commentId];
+    this.actionBoxVisibility[commentId] = { type: '', isVisible: false };
+  }
+  
+  isActionBoxVisible(commentId: string, actionType: 'edit' | 'reply'): boolean {
+    return this.actionBoxVisibility[commentId]?.type === actionType && this.actionBoxVisibility[commentId]?.isVisible;
   }
 }

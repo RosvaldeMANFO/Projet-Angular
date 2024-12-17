@@ -60,26 +60,57 @@
                         <div class="flex items-center gap-3 text-md w-full justify-between">
                             <a [routerLink]="['/profile', comment.authorId]"
                                 class="text-primary-500 hover:underline flex items-center gap-2">
-                                <span *ngIf="comment.authorName.length > 0"
+                                <span *ngIf="comment.authorName && comment.authorName.length > 0"
                                     class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center text-white">
                                     {{ (comment.authorName).charAt(0) }}
                                 </span>
-                                <span *ngIf="comment.authorName.length === 0"
+                                <span *ngIf="comment.authorName && comment.authorName.length === 0"
                                     class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center text-white">
                                     {{ "U" }}
                                 </span>
                                 <span>{{ comment.authorName }}</span>
                             </a>
-                            <button (click)="deleteComment(comment.id)" class="text-red-300 hover:text-red-400 ">
-                                <mat-icon>delete</mat-icon>
-                            </button>
+                            <div class="flex gap-2">
+                                <button (click)="toggleActionBox(comment.id, 'reply')" class="text-gray-500 hover:text-gray-600">
+                                    <mat-icon>reply</mat-icon>
+                                </button>
+                                <button (click)="toggleActionBox(comment.id, 'edit')" class="text-blue-500 hover:text-blue-600">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button (click)="deleteComment(comment.id)" class="text-red-400 hover:text-red-500">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
                         </div>
-                        <p class="flex flex-col gap-1 w-full">
+                        <div *ngIf="comment.replyTo" class="bg-gray-200 rounded-md p-2 text-sm w-full">
+                            <p class="text-gray-500">
+                                <strong>Quoted:</strong> {{ getParentComment(comment.replyTo)?.content || 'Original comment not found' }}
+                            </p>
+                        </div>
+                        <div *ngIf="isActionBoxVisible(comment.id, 'edit')" class="w-full">
+                            <mat-form-field class="w-full" appearance="outline">
+                                <textarea matInput [(ngModel)]="reply[comment.id]" placeholder="Edit your comment"></textarea>
+                            </mat-form-field>
+                            <div class="flex justify-end gap-2">
+                                <button mat-button (click)="saveEditedComment(comment.id)" class="text-primary-500">Save</button>
+                                <button mat-button (click)="toggleActionBox(comment.id, 'edit')" class="text-gray-500">Cancel</button>
+                            </div>
+                        </div>
+                        <p *ngIf="!isActionBoxVisible(comment.id, 'edit')" class="flex flex-col gap-1 w-full">
                             {{ comment.content }}
                             <span class="text-end text-gray-500 text-sm w-full">
                                 {{ formatDate(comment.createdAt) }}
                             </span>
                         </p>
+                        <div *ngIf="isActionBoxVisible(comment.id, 'reply')" class="w-full">
+                            <mat-form-field class="w-full" appearance="outline">
+                                <textarea matInput [(ngModel)]="reply[comment.id]" placeholder="Write your reply"></textarea>
+                            </mat-form-field>
+                            <div class="flex justify-end gap-2">
+                                <button mat-button (click)="addReply(comment.id)" class="text-primary-500">Reply</button>
+                                <button mat-button (click)="toggleActionBox(comment.id, 'reply')" class="text-gray-500">Cancel</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
