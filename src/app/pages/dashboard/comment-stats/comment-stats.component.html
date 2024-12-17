@@ -9,7 +9,7 @@
           [options]="commentChartOptions">
       </canvas>
 
-      <div *ngIf="commentChartData.datasets[0].data.length == 0" class="flex flex-col items-center justify-center">
+      <div *ngIf="commentChartData.datasets[0].data.length == 0" class="flex flex-col items-center justify-center my-28">
           <p class="text-gray-500">{{ this.languageService.translate('dashboard.noData') }}</p>
       </div>
   </div>

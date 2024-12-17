@@ -71,5 +71,20 @@ Password: test123
 
 **Firebase**: Backend pour la gestion des données.
 
+## 🖥️ Aperçu de l'application
+
+| **Home**               | **Créer une tâche**                                |
+|------------------------|----------------------------------------------------|
+| ![Home](src/assets/home.png)  | ![Créer ou éditer une tâche](src/assets/create-edit.png) |
+
+| **Détail de la tâche**  | **Dashboard**                                      |
+|-------------------------|----------------------------------------------------|
+| ![Détail de la tâche](src/assets/detail-task.png) | ![Dashboard](src/assets/dashboard.png)           |
+
+| **Profil**              | **Membres**              |
+|-------------------------|--------------------------|
+| ![profil](src/assets/profile.png) | ![profil](src/assets/members.png) |
+
+
 ## 📜 Licence
 Ce projet est sous licence MIT.
