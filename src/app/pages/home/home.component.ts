@@ -66,6 +66,9 @@ export class HomeComponent implements OnInit {
 
   selectTask = (task: Task) => {
     this.selectedTask = task;
+    if (this.selectedTask) {
+      this.selectedTaskComments = this.selectedTask.comments;
+    }
   };
 
   closeDrawer = () => {
@@ -136,6 +139,7 @@ export class HomeComponent implements OnInit {
         ];
         this.taskService.addComment(newComment as Comment);
         this.newComment = "";
+        this.taskService.setTask(this.selectedTask);
       }
     } catch (error) {
       console.error(error);
@@ -155,6 +159,7 @@ export class HomeComponent implements OnInit {
         this.selectedTaskComments = this.selectedTaskComments.filter(
           (comment) => comment.id !== commentId
         );
+        this.taskService.setTask(this.selectedTask as Task);
       }
     });
   };

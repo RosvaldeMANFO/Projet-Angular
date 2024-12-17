@@ -312,9 +312,9 @@ export const fakeTasks2 = [
     { taskId: "YNTfjSpGs0seBYvIil0b", authorId: "8O9neIbuUZUHVGn882tpwjYaI7w1", content: "Indexed the most queried fields. Performance is better now." },
   ];
   
-export const fakeComments: { taskName: string; commentCount: number }[] = [
-  { taskName: "Task 1", commentCount: 10 },
-  { taskName: "Task 2", commentCount: 20 },
-  { taskName: "Task 3", commentCount: 90 },
-  { taskName: "Task 4", commentCount: 40 },
-];
+// export const fakeComments: { taskName: string; commentCount: number }[] = [
+//   { taskName: "Task 1", commentCount: 10 },
+//   { taskName: "Task 2", commentCount: 20 },
+//   { taskName: "Task 3", commentCount: 90 },
+//   { taskName: "Task 4", commentCount: 40 },
+// ];
